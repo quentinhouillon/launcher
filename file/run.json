@@ -1,0 +1,137 @@
+[
+    {
+        "app": "firefox",
+        "lnk": "ff",
+        "cmd": "firefox"
+    },
+    {
+        "app": "vs code",
+        "lnk": "vsc",
+        "cmd": "code"
+    },
+    {
+        "app": "terminal",
+        "lnk": "cmd",
+        "cmd": "cmd"
+    },
+    {
+        "app": "python",
+        "lnk": "py",
+        "cmd": "python"
+    },
+    {
+        "app": "git bash",
+        "lnk": "gb",
+        "cmd": "shortuts\\Gb.lnk"
+    },
+    {
+        "app": "powershell",
+        "lnk": "po",
+        "cmd": "powershell"
+    },
+    {
+        "app": "ccleaner",
+        "lnk": "cc",
+        "cmd": "ccleaner"
+    },
+    {
+        "app": "keepass",
+        "lnk": "kp",
+        "cmd": "shortuts\\Kp.lnk"
+    },
+    {
+        "app": "idle",
+        "lnk": "idle",
+        "cmd": "shortuts\\Idle.lnk"
+    },
+    {
+        "app": "libre office",
+        "lnk": "lo",
+        "cmd": "shortuts\\Lo.lnk"
+    },
+    {
+        "app": "groove musique",
+        "lnk": "gm",
+        "cmd": "shortuts\\Gm.lnk"
+    },
+    {
+        "app": "musicbee",
+        "lnk": "mb",
+        "cmd": "shortuts\\Mb.lnk"
+    },
+    {
+        "app": "courrier",
+        "lnk": "c",
+        "cmd": "shortuts\\co.lnk"
+    },
+    {
+        "app": "skype",
+        "lnk": "sk",
+        "cmd": "shortuts\\Skype.lnk"
+    },
+    {
+        "app": "watsapp",
+        "lnk": "wa",
+        "cmd": "shortuts\\Wa.lnk"
+    },
+    {
+        "app": "discord",
+        "lnk": "dd",
+        "cmd": "shortuts\\dd.lnk"
+    },
+    {
+        "app": "parametre",
+        "lnk": "p",
+        "cmd": "shortuts\\Pa.lnk"
+    },
+    {
+        "app": "xbox",
+        "lnk": "x",
+        "cmd": "shortuts\\Xb.lnk"
+    },
+    {
+        "app": "notepad",
+        "lnk": "np",
+        "cmd": "notepad"
+    },
+    {
+        "app": "windows store",
+        "lnk": "ws",
+        "cmd": "shortuts\\St.lnk"
+    },
+    {
+        "app": "windows defender",
+        "lnk": "wd",
+        "cmd": "shortuts\\def.lnk"
+    },
+    {
+        "app": "kaspersky",
+        "lnk": "ks",
+        "cmd": "Ks.lnk"
+    },
+    {
+        "app": "windows map",
+        "lnk": "wm",
+        "cmd": "Map.lnk"
+    },
+    {
+        "app": "pdf",
+        "lnk": "pdf",
+        "cmd": "shortuts\\Pdf.lnk"
+    },
+    {
+        "app": "paint",
+        "lnk": "pt",
+        "cmd": "shortuts\\Paint.lnk"
+    },
+    {
+        "app": "gimp",
+        "lnk": "gp",
+        "cmd": "shortuts\\GIMP.lnk"
+    },
+    {
+        "app": "capture ecran",
+        "lnk": "ce",
+        "cmd": "screen.lnk"
+    }
+]
