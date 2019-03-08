@@ -1,15 +1,20 @@
 from tkinter import *
 from datetime import datetime
 from time import strftime
-from os import getcwd
+from os import getcwd, chdir
 
 from module.clss import *
 
+chdir(getcwd())
+
 window = Tk()
 
-color = "black"
-color2 = "white"
-color3="#1E272E"
+with open("file/theme.json", 'r') as th:
+    data = load(th)
+
+color = data["my_theme"]["bg"]
+color2 = data["my_theme"]["fg"]
+color3= data["my_theme"]["ft"]
 
 font_type = "consolas"
 var_entry = StringVar()
@@ -29,9 +34,9 @@ def hour():
 
 # WINDOW
 window.title("Launcher")
+window.iconbitmap("img\\favicon.ico")
 window.geometry("350x90-1007+647")
 window.minsize(350, 90)
-window.iconbitmap("img/favicon.ico")
 window.configure(bg=color, cursor="pirate")
 
 # FRAME
@@ -65,7 +70,7 @@ response.pack(fill="x")
 
 lbl_time.pack(side="left")
 lbl_date.pack(side="right")
-footer.pack(fill="x")
+footer.pack(fill="x", side="bottom")
 
 
 if __name__ == "__main__":

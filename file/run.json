@@ -133,5 +133,10 @@
         "app": "capture ecran",
         "lnk": "ce",
         "cmd": "screen.lnk"
+    },
+    {
+        "app": "theme",
+        "lnk": "th",
+        "cmd": "module\\my_theme.py"
     }
 ]

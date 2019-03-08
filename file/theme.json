@@ -1,0 +1,17 @@
+{
+    "bg_theme": {
+        "black": "black",
+        "white": "white",
+        "ft_white": "#7f8c8d",
+        "ft_black": "#1E272E"
+    },
+    "fg_theme": {
+        "black": "black",
+        "white": "white"
+    },
+    "my_theme": {
+        "bg": "black",
+        "fg": "white",
+        "ft": "#1E272E"
+    }
+}
