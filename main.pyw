@@ -67,7 +67,6 @@ e_input.focus()
 e_input.bind('<Return>', run)
 
 # PACK
-
 lab.pack(fill='x')
 prompt.pack(side="left")
 e_input.pack(fill='x')

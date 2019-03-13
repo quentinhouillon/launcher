@@ -1,3 +1,4 @@
+from os import system
 from tkinter import Label
 from json import load, dump
 
@@ -31,6 +32,12 @@ class Launcher:
             
             elif self.command == "exit":
                 exit()
+            
+            elif self.command == "shutdown":
+                system("shutdown -p")
+            
+            elif self.command == "restart":
+                system("shutdown -r")
             
             else:
                 self.lab_text.config(text=f"not found: {self.command}",

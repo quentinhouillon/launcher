@@ -71,7 +71,7 @@
     },
     {
         "app": "watsapp",
-        "lnk": "wa",
+        "lnk": "w",
         "cmd": "shortuts\\Wa.lnk"
     },
     {
@@ -143,5 +143,85 @@
         "app": "theme",
         "lnk": "th",
         "cmd": "module\\my_theme.pyw"
+    },
+    {
+        "app": "qwant",
+        "lnk": "qw",
+        "cmd": "https://www.qwant.com/"
+    },
+    {
+        "app": "duckduckgo",
+        "lnk": "ddg",
+        "cmd": "https://start.duckduckgo.com"
+    },
+    {
+        "app": "google",
+        "lnk": "g",
+        "cmd":"https://encrypted.google.com/"
+    },
+    {
+        "app": "youtube",
+        "lnk": "yt",
+        "cmd": "https://www.youtube.com/"
+    },
+    {
+        "app": "netcourrier",
+        "lnk": "nc",
+        "cmd": "https://www.netcourrier.com"
+    },
+    {
+        "app": "ent",
+        "lnk": "ent",
+        "cmd": "https://ent77.seine-et-marne.fr/auth/"
+    },
+    {
+        "app": "pronote",
+        "lnk": "pr",
+        "cmd": "https://0770009s.index-education.net/pronote/"
+    },
+    {
+        "app": "ubisoft club",
+        "lnk": "ub",
+        "cmd": "https://club.ubisoft.com/fr-FR/dashboard"
+    },
+    {
+        "app": "tk docks",
+        "lnk": "tk",
+        "cmd": "http://www.tkdocs.com/tutorial/index.html"
+    },
+    {
+        "app": "apprendre python",
+        "lnk": "ap",
+        "cmd": "https://apprendre-python.com"
+    },
+    {
+        "app": "developpez",
+        "lnk": "d",
+        "cmd": "https://python.developpez.com/cours"
+    },
+    {
+        "app": "clubic",
+        "lnk": "cl",
+        "cmd": "http://clubic.com/"
+    },
+    {
+        "app": "generation nt",
+        "lnk": "gnt",
+        "cmd": "https://www.generation-nt.com/"
+    },
+    {
+        "app": "journal du geek",
+        "lnk": "jg",
+        "cmd": "http://www.journaldugeek.com/"
+    },
+    {
+        "app": "pc astuce",
+        "lnk": "pc",
+        "cmd": "http://pcastuce.com/"
+    },
+    {
+        "app": "watsapp web",
+        "lnk": "ww",
+        "cmd": "https://web.whatsapp.com/"
     }
 ]
