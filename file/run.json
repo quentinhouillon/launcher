@@ -200,6 +200,11 @@
         "cmd": "https://python.developpez.com/cours"
     },
     {
+        "app": "github",
+        "lnk":"gh",
+        "cmd": "https://github.com/"
+    },
+    {
         "app": "clubic",
         "lnk": "cl",
         "cmd": "http://clubic.com/"
