@@ -107,8 +107,13 @@
     {
         "app": "kaspersky",
         "lnk": "ks",
-        "cmd": "Ks.lnk"
+        "cmd": "shortuts\\Ks.lnk"
     },
+    {
+        "app": "kaspersky vpn",
+        "lnk": "ksv",
+        "cmd": "shortuts\\Ksv.lnk"
+   },
     {
         "app": "windows map",
         "lnk": "wm",
@@ -137,6 +142,6 @@
     {
         "app": "theme",
         "lnk": "th",
-        "cmd": "module\\my_theme.py"
+        "cmd": "module\\my_theme.pyw"
     }
 ]
