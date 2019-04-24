@@ -228,5 +228,10 @@
         "app": "watsapp web",
         "lnk": "ww",
         "cmd": "https://web.whatsapp.com/"
+    },
+    {
+        "app": "meteo",
+        "lnk": "m",
+        "cmd": "module\\meteo.pyw"
     }
 ]
