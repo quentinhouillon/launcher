@@ -1,4 +1,4 @@
-from os import system
+from os import system, chdir, getcwd, startfile
 from tkinter import Label
 from json import load, dump
 
@@ -6,7 +6,7 @@ class Launcher:
     def __init__(self, command, lab_text):
         self.command = command
         self.lab_text = lab_text
-        from os import getcwd, chdir; chdir(getcwd())
+        chdir(getcwd())
 
     def execute_app(self):
         with open("file/run.json", 'r') as js:
@@ -18,7 +18,7 @@ class Launcher:
         for i in self.data:
             if self.command == i["lnk"] or self.command == i["app"]:
                 try:
-                    from os import startfile; startfile(i["cmd"])
+                    startfile(i["cmd"])
                     self.lab_text.config(
                         text=f"run: {self.command}",
                         bg=self.theme["my_theme"]["bg"], fg="green")

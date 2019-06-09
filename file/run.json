@@ -233,5 +233,10 @@
         "app": "meteo",
         "lnk": "m",
         "cmd": "module\\meteo.pyw"
+    },
+    {
+	"app": "launch command",
+	"lnk": "lc",
+	"cmd": "module\\launch_command.pyw"
     }
 ]
