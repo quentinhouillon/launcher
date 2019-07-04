@@ -113,7 +113,7 @@
         "app": "kaspersky vpn",
         "lnk": "ksv",
         "cmd": "shortuts\\Ksv.lnk"
-   },
+    },
     {
         "app": "windows map",
         "lnk": "wm",
@@ -157,7 +157,7 @@
     {
         "app": "google",
         "lnk": "g",
-        "cmd":"https://encrypted.google.com/"
+        "cmd": "https://encrypted.google.com/"
     },
     {
         "app": "youtube",
@@ -201,7 +201,7 @@
     },
     {
         "app": "github",
-        "lnk":"gh",
+        "lnk": "gh",
         "cmd": "https://github.com/"
     },
     {
@@ -235,8 +235,8 @@
         "cmd": "module\\meteo.pyw"
     },
     {
-	"app": "launch command",
-	"lnk": "lc",
-	"cmd": "module\\launch_command.pyw"
+        "app": "list",
+        "lnk": "ls",
+        "cmd": "module\\launch_command.pyw"
     }
 ]
