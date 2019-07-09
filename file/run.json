@@ -238,5 +238,15 @@
         "app": "list",
         "lnk": "ls",
         "cmd": "module\\launch_command.pyw"
+    },
+    {
+        "app": "steam",
+        "lnk": "st",
+        "cmd": "shortuts\\steam.lnk"
+    },
+    {
+        "app": "firestorm",
+        "lnk": "fs",
+        "cmd": "shortuts\\firestorm.pyw"
     }
 ]

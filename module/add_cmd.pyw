@@ -17,11 +17,11 @@ def execute_lnk(event):
     cmd_e.focus()
 
     global get_lnk
-    get_lnk = app_e.get()
+    get_lnk = lnk_e.get()
 
 def execute_cmd(event):
     global get_cmd
-    get_cmd = app_e.get()
+    get_cmd = cmd_e.get()
 
     to_append = {
         "app": get_app,
