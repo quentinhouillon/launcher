@@ -248,5 +248,15 @@
         "app": "firestorm",
         "lnk": "fs",
         "cmd": "shortuts\\firestorm.pyw"
+    },
+    {
+        "app": "spotify",
+        "lnk": "s",
+        "cmd": "shortuts\\spotify.lnk"
+    },
+    {
+        "app": "terminal_",
+        "lnk": "t",
+        "cmd": "shortuts\\Terminal.lnk"
     }
 ]

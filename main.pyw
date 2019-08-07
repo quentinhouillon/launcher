@@ -12,6 +12,7 @@ window = Tk()
 with open("file/theme.json", 'r') as theme:
     th = load(theme)
 
+#VARIABLE
 color1 = th["my_theme"]["bg"]
 color2 = th["my_theme"]["fg"]
 color3 = th["my_theme"]["ft"]
@@ -20,10 +21,11 @@ font_type = "consolas"
 var_entry = StringVar()
 date = datetime.now()
 
-
+#CALLBACK
 def run(event):
-    launch = Launcher(e_input.get(), response)
-    launch.execute_app()
+    launch = Launcher(e_input.get())
+    enter = launch.execute_app()
+    response.config(text=enter["text"], fg=enter["fg"])
     e_input.delete(0, END)
 
 
@@ -39,7 +41,7 @@ def hour():
 
 # WINDOW
 window.title("Launcher")
-window.iconbitmap("img\\favicon.ico")
+window.iconbitmap("img\\launch.ico")
 window.geometry("350x90-1007+647")
 window.minsize(350, 90)
 window.configure(bg=color1, cursor="pirate")
@@ -53,7 +55,7 @@ lab = Label(main_frame, text=".: LAUNCHER :.", bg=color1, fg=color2,
             anchor="center", font=font_type)
 
 prompt = Label(main_frame, text=">>", bg=color1, fg=color2, font=font_type)
-response = Label(window, bg=color1, fg=color2, anchor="w", font=(font_type, 8))
+response = Label(window, bg=color1, anchor="w", font=(font_type, 8))
 lbl_time = Label(footer, text="current time: 00:00:00", bg=color3, fg=color2)
 restart = Label(footer, text="restart", bg=color3, fg="green", anchor="e")
 restart.bind("<Button-1>", restart_window)
