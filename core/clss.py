@@ -1,12 +1,12 @@
-from os import system, chdir, getcwd, startfile
-from json import load, dump
+from json import dump, load
+from os import startfile, system
+
 
 class Launcher:
     def __init__(self, command):
         self.command = command
         self.text = ""
         self.color = ""
-        chdir(getcwd())
 
     def execute_app(self):
         with open("file/run.json", 'r') as js:
@@ -41,3 +41,4 @@ class Launcher:
 
         return {"text": self.text,
                 "fg": self.color}
+

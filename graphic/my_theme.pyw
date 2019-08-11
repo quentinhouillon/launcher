@@ -37,7 +37,7 @@ def run(event):
 
 #WINDOW
 window.title("theme")
-window.iconbitmap("img\\favicon.ico")
+window.iconbitmap("img\\launch.ico")
 window.geometry("350x90")
 window.minsize(350, 90)
 window.configure(bg=color, cursor="pirate")

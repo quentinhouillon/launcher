@@ -31,7 +31,7 @@ def main():
     #WINDOW
     window = Tk()
     window.title("meteo")
-    window.iconbitmap("img\\favicon.ico")
+    window.iconbitmap("img\\launch.ico")
     window.geometry("350x250")
     window.minsize(350, 90)
     window.configure(bg=color1, cursor="pirate")

@@ -1,5 +1,20 @@
 [
     {
+        "app": "list",
+        "lnk": "ls",
+        "cmd": "graphic\\launch_command.pyw"
+    },
+    {
+        "app": "theme",
+        "lnk": "th",
+        "cmd": "graphic\\my_theme.pyw"
+    },
+    {
+        "app": "meteo",
+        "lnk": "m",
+        "cmd": "graphic\\meteo.pyw"
+    },
+    {
         "app": "firefox",
         "lnk": "ff",
         "cmd": "firefox"
@@ -137,12 +152,7 @@
     {
         "app": "capture ecran",
         "lnk": "ce",
-        "cmd": "screen.lnk"
-    },
-    {
-        "app": "theme",
-        "lnk": "th",
-        "cmd": "module\\my_theme.pyw"
+        "cmd": "shortuts\\screen.lnk"
     },
     {
         "app": "qwant",
@@ -230,16 +240,6 @@
         "cmd": "https://web.whatsapp.com/"
     },
     {
-        "app": "meteo",
-        "lnk": "m",
-        "cmd": "module\\meteo.pyw"
-    },
-    {
-        "app": "list",
-        "lnk": "ls",
-        "cmd": "module\\launch_command.pyw"
-    },
-    {
         "app": "steam",
         "lnk": "st",
         "cmd": "shortuts\\steam.lnk"
@@ -258,5 +258,10 @@
         "app": "terminal_",
         "lnk": "t",
         "cmd": "shortuts\\Terminal.lnk"
+    },
+    {
+        "app": "diskstation",
+        "lnk": "ds",
+        "cmd": "https://hvincent.myds.me:5001/"
     }
 ]

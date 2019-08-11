@@ -10,28 +10,34 @@ with open("file\\theme.json", 'r') as theme:
 def execute_app(event):
     lnk_e.focus()
 
-    global get_app
-    get_app = app_e.get()
-
 def execute_lnk(event):
     cmd_e.focus()
 
-    global get_lnk
-    get_lnk = lnk_e.get()
-
 def execute_cmd(event):
-    global get_cmd
+    get_app = app_e.get()
+    get_lnk = lnk_e.get()
     get_cmd = cmd_e.get()
 
-    to_append = {
-        "app": get_app,
-        "lnk": get_lnk,
-        "cmd": get_cmd}
+    if get_app:
+        if get_lnk:
+            if get_cmd:
+                to_append = {
+                    "app": get_app,
+                    "lnk": get_lnk,
+                    "cmd": get_cmd}
+            
+                with open("file\\run.json", 'w') as file:
+                    run.append(to_append)
+                    dump(run, file, indent=4)
+                    exit()
+            else:
+                answer.config(text="complete cmd", bg=color1, fg="red")
+        else:
+            answer.config(text="complete lnk", bg=color1, fg="red")
+    
+    else:
+        answer.config(text="complete app", bg=color1, fg="red")
 
-    with open("file\\run.json", 'w') as file:
-        run.append(to_append)
-        dump(run, file, indent=4)
-        exit()
 
 color1 = th["my_theme"]["bg"]
 color2 = th["my_theme"]["fg"]
@@ -45,15 +51,17 @@ cmd_text = StringVar()
 
 #WINDOW
 window.title("add - command")
-window.geometry("200x250")
-window.minsize(200,250)
-window.iconbitmap("img\\favicon.ico")
+window.geometry("300x100")
+window.resizable(False, False)
+window.iconbitmap("img\\launch.ico")
 window.configure(cursor="pirate", bg=color1)
 
 #LABEL
 app = Label(text="app: ", bg=color1, fg=color2, font=tf, anchor="w")
 lnk = Label(text="lnk: ", bg=color1, fg=color2, font=tf, anchor="w")
 cmd = Label(text="cmd: ", bg=color1, fg=color2, font=tf, anchor="w")
+
+answer = Label(window, bg=color1, anchor="w")
 
 #ENTRY
 app_e = Entry(bd=0, bg=color1, fg=color2, insertbackground=color2,
@@ -79,5 +87,7 @@ lnk_e.grid(row=1, column=1)
 
 cmd.grid(row=2, column=0)
 cmd_e.grid(row=2, column=1)
+
+answer.grid(row=3, column=0)
 
 window.mainloop()
