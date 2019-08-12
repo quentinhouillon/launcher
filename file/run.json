@@ -5,11 +5,6 @@
         "cmd": "graphic\\launch_command.pyw"
     },
     {
-        "app": "theme",
-        "lnk": "th",
-        "cmd": "graphic\\my_theme.pyw"
-    },
-    {
         "app": "meteo",
         "lnk": "m",
         "cmd": "graphic\\meteo.pyw"
@@ -263,5 +258,10 @@
         "app": "diskstation",
         "lnk": "ds",
         "cmd": "https://hvincent.myds.me:5001/"
+    },
+    {
+        "app": "flatui",
+        "lnk": "fu",
+        "cmd": "https://flatuicolors.com/"
     }
 ]

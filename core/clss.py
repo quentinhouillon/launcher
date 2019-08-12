@@ -9,7 +9,7 @@ class Launcher:
         self.color = ""
 
     def execute_app(self):
-        with open("file/run.json", 'r') as js:
+        with open("file\\run.json", 'r') as js:
             self.data = load(js)
 
         for i in self.data:
@@ -41,4 +41,24 @@ class Launcher:
 
         return {"text": self.text,
                 "fg": self.color}
+
+    def theme_change(self):
+        with open("file\\theme.json", 'r') as th:
+            self.theme = load(th)
+
+        for i in self.theme["bg_theme"]:
+            if self.theme["my_theme"]["bg"] == self.theme["bg_theme"]["black"]:
+                self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["white"]
+                self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["black"]
+                self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_white"]
+    
+            else:
+                self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["black"]
+                self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["white"]
+                self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_black"]
+            
+            break
+    
+        with open("file/theme.json", 'w') as save:
+            dump(self.theme, save, indent=4)
 

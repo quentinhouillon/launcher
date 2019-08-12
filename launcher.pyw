@@ -5,6 +5,7 @@ from tkinter import *
 
 from core.clss import *
 
+chdir(getcwd())
 
 # CALLBACK
 def run(event):
@@ -14,7 +15,9 @@ def run(event):
     e_input.delete(0, END)
 
 
-def restart_window(event):
+def change_theme(event):
+    launch = Launcher(e_input.get())
+    launch.theme_change()
     window.destroy()
 
     try:
@@ -29,7 +32,6 @@ def hour():
     window.after(1000, hour)
 
 
-chdir(getcwd())
 # FILE
 with open("file\\theme.json", 'r') as theme:
     th = load(theme)
@@ -57,17 +59,22 @@ window.configure(bg=color1, cursor="pirate")
 main_frame = Frame(window, bg=color1)
 footer = Frame(window, bg=color3)
 
+# IMAGE
+logo_theme = PhotoImage(file="img\\theme.png")
+
 # LABEL
 lab = Label(main_frame, text=".: LAUNCHER :.", bg=color1, fg=color2,
             anchor="center", font=font_type)
 
 prompt = Label(main_frame, text=">>", bg=color1, fg=color2, font=font_type)
-response = Label(window, bg=color1, anchor="w", font=(font_type, 8))
+response = Label(window, text="if you need you can enter 'help'", bg=color1, 
+                fg="blue", anchor="w", font=(font_type, 8))
+
 lbl_time = Label(footer, text="current time: 00:00:00", bg=color3,
                     fg=color2)
 
-restart = Label(footer, text="restart", bg=color3, fg="green", anchor="e")
-restart.bind("<Button-1>", restart_window)
+lbl_theme = Label(footer, image=logo_theme, bg=color3, anchor="e")
+lbl_theme.bind("<Button-1>", change_theme)
 lbl_date = Label(footer, text=f"{date.year} - w4rmux", bg=color3, fg=color2)
 
 # ENTRY
@@ -88,7 +95,7 @@ response.pack(fill="x")
 
 lbl_time.pack(side="left")
 lbl_date.pack(side="right")
-restart.pack(fill="x", side="right", padx="55")
+lbl_theme.pack(fill="x", side="right", padx="55")
 footer.pack(fill="x", side="bottom")
 
 
