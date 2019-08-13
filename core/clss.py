@@ -1,6 +1,7 @@
 from json import dump, load
 from os import startfile, system
 
+from graphic.launch_command import *
 
 class Launcher:
     def __init__(self, command):
@@ -12,6 +13,7 @@ class Launcher:
         with open("file\\run.json", 'r') as js:
             self.data = load(js)
 
+        self.command = self.command.strip()
         for i in self.data:
             if self.command == i["lnk"] or self.command == i["app"]:
                 app = i["app"]
@@ -26,19 +28,29 @@ class Launcher:
 
                 break
 
+            elif self.command == "ls" or self.command == "list":
+                cmd_main()
+                break
+            
+            elif self.command == "help":
+                pass
+
             elif self.command == "exit":
                 exit()
             
             elif self.command == "shutdown":
                 system("shutdown -p")
+                break
             
             elif self.command == "restart":
                 system("shutdown -r")
+                break
             
             else:
                 self.text = f"not found {self.command}"
                 self.color = "orange"
 
+        print(self.text)
         return {"text": self.text,
                 "fg": self.color}
 

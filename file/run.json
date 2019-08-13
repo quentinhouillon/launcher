@@ -1,13 +1,8 @@
 [
     {
-        "app": "list",
-        "lnk": "ls",
-        "cmd": "graphic\\launch_command.pyw"
-    },
-    {
         "app": "meteo",
         "lnk": "m",
-        "cmd": "graphic\\meteo.pyw"
+        "cmd": "shortuts\\meteo.lnk"
     },
     {
         "app": "firefox",

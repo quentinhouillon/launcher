@@ -1,54 +1,76 @@
 from tkinter import *
-from json import load, dump
+from json import load
+from datetime import datetime
+from graphic.add_cmd import *
+from graphic.show_cmd import *
 
-# CALLBACK
-def run(file):
-    from os import startfile; startfile(file)
-    window.destroy()
+def cmd_main():
+    # CALLBACK
+    def _run_cmd(file):
+        from os import startfile; startfile(file)
+        window_cmd.destroy()
 
-def condition(event):
-    if cmd.get() == "show":
-        run("graphic\\show_cmd.pyw")
-    
-    elif cmd.get() == "add":
-        run("graphic\\add_cmd.pyw")
+    def _condition_cmd(event):
+        if cmd.get() == "show":
+            main_show()
+        
+        elif cmd.get() == "add":
+            main_add()
 
-# FILE
-with open("file\\theme.json", "r") as theme:
-    th = load(theme)
 
-# VARIABLE
-color1 = th["my_theme"]["bg"]
-color2 = th["my_theme"]["fg"]
-color3 = th["my_theme"]["ft"]
+    # FILE
+    with open("file\\theme.json", "r") as theme:
+        th = load(theme)
 
-window = Tk()
-var_text = StringVar()
-tf = "consolas"
+    with open("file\\run.json", 'r') as file:
+        run = load(file)
 
-# WINDOW
-window.title("list - command")
-window.iconbitmap("img\\launch.ico")
-window.configure(cursor="pirate", bg=color1)
+    # VARIABLE
+    color1 = th["my_theme"]["bg"]
+    color2 = th["my_theme"]["fg"]
+    color3 = th["my_theme"]["ft"]
 
-# FRAME
-main = Frame(window, bg=color1)
+    tf = "consolas"
+    date = datetime.now()
 
-# LABEL
-lbl = Label(main, text="add or show", bg=color1, fg=color2, font=tf)
-prompt = Label(main, text=">>", bg=color1, fg=color2, font=tf, anchor="w")
+    window_cmd = Tk()
+    var_text = StringVar()
 
-# ENTRY
-cmd = Entry(main, bg=color1, fg=color2, font=tf, bd=0, textvariable=var_text, 
-            insertbackground=color2)
+    # WINDOW
+    window_cmd.title("list - cmd")
+    window_cmd.iconbitmap("img\\launch.ico")
+    window_cmd.configure(bg=color1)
 
-cmd.focus()
-cmd.bind("<Return>", condition)
+    # FRAME
+    main_cmd = Frame(window_cmd, bg=color1)
+    footer_cmd = Frame(window_cmd, bg=color3)
 
-# GRID
-lbl.pack(fill="x")
-prompt.pack(side="left")
-cmd.pack(fill="x")
-main.pack(fill="x")
+    # LABEL
+    lbl = Label(main_cmd, text="add or show", bg=color1, fg=color2, font=tf)
+    prompt = Label(main_cmd, text=">>", bg=color1, fg=color2, font=tf,
+                anchor="w")
 
-window.mainloop()
+    error = Label(window_cmd, bg=color1, fg="red", font=tf)
+
+    time = Label(footer_cmd, text=f"w4rmux - {date.year}", bg=color3,
+                fg=color2, font=tf)
+
+    # ENTRY
+    cmd = Entry(main_cmd, bg=color1, fg=color2, font=tf, bd=0,
+                textvariable=var_text, insertbackground=color2)
+
+    cmd.focus()
+    cmd.bind("<Return>", _condition_cmd)
+
+    # GRID
+    lbl.pack(fill="x")
+    prompt.pack(side="left")
+    cmd.pack(fill="x")
+    main_cmd.pack(fill="x")
+
+    error.pack(fill="x", anchor="w")
+
+    time.pack(side="right", fill="x")
+    footer_cmd.pack(fill="x", side="bottom")
+
+    window_cmd.mainloop()
