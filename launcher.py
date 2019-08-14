@@ -2,6 +2,7 @@ from datetime import datetime
 from os import chdir, getcwd, startfile
 from time import strftime
 from tkinter import *
+from json import load
 
 from core.clss import *
 
@@ -9,11 +10,18 @@ chdir(getcwd())
 
 def launcher():
     # CALLBACK
+    def _del_window():
+        window.destroy()
+
     def run(event):
         launch = Launcher(e_input.get())
-        enter = launch.execute_app()
-        response.config(text=enter["text"], fg=enter["fg"])
         e_input.delete(0, END)
+        enter = launch.execute_app()
+        try:
+            response.config(text=enter["text"], fg=enter["fg"])
+
+        except:
+            pass
 
 
     def change_theme(event):
@@ -62,8 +70,8 @@ def launcher():
                 anchor="center", font=font_type)
 
     prompt = Label(main_frame, text=">>", bg=color1, fg=color2, font=font_type)
-    response = Label(window, text="if you need you can enter 'help'", bg=color1, 
-                    fg="blue", anchor="w", font=(font_type, 8))
+    response = Label(window, text="if you need you can enter 'help' or 'about'",
+                     bg=color1, fg="blue", anchor="w", font=(font_type, 8))
 
     lbl_time = Label(footer, text="current time: 00:00:00", bg=color3,
                         fg=color2)

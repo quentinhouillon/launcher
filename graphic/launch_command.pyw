@@ -57,7 +57,7 @@ def cmd_main():
 
     error = Label(window_cmd, bg=color1, fg="red", font=tf)
 
-    time = Label(footer_cmd, text=f"w4rmux - {date.year}", bg=color3,
+    time = Label(footer_cmd, text=date.year, bg=color3,
                 fg=color2, font=tf)
 
     # ENTRY

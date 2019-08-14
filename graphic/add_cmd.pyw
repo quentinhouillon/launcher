@@ -50,14 +50,14 @@ def main_add():
     lnk_text = StringVar()
     cmd_text = StringVar()
 
-    #WINDOW
+    # WINDOW
     window_add.title("add - command")
     window_add.geometry("300x100")
     window_add.resizable(False, False)
     window_add.iconbitmap("img\\launch.ico")
     window_add.configure(cursor="pirate", bg=color1)
 
-    #LABEL
+    # LABEL
     app = Label(window_add, text="app: ", bg=color1, fg=color2, font=tf,
                 anchor="w")
     
@@ -69,7 +69,7 @@ def main_add():
 
     answer = Label(window_add, bg=color1, anchor="w")
 
-    #ENTRY
+    # ENTRY
     app_e = Entry(window_add, bd=0, bg=color1, fg=color2,
                   insertbackground=color2, textvariable=app_text, font=tf)
 
@@ -84,7 +84,7 @@ def main_add():
     lnk_e.bind('<Return>', execute_lnk)
     cmd_e.bind('<Return>', execute_cmd)
 
-    #GRID
+    # GRID
     app.grid(row=0, column=0)
     app_e.grid(row=0, column=1)
 

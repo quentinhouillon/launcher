@@ -36,8 +36,9 @@ class Launcher:
                 help_launcher()
                 break
             
-            elif self.command == "help":
-                pass
+            elif self.command == "about":
+                about_launcher()
+                break
 
             elif self.command == "exit":
                 exit()

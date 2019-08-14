@@ -2,7 +2,7 @@
     {
         "app": "meteo",
         "lnk": "m",
-        "cmd": "shortuts\\meteo.lnk"
+        "cmd": "shortcuts\\meteo.lnk"
     },
     {
         "app": "firefox",
@@ -27,7 +27,7 @@
     {
         "app": "git bash",
         "lnk": "gb",
-        "cmd": "shortuts\\Gb.lnk"
+        "cmd": "shortcuts\\Gb.lnk"
     },
     {
         "app": "powershell",
@@ -42,57 +42,57 @@
     {
         "app": "keepass",
         "lnk": "kp",
-        "cmd": "shortuts\\Kp.lnk"
+        "cmd": "shortcuts\\Kp.lnk"
     },
     {
         "app": "idle",
         "lnk": "idle",
-        "cmd": "shortuts\\Idle.lnk"
+        "cmd": "shortcuts\\Idle.lnk"
     },
     {
         "app": "libre office",
         "lnk": "lo",
-        "cmd": "shortuts\\Lo.lnk"
+        "cmd": "shortcuts\\Lo.lnk"
     },
     {
         "app": "groove musique",
         "lnk": "gm",
-        "cmd": "shortuts\\Gm.lnk"
+        "cmd": "shortcuts\\Gm.lnk"
     },
     {
         "app": "musicbee",
         "lnk": "mb",
-        "cmd": "shortuts\\Mb.lnk"
+        "cmd": "shortcuts\\Mb.lnk"
     },
     {
         "app": "courrier",
         "lnk": "c",
-        "cmd": "shortuts\\co.lnk"
+        "cmd": "shortcuts\\co.lnk"
     },
     {
         "app": "skype",
         "lnk": "sk",
-        "cmd": "shortuts\\Skype.lnk"
+        "cmd": "shortcuts\\Skype.lnk"
     },
     {
         "app": "watsapp",
         "lnk": "w",
-        "cmd": "shortuts\\Wa.lnk"
+        "cmd": "shortcuts\\Wa.lnk"
     },
     {
         "app": "discord",
         "lnk": "dd",
-        "cmd": "shortuts\\dd.lnk"
+        "cmd": "shortcuts\\dd.lnk"
     },
     {
         "app": "parametre",
         "lnk": "p",
-        "cmd": "shortuts\\Pa.lnk"
+        "cmd": "shortcuts\\Pa.lnk"
     },
     {
         "app": "xbox",
         "lnk": "x",
-        "cmd": "shortuts\\Xb.lnk"
+        "cmd": "shortcuts\\Xb.lnk"
     },
     {
         "app": "notepad",
@@ -102,22 +102,22 @@
     {
         "app": "windows store",
         "lnk": "ws",
-        "cmd": "shortuts\\St.lnk"
+        "cmd": "shortcuts\\St.lnk"
     },
     {
         "app": "windows defender",
         "lnk": "wd",
-        "cmd": "shortuts\\def.lnk"
+        "cmd": "shortcuts\\def.lnk"
     },
     {
         "app": "kaspersky",
         "lnk": "ks",
-        "cmd": "shortuts\\Ks.lnk"
+        "cmd": "shortcuts\\Ks.lnk"
     },
     {
         "app": "kaspersky vpn",
         "lnk": "ksv",
-        "cmd": "shortuts\\Ksv.lnk"
+        "cmd": "shortcuts\\Ksv.lnk"
     },
     {
         "app": "windows map",
@@ -127,22 +127,22 @@
     {
         "app": "pdf",
         "lnk": "pdf",
-        "cmd": "shortuts\\Pdf.lnk"
+        "cmd": "shortcuts\\Pdf.lnk"
     },
     {
         "app": "paint",
         "lnk": "pt",
-        "cmd": "shortuts\\Paint.lnk"
+        "cmd": "shortcuts\\Paint.lnk"
     },
     {
         "app": "gimp",
         "lnk": "gp",
-        "cmd": "shortuts\\GIMP.lnk"
+        "cmd": "shortcuts\\GIMP.lnk"
     },
     {
         "app": "capture ecran",
         "lnk": "ce",
-        "cmd": "shortuts\\screen.lnk"
+        "cmd": "shortcuts\\screen.lnk"
     },
     {
         "app": "qwant",
@@ -232,22 +232,22 @@
     {
         "app": "steam",
         "lnk": "st",
-        "cmd": "shortuts\\steam.lnk"
+        "cmd": "shortcuts\\steam.lnk"
     },
     {
         "app": "firestorm",
         "lnk": "fs",
-        "cmd": "shortuts\\firestorm.lnk"
+        "cmd": "shortcuts\\firestorm.lnk"
     },
     {
         "app": "spotify",
         "lnk": "s",
-        "cmd": "shortuts\\spotify.lnk"
+        "cmd": "shortcuts\\spotify.lnk"
     },
     {
         "app": "terminal",
         "lnk": "t",
-        "cmd": "shortuts\\Terminal.lnk"
+        "cmd": "shortcuts\\Terminal.lnk"
     },
     {
         "app": "diskstation",
