@@ -15,7 +15,7 @@
         "cmd": "code"
     },
     {
-        "app": "terminal",
+        "app": "invite de commande",
         "lnk": "cmd",
         "cmd": "cmd"
     },
@@ -237,7 +237,7 @@
     {
         "app": "firestorm",
         "lnk": "fs",
-        "cmd": "shortuts\\firestorm.pyw"
+        "cmd": "shortuts\\firestorm.lnk"
     },
     {
         "app": "spotify",
@@ -245,7 +245,7 @@
         "cmd": "shortuts\\spotify.lnk"
     },
     {
-        "app": "terminal_",
+        "app": "terminal",
         "lnk": "t",
         "cmd": "shortuts\\Terminal.lnk"
     },

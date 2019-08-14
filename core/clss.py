@@ -1,7 +1,7 @@
 from json import dump, load
 from os import startfile, system
 
-from graphic.launch_command import *
+from graphic import *
 
 class Launcher:
     def __init__(self, command):
@@ -33,6 +33,10 @@ class Launcher:
                 break
             
             elif self.command == "help":
+                help_launcher()
+                break
+            
+            elif self.command == "help":
                 pass
 
             elif self.command == "exit":
@@ -50,7 +54,6 @@ class Launcher:
                 self.text = f"not found {self.command}"
                 self.color = "orange"
 
-        print(self.text)
         return {"text": self.text,
                 "fg": self.color}
 

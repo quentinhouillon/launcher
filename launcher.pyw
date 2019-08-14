@@ -20,13 +20,7 @@ def launcher():
         launch = Launcher(e_input.get())
         launch.theme_change()
         window.destroy()
-
-        try:
-            startfile("launcher.pyw")
-
-        except:
-            startfile("launcher.exe")
-
+        launcher()
 
     def hour():
         lbl_time.config(text=strftime("current time: %H:%M:%S"))
@@ -54,7 +48,7 @@ def launcher():
     window.iconbitmap("img\\launch.ico")
     window.geometry("350x90-1007+647")
     window.minsize(350, 90)
-    window.configure(bg=color1, cursor="pirate")
+    window.configure(bg=color1)
 
     # FRAME
     main_frame = Frame(window, bg=color1)

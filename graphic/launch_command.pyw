@@ -5,10 +5,30 @@ from graphic.add_cmd import *
 from graphic.show_cmd import *
 
 def cmd_main():
+    # FILE
+    with open("file\\theme.json", "r") as theme:
+        th = load(theme)
+        
+    with open("file\\run.json", 'r') as file:
+        run = load(file)
+            
+    # VARIABLE
+    color1 = th["my_theme"]["bg"]
+    color2 = th["my_theme"]["fg"]
+    color3 = th["my_theme"]["ft"]
+    
+    tf = "consolas"
+    date = datetime.now()
+    
+    window_cmd = Tk()
+    var_text = StringVar()
+
+
     # CALLBACK
     def _run_cmd(file):
         from os import startfile; startfile(file)
         window_cmd.destroy()
+
 
     def _condition_cmd(event):
         if cmd.get() == "show":
@@ -16,25 +36,10 @@ def cmd_main():
         
         elif cmd.get() == "add":
             main_add()
+        
+        else:
+            error.config(text=f"error {cmd.get()}")
 
-
-    # FILE
-    with open("file\\theme.json", "r") as theme:
-        th = load(theme)
-
-    with open("file\\run.json", 'r') as file:
-        run = load(file)
-
-    # VARIABLE
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
-
-    tf = "consolas"
-    date = datetime.now()
-
-    window_cmd = Tk()
-    var_text = StringVar()
 
     # WINDOW
     window_cmd.title("list - cmd")
@@ -62,7 +67,7 @@ def cmd_main():
     cmd.focus()
     cmd.bind("<Return>", _condition_cmd)
 
-    # GRID
+    # PACK
     lbl.pack(fill="x")
     prompt.pack(side="left")
     cmd.pack(fill="x")
