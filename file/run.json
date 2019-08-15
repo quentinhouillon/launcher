@@ -1,10 +1,5 @@
 [
     {
-        "app": "meteo",
-        "lnk": "m",
-        "cmd": "shortcuts\\meteo.lnk"
-    },
-    {
         "app": "firefox",
         "lnk": "ff",
         "cmd": "firefox"
@@ -258,5 +253,10 @@
         "app": "flatui",
         "lnk": "fu",
         "cmd": "https://flatuicolors.com/"
+    },
+    {
+        "app": "calculatrice",
+        "lnk": "calc",
+        "cmd": "shortcuts\\Calculatrice.lnk"
     }
 ]

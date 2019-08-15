@@ -16,9 +16,20 @@ def help_launcher():
     window_help = Tk()
     date = datetime.now()
 
-    text = "Si vous voulez afficher vos commandes raccourcis ou en \
-ajouter, tapez 'ls' ou'list' puis tapez 'add' ou 'show' pour ajouter une \
-commande ou les afficher"
+    text = "\
+- Pour voir vos commandes d'ouverture ou en ajouter,\
+tapez add' pour ajouter ou 'show' pour les afficher.\n\n\
+- Launcher a besoin d'accéder aux fichiers du dossier 'shortcuts',\
+pour y ajouter un fichier, tapez 'open' vous aurez juste a \
+glisser votre fichier dans dossier shortcuts.\n\n \
+- Après avoir tapez' add', pour ajouter un site web, entrez juste \
+l'url du site\n\
+exemple: 'https://www.google.com/'\n\n\
+- Après avoir tapez 'add', pour ajoutez une application, vous \
+devez tapez 'shortcuts\Le nom du fichier.lnk' n'oubliez pas '.lnk' \
+a la fin du fichier !\n \
+exemple: 'shortcuts\firefox.lnk'\n\n\
+- Launcher vous donne aussi la météo, vous devez juste tapez 'meteo'"
 
     # WINDOW
     window_help.title("Help")

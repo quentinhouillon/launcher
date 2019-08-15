@@ -28,29 +28,44 @@ class Launcher:
 
                 break
 
-            elif self.command == "ls" or self.command == "list":
-                cmd_main()
+            elif self.command == "add":
+                main_add()
                 break
             
+            elif self.command == "show":
+                main_show()
+                break
+
             elif self.command == "help":
                 help_launcher()
                 break
-            
+
             elif self.command == "about":
                 about_launcher()
                 break
 
+            elif self.command == "open":
+                startfile("shortcuts")
+                system("start %windir%\\explorer.exe shell:::\
+{4234d49b-0245-4df3-b780-3893943456e1}")
+                
+                break
+
+            elif self.command == "meteo":
+                main_meteo()
+                break
+
             elif self.command == "exit":
                 exit()
-            
+
             elif self.command == "shutdown":
                 system("shutdown -p")
                 break
-            
+
             elif self.command == "restart":
                 system("shutdown -r")
                 break
-            
+
             else:
                 self.text = f"not found {self.command}"
                 self.color = "orange"
@@ -67,14 +82,13 @@ class Launcher:
                 self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["white"]
                 self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["black"]
                 self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_white"]
-    
+
             else:
                 self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["black"]
                 self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["white"]
                 self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_black"]
-            
+
             break
-    
+
         with open("file/theme.json", 'w') as save:
             dump(self.theme, save, indent=4)
-

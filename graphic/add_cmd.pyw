@@ -52,20 +52,20 @@ def main_add():
 
     # WINDOW
     window_add.title("add - command")
-    window_add.geometry("300x100")
+    # window_add.geometry("300x100")
     window_add.resizable(False, False)
     window_add.iconbitmap("img\\launch.ico")
     window_add.configure(cursor="pirate", bg=color1)
 
     # LABEL
-    app = Label(window_add, text="app: ", bg=color1, fg=color2, font=tf,
-                anchor="w")
+    app = Label(window_add, text="nom de l'application ou du site: ", 
+                bg=color1, fg=color2, font=tf, anchor="w")
     
-    lnk = Label(window_add, text="lnk: ", bg=color1, fg=color2, font=tf,
-                anchor="w")
+    lnk = Label(window_add, text="nom du raccourcis: ", bg=color1, 
+                fg=color2, font=tf, anchor="w")
     
-    cmd = Label(window_add, text="cmd: ", bg=color1, fg=color2, font=tf,
-                anchor="w")
+    cmd = Label(window_add, text="chemin d'accès ou url: ", bg=color1, 
+                fg=color2, font=tf, anchor="w")
 
     answer = Label(window_add, bg=color1, anchor="w")
 
@@ -84,16 +84,16 @@ def main_add():
     lnk_e.bind('<Return>', execute_lnk)
     cmd_e.bind('<Return>', execute_cmd)
 
-    # GRID
-    app.grid(row=0, column=0)
-    app_e.grid(row=0, column=1)
+    # PACK
+    app.pack(fill="x", anchor="w")
+    app_e.pack(fill="x")
 
-    lnk.grid(row=1, column=0)
-    lnk_e.grid(row=1, column=1)
+    lnk.pack(fill="x", anchor="w")
+    lnk_e.pack(fill="x")
 
-    cmd.grid(row=2, column=0)
-    cmd_e.grid(row=2, column=1)
+    cmd.pack(fill="x", anchor="w")
+    cmd_e.pack(fill="x")
 
-    answer.grid(row=3, column=0)
+    answer.pack(fill="x", anchor="w")
 
     window_add.mainloop()
