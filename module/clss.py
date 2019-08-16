@@ -15,20 +15,7 @@ class Launcher:
 
         self.command = self.command.strip()
         for i in self.data:
-            if self.command == i["lnk"] or self.command == i["app"]:
-                app = i["app"]
-                try:
-                    startfile(i["cmd"])
-                    self.text = f"run {app}"
-                    self.color = "green"
-
-                except:
-                    self.text = f"error {app}"
-                    self.color = "red"
-
-                break
-
-            elif self.command == "add":
+            if self.command == "add":
                 main_add()
                 break
             
@@ -64,6 +51,19 @@ class Launcher:
 
             elif self.command == "restart":
                 system("shutdown -r")
+                break
+
+            elif self.command == i["lnk"] or self.command == i["app"]:
+                app = i["app"]
+                try:
+                    startfile(i["cmd"])
+                    self.text = f"run {app}"
+                    self.color = "green"
+
+                except:
+                    self.text = f"error {app}"
+                    self.color = "red"
+
                 break
 
             else:

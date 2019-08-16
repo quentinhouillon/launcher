@@ -24,7 +24,7 @@ def about_launcher():
 
     info = f"L'application open source {name} vous permet de lancer \
 vos applications et sites web avec vos mots clés personnalisés que \
-vous configuez très facilements"
+vous configuez facilements"
 
     # CALLBACK
     def _del_window():
