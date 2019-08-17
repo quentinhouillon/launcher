@@ -1,11 +1,10 @@
 # launcher
 
-## Site
-
-[Site](https://quentinhouillon.github.io/launcher/)
-
-## Dowload
+## Télécharger
 [Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/v1.0/Launcher-1.0.zip)
+
+## Site
+[Site](https://quentinhouillon.github.io/launcher/)
 
 ## Récupérer le code source
 - Vous pouvez récupérer le code a tout moment:
