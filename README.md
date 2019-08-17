@@ -2,10 +2,14 @@
 
 ## Site
 
-> https://quentinhouillon.github.io/launcher/
+[Site](https://quentinhouillon.github.io/launcher/)
 
 ## Dowload
-> https://github.com/quentinhouillon/launcher/releases/download/v1.0/Launcher-1.0.zip
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/v1.0/Launcher-1.0.zip)
+
+## Récupérer le code source
+- Vous pouvez récupérer le code a tout moment:
+[GitHub](https://github.com/quentinhouillon/launcher_interface)
 
 ## Description
 Launcher vous permet de lancer vos applications et vos
@@ -26,10 +30,6 @@ facilements
 
 ## Plateforme
 - Windows
-
-## Récupérer le code source
-- Vous pouvez récupérer le code a tout moment:
-> https://github.com/quentinhouillon/launcher_interface
 
 ## License
 - Tous droits réservés
