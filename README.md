@@ -1,5 +1,12 @@
 # launcher
 
+## Site
+
+> https://quentinhouillon.github.io/launcher/
+
+## Dowload
+> https://github.com/quentinhouillon/launcher/releases/download/v1.0/Launcher-1.0.zip
+
 ## Description
 Launcher vous permet de lancer vos applications et vos
 sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
