@@ -5,7 +5,7 @@ Launcher vous permet de lancer vos applications et vos
 sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
 facilements
 
-![screenshot](img\Capture.png)
+![screenshot](img/Capture.png)
 
 ---
 
