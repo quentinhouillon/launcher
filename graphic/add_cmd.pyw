@@ -30,7 +30,7 @@ def main_add():
                     with open("file\\run.json", 'w') as file:
                         run.append(to_append)
                         dump(run, file, indent=4)
-                        exit()
+                        window_add.destroy()
                 else:
                     answer.config(text="complete cmd", bg=color1, fg="red")
             else:
@@ -56,6 +56,7 @@ def main_add():
     window_add.resizable(False, False)
     window_add.iconbitmap("img\\launch.ico")
     window_add.configure(cursor="pirate", bg=color1)
+    window_add.focus_force()
 
     # LABEL
     app = Label(window_add, text="nom de l'application ou du site: ", 

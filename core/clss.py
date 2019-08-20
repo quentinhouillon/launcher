@@ -67,7 +67,7 @@ class Launcher:
                 break
 
             else:
-                self.text = f"not found {self.command} open ?"
+                self.text = f"not found {self.command}, open with qwant ?"
                 self.color = "orange"
 
         return {"text": self.text,

@@ -19,12 +19,12 @@ def about_launcher():
 
     author = "w4rmux"
     name = "Launcher"
-    version = "1.0"
+    version = "1.1"
     license = "All Right Reserved"
 
     info = f"L'application open source {name} vous permet de lancer \
-vos applications et sites web avec vos mots clés personnalisés que \
-vous configuez facilements"
+vos applications et sites web avec vos propre mots clés que \
+vous personnalisés facilements"
 
     # CALLBACK
     def _del_window():
@@ -36,6 +36,7 @@ vous configuez facilements"
     window_about.geometry("560x300")
     window_about.resizable(False, False)
     window_about.configure(bg=color1)
+    window_about.focus_force()
 
     # FRAME
     main_about = Frame(window_about, bg=color1)
