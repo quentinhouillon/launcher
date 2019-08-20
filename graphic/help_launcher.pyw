@@ -21,21 +21,25 @@ def help_launcher():
 tapez add' pour ajouter ou 'show' pour les afficher.\n\n\
 - Launcher a besoin d'accéder aux fichiers du dossier 'shortcuts',\
 pour y ajouter un fichier, tapez 'open' vous aurez juste a \
-glisser votre fichier dans dossier shortcuts.\n\n \
+glisser votre fichier dans le dossier shortcuts.\n\n \
 - Après avoir tapez' add', pour ajouter un site web, entrez juste \
 l'url du site\n\
 exemple: 'https://www.google.com/'\n\n\
 - Après avoir tapez 'add', pour ajoutez une application, vous \
 devez tapez 'shortcuts\Le nom du fichier.lnk' n'oubliez pas '.lnk' \
 a la fin du fichier !\n \
-exemple: 'shortcuts\firefox.lnk'\n\n\
-- Launcher vous donne aussi la météo, vous devez juste tapez 'meteo'"
+exemple: 'shortcuts\firefox.lnk' si le fichier y est.\n\n\
+- Launcher vous donne aussi la météo, vous devez juste tapez 'meteo'\n\
+- Si vous tapez une commande inconnu au logiciel, vous pourrez cliquez \
+sur le texte orange, celui-ci ouvrira sur qwant (moteur de recherche) votre \
+commande"
 
     # WINDOW
     window_help.title("Help")
     window_help.iconbitmap("img\\launch.ico")
     window_help.resizable(False, False)
     window_help.configure(bg=color1)
+    window_help.focus_force()
 
     # FRAME
     footer_help = Frame(window_help, bg=color3)

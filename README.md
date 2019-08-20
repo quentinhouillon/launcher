@@ -1,15 +1,3 @@
-# launcher
-
-## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/v1.0/Launcher-1.0.zip)
-
-## Site
-[Site](https://quentinhouillon.github.io/launcher/)
-
-## Récupérer le code source
-- Vous pouvez récupérer le code a tout moment:
-[GitHub](https://github.com/quentinhouillon/launcher_interface)
-
 ## Description
 Launcher vous permet de lancer vos applications et vos
 sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
@@ -18,6 +6,9 @@ facilements
 ![screenshot](img/Capture.png)
 
 ---
+
+## Télécharger
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/1.1/Launcher1.1.zip)
 
 ## Développement
 - Python 3.6
@@ -35,3 +26,6 @@ facilements
 
 ## Auteur
 - w4rmux
+- [GitHub](https://github.com/quentinhouillon/)
+- [Site](https://quentinhouillon.github.io/w4rmux/)
+

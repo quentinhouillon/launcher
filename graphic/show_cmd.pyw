@@ -33,6 +33,7 @@ def main_show():
     window.title("show - cmd")
     window.iconbitmap("img\\launch.ico")
     window.configure(bg=color1)
+    window.focus_force()
 
     # FRAME
     main = Frame(window, bg=color1)
