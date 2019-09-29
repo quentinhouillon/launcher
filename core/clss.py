@@ -19,11 +19,11 @@ class Launcher:
                 app = i["app"]
                 try:
                     startfile(i["cmd"])
-                    self.text = f"run {app}"
+                    self.text = f"lancement de {app}"
                     self.color = "green"
 
                 except:
-                    self.text = f"error {app}"
+                    self.text = f"erreur {app}"
                     self.color = "red"
 
                 break
@@ -32,7 +32,7 @@ class Launcher:
                 main_add()
                 break
             
-            elif self.command == "show":
+            elif self.command == "ls":
                 main_show()
                 break
 
@@ -68,27 +68,27 @@ class Launcher:
 
             else:
                 self.text = f"not found {self.command}, open with qwant ?"
-                self.color = "orange"
+                self.color = "#e55039"
 
         return {"text": self.text,
                 "fg": self.color}
 
     def theme_change(self):
-        with open("file\\theme.json", 'r') as th:
-            self.theme = load(th)
+        with open("file/settings.json", 'r') as settings:
+            SETT = load(settings)
 
-        for i in self.theme["bg_theme"]:
-            if self.theme["my_theme"]["bg"] == self.theme["bg_theme"]["black"]:
-                self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["white"]
-                self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["black"]
-                self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_white"]
+        for i in SETT["bg_theme"]:
+            if SETT["my_theme"]["bg"] == SETT["bg_theme"]["black"]:
+                SETT["my_theme"]["bg"] = SETT["bg_theme"]["white"]
+                SETT["my_theme"]["fg"] = SETT["fg_theme"]["black"]
+                SETT["my_theme"]["ft"] = SETT["bg_theme"]["ft_white"]
 
             else:
-                self.theme["my_theme"]["bg"] = self.theme["bg_theme"]["black"]
-                self.theme["my_theme"]["fg"] = self.theme["fg_theme"]["white"]
-                self.theme["my_theme"]["ft"] = self.theme["bg_theme"]["ft_black"]
+                SETT["my_theme"]["bg"] = SETT["bg_theme"]["black"]
+                SETT["my_theme"]["fg"] = SETT["fg_theme"]["white"]
+                SETT["my_theme"]["ft"] = SETT["bg_theme"]["ft_black"]
 
             break
 
-        with open("file/theme.json", 'w') as save:
-            dump(self.theme, save, indent=4)
+        with open("file/settings.json", 'w') as save:
+            dump(SETT, save, indent=4)

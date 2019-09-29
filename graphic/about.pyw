@@ -5,22 +5,25 @@ from json import load
 
 def about_launcher():
     # FILE
-    with open("file\\theme.json", "r") as theme:
-        th = load(theme)
+    with open("file\\settings.json", "r") as settings:
+        SETT = load(settings)
 
     # VARIABLE
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
-    tf = "consolas"
+    color1 = SETT["my_theme"]["bg"]
+    color2 = SETT["my_theme"]["fg"]
+    color3 = SETT["my_theme"]["ft"]
+    TF = SETT["my_theme"]["font"]
+
+    WIDTH = "560"
+    HEIGHT = "300"
 
     window_about = Toplevel()
     date = datetime.now()
 
     author = "w4rmux"
     name = "Launcher"
-    version = "1.1"
-    license = "All Right Reserved"
+    version = "2.0"
+    license = "(C) Tous Droits Réservés"
 
     info = f"L'application open source {name} vous permet de lancer \
 vos applications et sites web avec vos propre mots clés que \
@@ -33,7 +36,7 @@ vous personnalisés facilements"
     # WINDOW
     window_about.title("About - Launcher")
     window_about.iconbitmap("img\\launch.ico")
-    window_about.geometry("560x300")
+    window_about.geometry(f"{WIDTH}x{HEIGHT}")
     window_about.resizable(False, False)
     window_about.configure(bg=color1)
     window_about.focus_force()
@@ -44,24 +47,24 @@ vous personnalisés facilements"
 
     # LABEL
     lbl_title = Label(window_about, text="About", bg=color1, fg=color2,
-                      font=(tf, 14))
+                      font=(TF, 14))
 
-    lbl_author = Label(main_about, text=f"\n\nauthor: {author}", bg=color1,
-                       fg=color2, font=tf, anchor="w")
+    lbl_author = Label(main_about, text=f"\n\nAuteur: {author}", bg=color1,
+                       fg=color2, font=TF, anchor="w")
 
-    lbl_name = Label(main_about, text=f"name: {name}", bg=color1, fg=color2,
-                     font=tf, anchor="w")
+    lbl_name = Label(main_about, text=f"Programme: {name}", bg=color1, fg=color2,
+                     font=TF, anchor="w")
 
     lbl_version = Label(main_about, text=f"version: {version}", bg=color1,
-                        fg=color2, font=tf, anchor="w")
+                        fg=color2, font=TF, anchor="w")
 
     lbl_license = Label(main_about, text=f"license: {license} \t", bg=color1,
-                        fg=color2, font=tf, anchor="w")
+                        fg=color2, font=TF, anchor="w")
 
-    lbl_info = Message(main_about, text=info, bg=color1, fg=color2, font=tf)
+    lbl_info = Message(main_about, text=info, bg=color1, fg=color2, font=TF)
 
     lbl_date = Label(footer_about, text=date.year, bg=color3, fg=color2,
-                     font=tf)
+                     font=TF)
 
     # PACK
     lbl_title.pack(side="top", anchor="center", fill="x")

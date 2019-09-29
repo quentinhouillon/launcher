@@ -34,7 +34,8 @@ options = {
             "requests",
             "idna",
             "queue",
-            "lxml"
+            "lxml",
+            "tkinter"
         ]
     },
 }

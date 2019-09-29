@@ -20,38 +20,39 @@ def main_meteo():
             lbl.insert(INSERT, f" - {d}\n")
 
     # FILE
-    with open("file\\theme.json", "r") as theme:
-        th = load(theme)
+    with open("file\\settings.json", "r") as settings:
+        SETT = load(settings)
 
     # VARIABLE
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
+    COLOR1 = SETT["my_theme"]["bg"]
+    COLOR2 = SETT["my_theme"]["fg"]
+    COLOR3 = SETT["my_theme"]["ft"]
 
-    tf = "consolas"
+    TF = SETT["my_theme"]["font"]
     date = datetime.now()
+    
+    window_meteo = Tk()
 
     #WINDOW
-    window_meteo = Tk()
     window_meteo.title("meteo")
     window_meteo.iconbitmap("img\\launch.ico")
     window_meteo.geometry("350x250")
     window_meteo.resizable(False, False)
-    window_meteo.configure(bg=color1)
+    window_meteo.configure(bg=COLOR1, padx=5, pady=5)
     window_meteo.focus_force()
 
     #FRAME
-    main_meteo = Frame(window_meteo, bg=color1)
-    footer = Frame(window_meteo, bg=color3)
+    main_meteo = Frame(window_meteo, bg=COLOR1)
+    footer = Frame(window_meteo, bg=COLOR3)
 
     #LABEL
-    title = Label(main_meteo, text="Meteo\n", bg=color1, fg=color2,
-            anchor="center", font=tf)
+    title = Label(main_meteo, text="Meteo\n", bg=COLOR1, fg=COLOR2,
+            anchor="center", font=TF)
 
     answer = Text(
-        window_meteo, bd=0, bg=color1, fg=color2, font=(tf, 8))
+        window_meteo, bd=0, bg=COLOR1, fg=COLOR2, font=(TF, 8))
     
-    lbl_date = Label(footer, text=f"{date.year} - w4rmux", bg=color3, fg=color2)
+    lbl_date = Label(footer, text=f"{date.year} - w4rmux", bg=COLOR3, fg=COLOR2)
 
     # PACK
     title.pack(fill='x')

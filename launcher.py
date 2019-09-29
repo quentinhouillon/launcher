@@ -29,8 +29,9 @@ def launcher():
             pass
 
     def starter(event):
-        if color2 == "white":
+        if COLOR2 == "white":
             startfile(f"https://www.qwant.com/?q={v_entry}&t=web&theme=1")
+
         else:
             startfile(f"https://www.qwant.com/?q={v_entry}&t=web")
 
@@ -50,71 +51,71 @@ def launcher():
             window.after(1000, hour)
 
     # FILE
-    with open("file\\theme.json", 'r') as theme:
-        th = load(theme)
+    with open("file\\settings.json", 'r') as setttings:
+        SETT = load(setttings)
 
     # VARIABLE
     window = Tk()
 
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
+    COLOR1 = SETT["my_theme"]["bg"]
+    COLOR2 = SETT["my_theme"]["fg"]
+    COLOR3 = SETT["my_theme"]["ft"]
 
-    width = 350
-    height = 90
+    WIDTH = SETT["size"]["width"]
+    HEIGHT = SETT["size"]["height"]
 
-    w_screen = window.winfo_screenwidth()
-    h_screen = window.winfo_screenheight()
+    W_SCREEN = window.winfo_screenwidth()
+    H_SCREEN = window.winfo_screenheight()
 
-    w_center = int(w_screen-width-9)
-    h_center = int(h_screen/2 + height+170)
+    W_CENTER = int(W_SCREEN-WIDTH-9)
+    H_CENTER = int(H_SCREEN/2 + HEIGHT+110)
 
-    tf = "consolas"
+    TF = SETT["my_theme"]["font"]
     var_entry = StringVar()
     date = datetime.now()
 
     # WINDOW
     window.title("Launcher")
     window.iconbitmap("img\\launch.ico")
-    window.geometry(f"{width}x{height}-{w_center}+{h_center}")
-    window.minsize(width, height)
-    window.configure(bg=color1)
+    window.geometry(f"{WIDTH}x{HEIGHT}-{W_CENTER}+{H_CENTER}")
+    window.minsize(WIDTH, HEIGHT)
+    window.configure(bg=COLOR1, padx=5, pady=5)
     window.focus_force()
 
     # FRAME
-    main_frame = Frame(window, bg=color1)
-    footer = Frame(window, bg=color3)
+    main_frame = Frame(window, bg=COLOR1)
+    footer = Frame(window, bg=COLOR1)
 
     # IMAGE
     logo_theme = PhotoImage(file="img\\theme.png")
 
     # LABEL
-    lab = Label(main_frame, text=".: laucher :.".upper(), bg=color1, fg=color2,
-                anchor="center", font=tf)
+    lab = Label(main_frame, text=".: launcher :.".upper(), bg=COLOR1, fg=COLOR2,
+                anchor="center", font=TF, pady=8)
 
-    prompt = Label(main_frame, text=">>", bg=color1, fg=color2, font=tf)
-    response = Label(window, text="if you need you can enter 'help' or 'about'",
-                     bg=color1, fg=color2, anchor="w", font=(tf, 8))
+    prompt = Label(main_frame, text=">>", bg=COLOR1, fg=COLOR2, font=TF)
+    response = Label(window, text="Si besoin, tapez 'help' ou 'about'",
+                     bg=COLOR1, fg=COLOR2, anchor="w", font=(TF, 8), pady=8)
 
-    lbl_time = Label(footer, text="time: 00:00:00", bg=color3,
-                     fg=color2, font=(tf, 9))
+    lbl_time = Label(footer, text="time: 00:00:00", bg=COLOR3,
+                     fg=COLOR2, font=(TF, 9))
 
-    lbl_theme = Label(footer, image=logo_theme, bg=color3, anchor="center")
+    lbl_theme = Label(footer, image=logo_theme, bg=COLOR1, anchor="center")
     lbl_theme.bind("<Button-1>", change_theme)
     lbl_date = Label(
-        footer, text=date.year, bg=color3, fg=color2, font=(tf, 10))
+        footer, text=date.year, bg=COLOR3, fg=COLOR2, font=(TF, 10))
 
     # ENTRY
-    e_input = Entry(main_frame, bd=0, bg=color1, fg=color2,
-                    insertbackground=color2, textvariable=var_entry,
-                    font=tf)
+    e_input = Entry(main_frame, bd=0, bg=COLOR3, fg=COLOR2,
+                    insertbackground=COLOR2, textvariable=var_entry,
+                    font=TF)
 
     e_input.focus()
     e_input.bind('<Return>', run)
 
     # PACK
     lab.pack()
-    prompt.pack(side="left")
+    # prompt.pack(side="left")
     e_input.pack(fill='x')
     main_frame.pack(fill='both')
 

@@ -8,7 +8,7 @@ facilements
 ---
 
 ## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/1.1/Launcher1.1.zip)
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.0/Launcher.-.Setup.exe)
 
 ## Développement
 - Python 3.6

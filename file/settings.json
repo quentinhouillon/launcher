@@ -1,8 +1,8 @@
 {
     "bg_theme": {
         "black": "#181818",
-        "white": "#ced6e0",
-        "ft_white": "#bdc3c7",
+        "white": "#a3adae",
+        "ft_white": "#d3d7d9",
         "ft_black": "#2B2B2B"
     },
     "fg_theme": {
@@ -12,6 +12,11 @@
     "my_theme": {
         "bg": "#181818",
         "fg": "white",
-        "ft": "#2B2B2B"
+        "ft": "#2B2B2B",
+        "font": "consolas"
+    },
+    "size": {
+        "width": 350,
+        "height": 120
     }
 }
