@@ -1,0 +1,22 @@
+{
+    "bg_theme": {
+        "black": "#181818",
+        "white": "#a3adae",
+        "ft_white": "#d3d7d9",
+        "ft_black": "#2B2B2B"
+    },
+    "fg_theme": {
+        "black": "black",
+        "white": "white"
+    },
+    "my_theme": {
+        "bg": "#a3adae",
+        "fg": "black",
+        "ft": "#d3d7d9",
+        "font": "consolas"
+    },
+    "size": {
+        "width": 350,
+        "height": 120
+    }
+}

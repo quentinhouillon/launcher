@@ -4,55 +4,62 @@ from datetime import datetime
 
 def help_launcher():
     # FILE
-    with open("file\\theme.json", "r") as theme:
-        th = load(theme)
+    with open("file\\settings.json", "r") as settings:
+        SETT = load(settings)
 
     # VARIABLE
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
+    COLOR1 = SETT["my_theme"]["bg"]
+    COLOR2 = SETT["my_theme"]["fg"]
+    COLOR3 = SETT["my_theme"]["ft"]
     
     tf = "consolas"
     window_help = Tk()
     date = datetime.now()
 
-    text = "\
-- Pour voir vos commandes d'ouverture ou en ajouter,\
-tapez add' pour ajouter ou 'show' pour les afficher.\n\n\
-- Launcher a besoin d'accéder aux fichiers du dossier 'shortcuts',\
-pour y ajouter un fichier, tapez 'open' vous aurez juste a \
-glisser votre fichier dans le dossier shortcuts.\n\n \
-- Après avoir tapez' add', pour ajouter un site web, entrez juste \
-l'url du site\n\
-exemple: 'https://www.google.com/'\n\n\
-- Après avoir tapez 'add', pour ajoutez une application, vous \
-devez tapez 'shortcuts\Le nom du fichier.lnk' n'oubliez pas '.lnk' \
-a la fin du fichier !\n \
-exemple: 'shortcuts\firefox.lnk' si le fichier y est.\n\n\
-- Launcher vous donne aussi la météo, vous devez juste tapez 'meteo'\n\
-- Si vous tapez une commande inconnu au logiciel, vous pourrez cliquez \
-sur le texte orange, celui-ci ouvrira sur qwant (moteur de recherche) votre \
-commande"
+    text = """
+- tapez 'add' pour ajouter une commande d'ouverture ou 'ls' pour 
+  les afficher.
+
+- Launcher a besoin d'accéder au dossier 'shortcuts' qui contient
+  tous les raccourcis. Pour y ajouter vos raccourcis, tapez 'open' puis
+  glisser vos fichiers dans ce dossier.
+
+- fonction 'add':
+  Pour ajouter un site web, entrez juste
+  l'url du site:
+  exemple: 'https://www.google.com/';
+
+  Pour une Application(dans le dossier 'shortcuts'), entrez
+  juste le nom du fichier, exemple: 'firefox'
+
+  Toute fois, vous pouvez utiliser le bouton 'parcourir' pour ouvrir un
+  fichier qui ne se trouve pas dans le dossier 'shortcuts'
+
+- Tapez 'meteo' dans Launcher, il vous donnera la météo
+
+- Si vous saisissez une commande inconnue dans Launcher, un texte apparaîtra,
+  cliquez sur celui-ci pour effectuer une recherche avec le moteur de 
+  recherche qwant. """
 
     # WINDOW
     window_help.title("Help")
     window_help.iconbitmap("img\\launch.ico")
     window_help.resizable(False, False)
-    window_help.configure(bg=color1)
+    window_help.configure(bg=COLOR1, padx=5, pady=5)
     window_help.focus_force()
 
     # FRAME
-    footer_help = Frame(window_help, bg=color3)
+    footer_help = Frame(window_help, bg=COLOR3)
 
     # LABEL
-    lbl_title = Label(window_help, text="help".upper(), bg=color1, fg=color2,
+    lbl_title = Label(window_help, text="help".upper(), bg=COLOR1, fg=COLOR2,
                       font=tf)
 
-    lbl_fr = Message(window_help, text=text, bg=color1, fg=color2,
+    lbl_fr = Message(window_help, text=text, bg=COLOR1, fg=COLOR2,
                      font=(tf, 12))
 
-    lbl_date = Label(footer_help, text=date.year, bg=color3,
-                     fg=color2, font=tf)
+    lbl_date = Label(footer_help, text=date.year, bg=COLOR3,
+                     fg=COLOR2, font=tf)
 
     # PACK
     lbl_title.pack(anchor="center", fill="x")

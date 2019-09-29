@@ -1,12 +1,21 @@
 from tkinter import *
+from tkinter import filedialog
 from json import dump, load
 
 def main_add():
     with open("file\\run.json", 'r') as file:
         run = load(file)
 
-    with open("file\\theme.json", 'r') as theme:
-        th = load(theme)
+    with open("file\\settings.json", 'r') as settings:
+        SETT = load(settings)
+    
+    def browse_file():
+        try:
+            file = filedialog.askopenfile(title='Choose a file')
+            cmd_e.insert(INSERT, file.name)
+
+        except:
+            print(file.name)
 
     def execute_app(event):
         lnk_e.focus()
@@ -22,28 +31,39 @@ def main_add():
         if get_app:
             if get_lnk:
                 if get_cmd:
-                    to_append = {
-                        "app": get_app,
-                        "lnk": get_lnk,
-                        "cmd": get_cmd}
-                
-                    with open("file\\run.json", 'w') as file:
-                        run.append(to_append)
-                        dump(run, file, indent=4)
-                        window_add.destroy()
+                    if ("/" or ".com" or "www.") in get_cmd:
+                        to_append = {
+                            "app": get_app,
+                            "lnk": get_lnk,
+                            "cmd": get_cmd}
+                    
+                        with open("file\\run.json", 'w') as file:
+                            run.append(to_append)
+                            dump(run, file, indent=4)
+                            window_add.destroy()
+                    else:
+                        to_append = {
+                            "app": get_app,
+                            "lnk": get_lnk,
+                            "cmd": f"shortcuts\{get_cmd}.lnk"}
+                    
+                        with open("file\\run.json", 'w') as file:
+                            run.append(to_append)
+                            dump(run, file, indent=4)
+                            window_add.destroy()
                 else:
-                    answer.config(text="complete cmd", bg=color1, fg="red")
+                    answer.config(text="complete cmd", bg=COLOR1, fg="red")
             else:
-                answer.config(text="complete lnk", bg=color1, fg="red")
+                answer.config(text="complete lnk", bg=COLOR1, fg="red")
         
         else:
-            answer.config(text="complete app", bg=color1, fg="red")
+            answer.config(text="complete app", bg=COLOR1, fg="red")
 
     # VARIABLE
-    color1 = th["my_theme"]["bg"]
-    color2 = th["my_theme"]["fg"]
-    color3 = th["my_theme"]["ft"]
-    tf = "consolas"
+    COLOR1 = SETT["my_theme"]["bg"]
+    COLOR2 = SETT["my_theme"]["fg"]
+    COLOR3 = SETT["my_theme"]["ft"]
+    TF = SETT["my_theme"]["font"]
 
     window_add = Tk()
     app_text = StringVar()
@@ -55,35 +75,39 @@ def main_add():
     # window_add.geometry("300x100")
     window_add.resizable(False, False)
     window_add.iconbitmap("img\\launch.ico")
-    window_add.configure(cursor="pirate", bg=color1)
+    window_add.configure(padx=10, pady=10, bg=COLOR1)
     window_add.focus_force()
 
     # LABEL
-    app = Label(window_add, text="nom de l'application ou du site: ", 
-                bg=color1, fg=color2, font=tf, anchor="w")
+    app = Label(window_add, text="Nom de l'application ou site:", 
+                bg=COLOR1, fg=COLOR2, font=TF, anchor="w")
     
-    lnk = Label(window_add, text="nom du raccourcis: ", bg=color1, 
-                fg=color2, font=tf, anchor="w")
+    lnk = Label(window_add, text="\nNom du raccourcis que vous voulez:",
+                bg=COLOR1, fg=COLOR2, font=TF, anchor="w")
     
-    cmd = Label(window_add, text="chemin d'accès ou url: ", bg=color1, 
-                fg=color2, font=tf, anchor="w")
+    cmd = Label(window_add, text="\nURL ou chemin d'accès:", bg=COLOR1, 
+                fg=COLOR2, font=TF, anchor="w")
 
-    answer = Label(window_add, bg=color1, anchor="w")
+    answer = Label(window_add, bg=COLOR1, anchor="w")
 
     # ENTRY
-    app_e = Entry(window_add, bd=0, bg=color1, fg=color2,
-                  insertbackground=color2, textvariable=app_text, font=tf)
+    app_e = Entry(window_add, bd=0, bg=COLOR3, fg=COLOR2,
+                  insertbackground=COLOR2, textvariable=app_text, font=TF)
 
-    lnk_e = Entry(window_add, bd=0, bg=color1, fg=color2,
-                  insertbackground=color2, textvariable=lnk_text, font=tf)
+    lnk_e = Entry(window_add, bd=0, bg=COLOR3, fg=COLOR2,
+                  insertbackground=COLOR2, textvariable=lnk_text, font=TF)
 
-    cmd_e = Entry(window_add,bd=0, bg=color1, fg=color2,
-                  insertbackground=color2, textvariable=cmd_text, font=tf)
+    cmd_e = Entry(window_add,bd=0, bg=COLOR3, fg=COLOR2,
+                  insertbackground=COLOR2, textvariable=cmd_text, font=TF)
 
     app_e.focus()
     app_e.bind('<Return>', execute_app)
     lnk_e.bind('<Return>', execute_lnk)
     cmd_e.bind('<Return>', execute_cmd)
+
+    # BUTTON
+    browse = Button(window_add, text="parcourir", bg=COLOR3, fg=COLOR2,
+                       font=TF, command=browse_file)
 
     # PACK
     app.pack(fill="x", anchor="w")
@@ -96,5 +120,6 @@ def main_add():
     cmd_e.pack(fill="x")
 
     answer.pack(fill="x", anchor="w")
+    browse.pack(anchor="e")
 
     window_add.mainloop()
