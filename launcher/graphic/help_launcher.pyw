@@ -4,7 +4,7 @@ from datetime import datetime
 
 def help_launcher():
     # FILE
-    with open("file\\settings.json", "r") as settings:
+    with open("../file/settings.json", "r") as settings:
         SETT = load(settings)
 
     # VARIABLE

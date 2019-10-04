@@ -25,7 +25,7 @@ options = {
             os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'),
             "core",
             "graphic",
-            "file",
+            "../file",
             "img",
             "shortcuts"
          ],

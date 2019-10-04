@@ -3,12 +3,12 @@ Launcher vous permet de lancer vos applications et vos
 sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
 facilements
 
-![screenshot](img/Capture.png)
+![screenshot](launcher/img/Capture.png)
 
 ---
 
 ## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.0/Launcher.-.Setup.exe)
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.1/Launcher-Setup.exe)
 
 ## Développement
 - Python 3.6

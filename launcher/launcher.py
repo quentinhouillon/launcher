@@ -5,10 +5,10 @@ from tkinter import *
 from json import load
 
 from core.clss import *
-
+from core.add_file import *
 
 def launcher():
-    chdir(getcwd())
+    chdir(f"{getcwd()}/../launcher")
 
     # CALLBACK
     def _del_window():
@@ -51,7 +51,7 @@ def launcher():
             window.after(1000, hour)
 
     # FILE
-    with open("file\\settings.json", 'r') as setttings:
+    with open("../file/settings.json", 'r') as setttings:
         SETT = load(setttings)
 
     # VARIABLE
@@ -61,8 +61,8 @@ def launcher():
     COLOR2 = SETT["my_theme"]["fg"]
     COLOR3 = SETT["my_theme"]["ft"]
 
-    WIDTH = SETT["size"]["width"]
-    HEIGHT = SETT["size"]["height"]
+    WIDTH = 350
+    HEIGHT = 120
 
     W_SCREEN = window.winfo_screenwidth()
     H_SCREEN = window.winfo_screenheight()
@@ -76,7 +76,7 @@ def launcher():
 
     # WINDOW
     window.title("Launcher")
-    window.iconbitmap("img\\launch.ico")
+    window.iconbitmap("img/launch.ico")
     window.geometry(f"{WIDTH}x{HEIGHT}-{W_CENTER}+{H_CENTER}")
     window.minsize(WIDTH, HEIGHT)
     window.configure(bg=COLOR1, padx=5, pady=5)
@@ -87,13 +87,12 @@ def launcher():
     footer = Frame(window, bg=COLOR1)
 
     # IMAGE
-    logo_theme = PhotoImage(file="img\\theme.png")
+    logo_theme = PhotoImage(file="img/theme.png")
 
     # LABEL
     lab = Label(main_frame, text=".: launcher :.".upper(), bg=COLOR1, fg=COLOR2,
                 anchor="center", font=TF, pady=8)
 
-    prompt = Label(main_frame, text=">>", bg=COLOR1, fg=COLOR2, font=TF)
     response = Label(window, text="Si besoin, tapez 'help' ou 'about'",
                      bg=COLOR1, fg=COLOR2, anchor="w", font=(TF, 8), pady=8)
 
@@ -115,7 +114,6 @@ def launcher():
 
     # PACK
     lab.pack()
-    # prompt.pack(side="left")
     e_input.pack(fill='x')
     main_frame.pack(fill='both')
 
@@ -131,4 +129,6 @@ def launcher():
 
 
 if __name__ == "__main__":
+    # CORRECT
+    adder()
     launcher()

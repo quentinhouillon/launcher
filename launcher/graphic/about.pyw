@@ -5,7 +5,7 @@ from json import load
 
 def about_launcher():
     # FILE
-    with open("file\\settings.json", "r") as settings:
+    with open("../file/settings.json", "r") as settings:
         SETT = load(settings)
 
     # VARIABLE
@@ -22,7 +22,7 @@ def about_launcher():
 
     author = "w4rmux"
     name = "Launcher"
-    version = "2.0"
+    version = "2.1"
     license = "(C) Tous Droits Réservés"
 
     info = f"L'application open source {name} vous permet de lancer \

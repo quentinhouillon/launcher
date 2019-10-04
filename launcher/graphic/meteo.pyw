@@ -20,7 +20,7 @@ def main_meteo():
             lbl.insert(INSERT, f" - {d}\n")
 
     # FILE
-    with open("file\\settings.json", "r") as settings:
+    with open("../file/settings.json", "r") as settings:
         SETT = load(settings)
 
     # VARIABLE
@@ -38,7 +38,7 @@ def main_meteo():
     window_meteo.iconbitmap("img\\launch.ico")
     window_meteo.geometry("350x250")
     window_meteo.resizable(False, False)
-    window_meteo.configure(bg=COLOR1, padx=5, pady=5)
+    window_meteo.configure(bg=COLOR1)
     window_meteo.focus_force()
 
     #FRAME

@@ -3,10 +3,10 @@ from json import dump, load
 
 def main_show():
     # FILE
-    with open("file\\run.json", "r") as run:
+    with open("../file/launcher.json", "r") as run:
         run = load(run)
 
-    with open("file\\settings.json", "r") as settings:
+    with open("../file/settings.json", "r") as settings:
         SETT = load(settings)
 
     # CALLBACK

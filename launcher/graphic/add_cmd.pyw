@@ -3,10 +3,10 @@ from tkinter import filedialog
 from json import dump, load
 
 def main_add():
-    with open("file\\run.json", 'r') as file:
-        run = load(file)
+    with open("../file/launcher.json", 'r') as file:
+        launcher = load(file)
 
-    with open("file\\settings.json", 'r') as settings:
+    with open("../file/settings.json", 'r') as settings:
         SETT = load(settings)
     
     def browse_file():
@@ -37,9 +37,9 @@ def main_add():
                             "lnk": get_lnk,
                             "cmd": get_cmd}
                     
-                        with open("file\\run.json", 'w') as file:
-                            run.append(to_append)
-                            dump(run, file, indent=4)
+                        with open("file\\launcher.json", 'w') as file:
+                            launcher.append(to_append)
+                            dump(launcher, file, indent=4)
                             window_add.destroy()
                     else:
                         to_append = {
@@ -47,9 +47,9 @@ def main_add():
                             "lnk": get_lnk,
                             "cmd": f"shortcuts\{get_cmd}.lnk"}
                     
-                        with open("file\\run.json", 'w') as file:
-                            run.append(to_append)
-                            dump(run, file, indent=4)
+                        with open("../file/launcher.json", 'w') as file:
+                            launcher.append(to_append)
+                            dump(launcher, file, indent=4)
                             window_add.destroy()
                 else:
                     answer.config(text="complete cmd", bg=COLOR1, fg="red")

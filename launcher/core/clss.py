@@ -10,7 +10,7 @@ class Launcher:
         self.color = ""
 
     def execute_app(self):
-        with open("file\\run.json", 'r') as js:
+        with open("../file/launcher.json", 'r') as js:
             self.data = load(js)
 
         self.command = self.command.strip().lower()
@@ -74,7 +74,7 @@ class Launcher:
                 "fg": self.color}
 
     def theme_change(self):
-        with open("file/settings.json", 'r') as settings:
+        with open("../file/settings.json", 'r') as settings:
             SETT = load(settings)
 
         for i in SETT["bg_theme"]:
@@ -90,5 +90,5 @@ class Launcher:
 
             break
 
-        with open("file/settings.json", 'w') as save:
+        with open("../file/settings.json", 'w') as save:
             dump(SETT, save, indent=4)
