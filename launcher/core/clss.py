@@ -65,6 +65,9 @@ class Launcher:
             elif self.command == "restart":
                 system("shutdown -r")
                 break
+                
+            elif self.command == "":
+                pass
 
             else:
                 self.text = f"not found {self.command}, open with qwant ?"

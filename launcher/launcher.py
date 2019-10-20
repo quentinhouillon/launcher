@@ -22,18 +22,18 @@ def launcher():
         enter = launch.execute_app()
         try:
             response.config(text=enter["text"], fg=enter["fg"])
-            if "not found" in enter["text"]:
-                response.bind("<Button-1>", starter)
+            response.bind("<Button-1>", starter)
 
         except:
             pass
 
     def starter(event):
-        if COLOR2 == "white":
-            startfile(f"https://www.qwant.com/?q={v_entry}&t=web&theme=1")
+        if "not found" in response["text"]:
+            if COLOR2 == "white":
+                startfile(f"https://www.qwant.com/?q={v_entry}&t=web&theme=1")
 
-        else:
-            startfile(f"https://www.qwant.com/?q={v_entry}&t=web")
+            else:
+                startfile(f"https://www.qwant.com/?q={v_entry}&t=web")
 
     def change_theme(event):
         launch = Launcher(e_input.get())
