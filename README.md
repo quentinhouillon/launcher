@@ -7,8 +7,15 @@ facilements
 
 ---
 
+## Mis a jour 2.2
+- correction du bug d'ouverture de commande inconnue, Launcher n'ouvrira plus
+  une commande existante.
+
+- correction du bug de saisis: lorsque vous appuyiez sur entrée en ayant rien
+  tapé, il y avait une erreur. Elle est désormais corri.
+
 ## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.1/Launcher-Setup.exe)
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.2/Launcher-Setup.exe)
 
 ## Développement
 - Python 3.6

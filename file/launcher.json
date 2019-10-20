@@ -3,5 +3,10 @@
         "app": "launcher",
         "lnk": "launcher",
         "cmd": "launcher.exe"
+    },
+    {
+        "app": "cmd",
+        "lnk": "cmd",
+        "cmd": "cmd"
     }
 ]
