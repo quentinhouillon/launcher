@@ -31,7 +31,7 @@ def main_show():
     window.geometry("600x650")
     window.minsize(600, 650)
     window.title("show - cmd")
-    window.iconbitmap("img\\launch.ico")
+    window.iconbitmap("launch.ico")
     window.configure(bg=COLOR1)
     window.focus_force()
 

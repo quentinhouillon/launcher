@@ -44,13 +44,6 @@ class Launcher:
                 about_launcher()
                 break
 
-            elif self.command == "open":
-                startfile("shortcuts")
-                system("start %windir%\\explorer.exe shell:::\
-{4234d49b-0245-4df3-b780-3893943456e1}")
-                
-                break
-
             elif self.command == "meteo":
                 main_meteo()
                 break
@@ -63,7 +56,7 @@ class Launcher:
                 break
 
             elif self.command == "restart":
-                system("shutdown -r")
+                system("shutdown -g")
                 break
                 
             elif self.command == "":

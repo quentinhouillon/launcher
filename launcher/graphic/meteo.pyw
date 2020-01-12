@@ -35,7 +35,7 @@ def main_meteo():
 
     #WINDOW
     window_meteo.title("meteo")
-    window_meteo.iconbitmap("img\\launch.ico")
+    window_meteo.iconbitmap("launch.ico")
     window_meteo.geometry("350x250")
     window_meteo.resizable(False, False)
     window_meteo.configure(bg=COLOR1)

@@ -1,7 +1,7 @@
 from os import system, chdir, listdir
 from json import dump
 
-def adder():
+def checking():
     try:
         chdir("../file")
 
@@ -16,13 +16,35 @@ def adder():
                 "app": "launcher",
                 "lnk": "launcher",
                 "cmd": "launcher.exe"
-            }
+            },
         ]
-        
-        system("echo blabla> launcher.json")
 
         with open("launcher.json", "w") as launcher:
             dump(add_launcher, launcher, indent=4)
+    
+    if "apps_windows.json" not in listdir("."):
+        add_apps = {
+            "windows_apps": {
+                "3D Builder": "com.microsoft.builder3d:",
+                "Alarme et horloge": "ms-clock:",
+                "Calculatrice": "calculator:",
+                "Calendrier": "outlookcal:",
+                "Caméra": "microsoft.windows.camera:",
+                "Obtenir de l'aide": "ms-contact-support:",
+                "Paramètres": "settings:",
+                "groove musique": "mswindowsmusic:",
+                "Courrier": "outlookmail:",
+                "Carte": "bingmaps:",
+                "Microsoft Edge": "microsoft-edge:",
+                "Microsoft Store": "ms-windows-store:",
+                "Film & Tv": "mswindowsvideo:",
+                "Photos": "ms-photos:",
+                "xbox": "xbox:"
+            }
+        }
+
+        with open("apps_windows.json", 'w') as adder:
+            dump(add_apps, adder, indent=4)
 
     if "settings.json" not in listdir("."):
         add_settings = {
@@ -47,8 +69,6 @@ def adder():
                 "height": 120
             }
         }
-
-        system("echo settings> settings.json")
 
         with open("settings.json", "w") as sett:
             dump(add_settings, sett, indent=4)

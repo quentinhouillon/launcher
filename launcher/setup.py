@@ -14,7 +14,7 @@ if sys.platform == 'win32':
     base = 'Win32GUI'
 
 executables = [
-    Executable('launcher.py', base=base)
+    Executable('launcher.py', base=base, icon="launch.ico")
 ]
 
 # <added>
@@ -25,9 +25,8 @@ options = {
             os.path.join(PYTHON_INSTALL_DIR, 'DLLs', 'tcl86t.dll'),
             "core",
             "graphic",
-            "../file",
             "img",
-            "shortcuts"
+            "launch.ico"
          ],
         'packages':[
             "bs4",

@@ -8,5 +8,15 @@
         "app": "cmd",
         "lnk": "cmd",
         "cmd": "cmd"
+    },
+    {
+        "app": "tst",
+        "lnk": "g",
+        "cmd": "..\\file\\shortcuts\\greg.lnk"
+    },
+    {
+        "app": "camera",
+        "lnk": "cam",
+        "cmd": "..\\file\\shortcuts\\microsoft.windows.camera:.lnk"
     }
 ]

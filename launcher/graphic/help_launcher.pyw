@@ -18,32 +18,33 @@ def help_launcher():
 
     text = """
 - tapez 'add' pour ajouter une commande d'ouverture ou 'ls' pour 
-  les afficher.
+  les afficher. Pour ouvrir votre site ou application, entrez juste
+  le nom de votre commande d'ouverture:
+  exemple: pour ouvrir firefox: tapez 'firefox' ou le mot clé choisis
+           (f, ff, fire, ...).
 
-- Launcher a besoin d'accéder au dossier 'shortcuts' qui contient
-  tous les raccourcis. Pour y ajouter vos raccourcis, tapez 'open' puis
-  glisser vos fichiers dans ce dossier.
-
-- fonction 'add':
+- La Fonction 'add':
   Pour ajouter un site web, entrez juste
   l'url du site:
   exemple: 'https://www.google.com/';
 
-  Pour une Application(dans le dossier 'shortcuts'), entrez
-  juste le nom du fichier, exemple: 'firefox'
+  Pour une Application: cliquez sur 'ajouter' pour parcourir les 
+  apllications de votre ordinateur, puis glissez celle-ci dans le 
+  dossier 'shortcuts', ensuite entrez juste le nom du fichier:
+  exemple: 'firefox'
 
-  Toute fois, vous pouvez utiliser le bouton 'parcourir' pour ouvrir un
-  fichier qui ne se trouve pas dans le dossier 'shortcuts'
+  Toute fois, vous pouvez utiliser le bouton 'parcourir' pour ajouter
+  un fichier qui ne se trouve pas dans le dossier 'shortcuts'
 
 - Tapez 'meteo' dans Launcher, il vous donnera la météo
 
-- Si vous saisissez une commande inconnue dans Launcher, un texte apparaîtra,
-  cliquez sur celui-ci pour effectuer une recherche avec le moteur de 
-  recherche qwant. """
+- Si vous saisissez une commande inconnue dans Launcher, un texte
+  apparaîtra, cliquez sur celui-ci pour effectuer une recherche avec
+  le moteur de recherche qwant. """
 
     # WINDOW
     window_help.title("Help")
-    window_help.iconbitmap("img\\launch.ico")
+    window_help.iconbitmap("launch.ico")
     window_help.resizable(False, False)
     window_help.configure(bg=COLOR1, padx=5, pady=5)
     window_help.focus_force()

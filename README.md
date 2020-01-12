@@ -1,21 +1,21 @@
 ## Description
-Launcher vous permet de lancer vos applications et vos
-sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
-facilements
+'Launcher' vous permet de lancer vos applications et vos
+sites web avec vos propre mots-clés que vous pouvez personnaliser et configurer 
+facilement.
 
 ![screenshot](launcher/img/Capture.png)
 
 ---
 
-## Mis a jour 2.2
-- correction du bug d'ouverture de commande inconnue, Launcher n'ouvrira plus
-  une commande existante.
+## Mis a jour 2.3
+- modification du dossier 'shortcuts': maintenant dans le dossier des
+  configurations 'file'.
 
-- correction du bug de saisis: lorsque vous appuyiez sur entrée en ayant rien
-  tapé, il y avait une erreur. Elle est désormais corri.
+- plus besoin de taper 'open' il y a maintenant un bouton 'ajouter' dans la
+  fenêtre 'add'.
 
-## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.2/Launcher-Setup.exe)
+## Téléchargement
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.3/Launcher-Setup.exe)
 
 ## Développement
 - Python 3.6

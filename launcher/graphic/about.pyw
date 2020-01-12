@@ -22,7 +22,7 @@ def about_launcher():
 
     author = "w4rmux"
     name = "Launcher"
-    version = "2.2"
+    version = "2.3"
     license = "(C) Tous Droits Réservés"
 
     info = f"L'application open source {name} vous permet de lancer \
@@ -35,7 +35,7 @@ vous personnalisés facilements"
 
     # WINDOW
     window_about.title("About - Launcher")
-    window_about.iconbitmap("img\\launch.ico")
+    window_about.iconbitmap("launch.ico")
     window_about.geometry(f"{WIDTH}x{HEIGHT}")
     window_about.resizable(False, False)
     window_about.configure(bg=color1)
