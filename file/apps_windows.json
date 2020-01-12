@@ -1,0 +1,19 @@
+{
+    "windows_apps": {
+        "3D Builder": "com.microsoft.builder3d:",
+        "Alarme et horloge": "ms-clock:",
+        "Calculatrice": "calculator:",
+        "Calendrier": "outlookcal:",
+        "Cam\u00e9ra": "microsoft.windows.camera:",
+        "Obtenir de l'aide": "ms-contact-support:",
+        "Param\u00e8tres": "settings:",
+        "groove musique": "mswindowsmusic:",
+        "Courrier": "outlookmail:",
+        "Carte": "bingmaps:",
+        "Microsoft Edge": "microsoft-edge:",
+        "Microsoft Store": "ms-windows-store:",
+        "Film & Tv": "mswindowsvideo:",
+        "Photos": "ms-photos:",
+        "xbox": "xbox:"
+    }
+}

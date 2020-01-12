@@ -5,8 +5,8 @@
         "cmd": "launcher.exe"
     },
     {
-        "app": "cmd",
-        "lnk": "cmd",
-        "cmd": "cmd"
+        "app": "Param\u00e8tres",
+        "lnk": "p",
+        "cmd": "settings:"
     }
 ]

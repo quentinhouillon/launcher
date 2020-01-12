@@ -1,21 +1,18 @@
 ## Description
-Launcher vous permet de lancer vos applications et vos
-sites web avec vos propre mots clés que vous pouvez personnaliser et configurer 
-facilements
+'Launcher' vous permet de lancer vos applications et vos
+sites web avec vos propre mots-clés que vous pouvez personnaliser et configurer 
+facilement.
 
 ![screenshot](launcher/img/Capture.png)
 
 ---
 
-## Mis a jour 2.2
-- correction du bug d'ouverture de commande inconnue, Launcher n'ouvrira plus
-  une commande existante.
+## Mis a jour 2.4
+- Suppression du dossier "shortcuts"
+- Ajout des commandes apps windows 10.
 
-- correction du bug de saisis: lorsque vous appuyiez sur entrée en ayant rien
-  tapé, il y avait une erreur. Elle est désormais corri.
-
-## Télécharger
-[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.2/Launcher-Setup.exe)
+## Téléchargement
+[Launcher.exe](https://github.com/quentinhouillon/launcher/releases/download/2.4/Launcher-Setup.exe)
 
 ## Développement
 - Python 3.6
