@@ -18,5 +18,10 @@
         "app": "camera",
         "lnk": "cam",
         "cmd": "..\\file\\shortcuts\\microsoft.windows.camera:.lnk"
+    },
+    {
+        "app": "my_note",
+        "lnk": "mn",
+        "cmd": "C:/w4rmux/MyNote/MyNote.exe"
     }
 ]

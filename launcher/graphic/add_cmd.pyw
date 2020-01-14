@@ -75,7 +75,7 @@ Windows/Start Menu/Programs")
                         "lnk": get_lnk,
                         "cmd": get_cmd}
                 
-                    with open("file\\launcher.json", 'w') as file:
+                    with open("..\\file\\launcher.json", 'w') as file:
                         launcher.append(to_append)
                         dump(launcher, file, indent=4)
                         window_add.destroy()

@@ -7,127 +7,136 @@ from json import load
 from core.clss import *
 from core.check_settings import *
 
-def launcher():
-    chdir(f"{getcwd()}/../launcher")
+class Launcher:
+    def __init__(self, root):
+        chdir(f"{getcwd()}/../launcher")
 
-    # CALLBACK
-    def _del_root():
-        root.destroy()
+        self.root = root
 
-    def run(event):
-        global v_entry
-        launch = Launcher(e_input.get())
-        v_entry = e_input.get()
-        e_input.delete(0, END)
-        enter = launch.execute_app()
+        self.get_settings()
+
+        WIDTH = 350
+        HEIGHT = 120
+
+        W_SCREEN = self.root.winfo_screenwidth()
+        H_SCREEN = self.root.winfo_screenheight()
+
+        W_CENTER = int(W_SCREEN-WIDTH-9)
+        H_CENTER = int(H_SCREEN/2 + HEIGHT+110)
+
+        self.var_entry = StringVar()
+        self.date = datetime.now()
+
+        # ROOT
+        self.root.title("Launcher")
+        self.root.iconbitmap("launch.ico")
+        self.root.geometry(f"{WIDTH}x{HEIGHT}-{W_CENTER}+{H_CENTER}")
+        self.root.minsize(WIDTH, HEIGHT)
+        self.root.configure(bg=self.BG, padx=5, pady=5)
+        self.root.focus_force()
+
+        # FRAME
+        self.frm_main = Frame(self.root, bg=self.BG)
+        self.frm_footer = Frame(self.root, bg=self.BG)
+
+        # IMAGE
+        self.logo_theme = PhotoImage(file="img/theme.png")
+
+        # LABEL
+        self.lbl_title = Label(self.frm_main, text=".: launcher :.".upper(),
+                               bg=self.BG, fg=self.FG, anchor="center",
+                               font=self.TF, pady=8)
+
+        self.lbl_resonse = Label(
+            self.root, text="Si besoin, tapez 'help' ou 'about'",
+            bg=self.BG, fg=self.FG, anchor="w", font=(self.TF, 8),
+            pady=8)
+
+        self.lbl_time = Label(self.frm_footer, text="time: 00:00:00", bg=self.FT,
+                         fg=self.FG, font=(self.TF, 9))
+
+        self.lbl_theme = Label(
+            self.frm_footer, image=self.logo_theme, bg=self.BG,
+            anchor="center")
+
+        self.lbl_date = Label(
+            self.frm_footer, text=self.date.year, bg=self.FT, fg=self.FG,
+            font=(self.TF, 10))
+
+        self.lbl_theme.bind("<Button-1>", self.change_theme)
+
+        # ENTRY
+        self.ent = Entry(self.frm_main, bd=0, bg=self.FT, fg=self.FG,
+                        insertbackground=self.FG, textvariable=self.var_entry,
+                        font=self.TF)
+
+        self.ent.focus()
+        self.ent.bind('<Return>', self.run)
+
+        # PACK
+        self.lbl_title.pack()
+        self.ent.pack(fill='x')
+        self.frm_main.pack(fill='both')
+
+        self.lbl_resonse.pack(anchor="w")
+
+        self.lbl_time.pack(side="left")
+        self.lbl_date.pack(side="right")
+        self.lbl_theme.pack(anchor="center")
+        self.frm_footer.pack(fill="x", side="bottom")
+
+        self.root.after(1000, self.hour)
+        self.root.mainloop()
+
+    def run(self, event):
+        self.core = Core(self.ent.get())
+        self.v_entry = self.ent.get()
+        self.ent.delete(0, END)
+        enter = self.core.execute_app()
         try:
-            response.config(text=enter["text"], fg=enter["fg"])
-            response.bind("<Button-1>", starter)
+            self.lbl_resonse.config(text=enter["text"], fg=enter["fg"])
+            self.lbl_resonse.bind("<Button-1>", self.starter)
 
         except:
             pass
 
-    def starter(event):
-        if "not found" in response["text"]:
-            if COLOR2 == "white":
-                startfile(f"https://www.qwant.com/?q={v_entry}&t=web&theme=1")
+    def starter(self, event):
+        if "not found" in self.lbl_resonse["text"]:
+            if self.FG == "white":
+                startfile(
+                    f"https://www.qwant.com/?q={self.v_entry}&t=web&theme=1")
 
             else:
-                startfile(f"https://www.qwant.com/?q={v_entry}&t=web")
+                startfile(f"https://www.qwant.com/?q={self.v_entry}&t=web")
 
-    def change_theme(event):
-        launch = Launcher(e_input.get())
-        launch.theme_change()
-        root.destroy()
-        launcher()
+    def change_theme(self, event):
+        self.core = Core(self.ent.get())
+        self.core.theme_change()
+        self.root.destroy()
+        main()
 
-    def hour():
+    def hour(self):
         try:
-            lbl_time.config(text=strftime("time: %H:%M:%S"))
-            root.after(1000, hour)
+            self.lbl_time.config(text=strftime("time: %H:%M:%S"))
+            self.root.after(1000, self.hour)
 
         except:
-            lbl_time.config(text="time: 00:00:00")
-            root.after(1000, hour)
+            self.lbl_time.config(text="time: 00:00:00")
+            self.root.after(1000, self.hour)
 
-    # FILE
-    with open("../file/settings.json", 'r') as setttings:
-        SETT = load(setttings)
+    def get_settings(self):
+        with open("../file/settings.json", 'r') as setttings:
+            SETT = load(setttings)
 
-    # VARIABLE
+        self.BG = SETT["my_theme"]["bg"]
+        self.FG = SETT["my_theme"]["fg"]
+        self.FT = SETT["my_theme"]["ft"]
+        self.TF = SETT["my_theme"]["font"]
+
+def main():
     root = Tk()
-
-    COLOR1 = SETT["my_theme"]["bg"]
-    COLOR2 = SETT["my_theme"]["fg"]
-    COLOR3 = SETT["my_theme"]["ft"]
-
-    WIDTH = 350
-    HEIGHT = 120
-
-    W_SCREEN = root.winfo_screenwidth()
-    H_SCREEN = root.winfo_screenheight()
-
-    W_CENTER = int(W_SCREEN-WIDTH-9)
-    H_CENTER = int(H_SCREEN/2 + HEIGHT+110)
-
-    TF = SETT["my_theme"]["font"]
-    var_entry = StringVar()
-    date = datetime.now()
-
-    # ROOT
-    root.title("Launcher")
-    root.iconbitmap("launch.ico")
-    root.geometry(f"{WIDTH}x{HEIGHT}-{W_CENTER}+{H_CENTER}")
-    root.minsize(WIDTH, HEIGHT)
-    root.configure(bg=COLOR1, padx=5, pady=5)
-    root.focus_force()
-
-    # FRAME
-    main_frame = Frame(root, bg=COLOR1)
-    footer = Frame(root, bg=COLOR1)
-
-    # IMAGE
-    logo_theme = PhotoImage(file="img/theme.png")
-
-    # LABEL
-    lab = Label(main_frame, text=".: launcher :.".upper(), bg=COLOR1, fg=COLOR2,
-                anchor="center", font=TF, pady=8)
-
-    response = Label(root, text="Si besoin, tapez 'help' ou 'about'",
-                     bg=COLOR1, fg=COLOR2, anchor="w", font=(TF, 8), pady=8)
-
-    lbl_time = Label(footer, text="time: 00:00:00", bg=COLOR3,
-                     fg=COLOR2, font=(TF, 9))
-
-    lbl_theme = Label(footer, image=logo_theme, bg=COLOR1, anchor="center")
-    lbl_theme.bind("<Button-1>", change_theme)
-    lbl_date = Label(
-        footer, text=date.year, bg=COLOR3, fg=COLOR2, font=(TF, 10))
-
-    # ENTRY
-    e_input = Entry(main_frame, bd=0, bg=COLOR3, fg=COLOR2,
-                    insertbackground=COLOR2, textvariable=var_entry,
-                    font=TF)
-
-    e_input.focus()
-    e_input.bind('<Return>', run)
-
-    # PACK
-    lab.pack()
-    e_input.pack(fill='x')
-    main_frame.pack(fill='both')
-
-    response.pack(anchor="w")
-
-    lbl_time.pack(side="left")
-    lbl_date.pack(side="right")
-    lbl_theme.pack(anchor="center")
-    footer.pack(fill="x", side="bottom")
-
-    root.after(1000, hour)
-    root.mainloop()
-
+    checking()
+    launch = Launcher(root)
 
 if __name__ == "__main__":
-    checking()
-    launcher()
+    main()

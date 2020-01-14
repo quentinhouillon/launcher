@@ -3,7 +3,7 @@ from os import startfile, system
 
 from graphic import *
 
-class Launcher:
+class Core:
     def __init__(self, command):
         self.command = command
         self.text = ""
