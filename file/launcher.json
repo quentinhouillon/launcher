@@ -3,10 +3,5 @@
         "app": "launcher",
         "lnk": "launcher",
         "cmd": "launcher.exe"
-    },
-    {
-        "app": "Param\u00e8tres",
-        "lnk": "p",
-        "cmd": "settings:"
     }
 ]

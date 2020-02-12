@@ -31,7 +31,7 @@ def checking():
                 "Calendrier": "outlookcal:",
                 "Caméra": "microsoft.windows.camera:",
                 "Obtenir de l'aide": "ms-contact-support:",
-                "Paramètres": "settings:",
+                "Paramètres": "ms-settings:",
                 "groove musique": "mswindowsmusic:",
                 "Courrier": "outlookmail:",
                 "Carte": "bingmaps:",
