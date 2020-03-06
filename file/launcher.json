@@ -3,5 +3,15 @@
         "app": "launcher",
         "lnk": "launcher",
         "cmd": "launcher.exe"
+    },
+    {
+        "app": "firefox",
+        "lnk": "ff",
+        "cmd": "firefox"
+    },
+    {
+        "app": "cmd",
+        "lnk": "cmd",
+        "cmd": "cmd"
     }
 ]

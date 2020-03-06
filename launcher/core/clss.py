@@ -3,6 +3,7 @@ from os import startfile, system
 
 from graphic import *
 
+
 class Launcher:
     def __init__(self, command):
         self.command = command
@@ -13,51 +14,35 @@ class Launcher:
         with open("../file/launcher.json", 'r') as js:
             self.data = load(js)
 
+        FUNCTIONS = {"add": main_add,
+                     "ls": main_show,
+                     "help": help_launcher,
+                     "about": about_launcher,
+                     "exit": (system, "shutdown -p"),
+                     "restart": (system, "net view")
+                     }
+
         self.command = self.command.strip().lower()
-        for i in self.data:
-            if self.command == i["lnk"] or self.command == i["app"]:
-                app = i["app"]
-                try:
-                    startfile(i["cmd"])
-                    self.text = f"lancement de {app}"
-                    self.color = "green"
+        if self.command:
+            for i in self.data:
+                if self.command == i["lnk"] or self.command == i["app"]:
+                    app = i["app"]
+                    try:
+                        startfile(i["cmd"])
+                        self.text = f"lancement de {app}"
+                        self.color = "green"
 
-                except:
-                    self.text = f"erreur {app}"
-                    self.color = "red"
+                    except:
+                        self.text = f"erreur {app}"
+                        self.color = "red"
 
-                break
-            
-            elif self.command == "add":
-                main_add()
-                break
-            
-            elif self.command == "ls":
-                main_show()
-                break
+            if self.command in FUNCTIONS:
+                try:  # Open function without argument
+                    FUNCTIONS[self.command]()
 
-            elif self.command == "help":
-                help_launcher()
-                break
-
-            elif self.command == "about":
-                about_launcher()
-                break
-
-            elif self.command == "exit":
-                exit()
-
-            elif self.command == "shutdown":
-                system("shutdown -p")
-                break
-
-            elif self.command == "restart":
-                system("shutdown -g")
-                break
-                
-            elif self.command == "":
-                pass
-
+                except TypeError:  # Open function with argument
+                    FUNCTIONS[self.command][0](FUNCTIONS[self.command][1])
+        
             else:
                 self.text = f"not found {self.command}, open with qwant ?"
                 self.color = "#e55039"
