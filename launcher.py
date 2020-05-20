@@ -1,4 +1,3 @@
-import sqlite3
 from datetime import datetime
 from json import dump, load
 from os import getcwd, chdir
@@ -12,9 +11,10 @@ class Launcher:
         chdir(getcwd())
 
         self.root = root
-
-        self.conn = sqlite3.connect("file/Launcher.db")
-        self.cur = self.conn.cursor()
+        self.ls_btn = []
+        self.ls_value = []
+        self.core = LauncherCore()
+        
         self.get_settings()
         self.date = datetime.now()
 
@@ -43,20 +43,40 @@ Tous Droits Réservés"
         # endregion: ROOT
 
         # region: FRAME
-        self.frm_entry = Frame(self.root, bg=self.BG, pady=15)
+        self.frm_entry = Frame(self.root, bg=self.BG, pady=16)
         self.frm_result = Frame(self.root, bg=self.ACCENT)
         # endregion: FRAME
 
+        # region IMAGE
+        self.img_search = PhotoImage(file="img/search.png")
+        # endregion IMAGE
+
+        # region: LABEL
+        self.lbl_search = Label(self.frm_entry, image=self.img_search,
+                                bg=self.BG)
+
+        self.lbl_search.bind("<ButtonRelease-1>",
+                             lambda x: self.create_button_search(self.ent.get()))
+        # endregion: LABEL
+
+        # region: BUTTON
+        self.btn_add_site = Button(self.root, text="+", bg=self.BG,
+                                   fg=self.FG, relief="flat",
+                                   font=("monospace", 23), command=self.add_site)
+        # region: BUTTON
+
         # region: ENTRY
         self.ent = Entry(self.frm_entry, bg=self.BG, fg=self.FG, relief="flat",
-                         justify="center", insertbackground=self.FG)
+                         justify="center", insertbackground=self.FG, font=("sans-serif", 14))
 
-        self.ent.bind("<Return>", lambda x: self.execute(self.ent.get()))
+        self.ent.bind("<KeyRelease>", lambda x: self.create_button_search(self.ent.get()))
         self.ent.focus()
         # endregion: ENTRY
 
         # region: PACK
+        self.lbl_search.pack(side="left", padx=10)
         self.ent.pack(fill="x")
+        self.btn_add_site.pack(side="right", anchor="n")
         self.frm_entry.pack(fill="x", side="top")
 
         self.frm_result.pack(fill="both", side="top")
@@ -79,14 +99,35 @@ Tous Droits Réservés"
         self.FG = self.THEME[self.MYTHEME]["fg"]
         self.ACCENT = self.THEME[self.MYTHEME]["accent"]
 
-    def execute(self, value, event=False):
-        print(value)
+    def create_button_search(self, value, event=False):
+        for index in range(len(self.ls_value)):
+            self.ls_btn[index].destroy()
+        
+        self.ls_value = []
+        self.ls_btn = []
+
+        for item in self.core.search(self.ent.get()):
+            if item.split("\\")[-1][:-4] not in self.ls_value:
+                self.ls_value.append(item.split("\\")[-1][:-4])
+
+        for index in range(len(self.ls_value)):
+            self.ls_btn.append(Button(self.root, text=self.ls_value[index],
+                                bg=self.BG, fg=self.FG, relief="flat",
+                                font=("sans serif", 13),
+                                command=lambda i=index: print(
+                                    self.ls_btn[i].cget("text"))))
+
+            self.ls_btn[index].pack(fill="x")
+
+    def add_site(self):
+        print("ceci est un test")
 
 def main():
     check()
     root = Tk()
     launch = Launcher(root)
     root.mainloop()
+    print(launch.ls_value)
 
 if __name__ == "__main__":
     main()
