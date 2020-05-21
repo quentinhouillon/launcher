@@ -1,6 +1,6 @@
 from datetime import datetime
 from json import dump, load
-from os import getcwd, chdir
+from os import getcwd, chdir, startfile
 from tkinter import *
 
 from core.check_settings import *
@@ -53,23 +53,27 @@ Tous Droits Réservés"
 
         # region: LABEL
         self.lbl_search = Label(self.frm_entry, image=self.img_search,
-                                bg=self.BG)
+                                bg=self.BG, cursor="hand2")
 
         self.lbl_search.bind("<ButtonRelease-1>",
-                             lambda x: self.create_button_search(self.ent.get()))
+                             lambda x: self.core.execute(self.ent.get()))
         # endregion: LABEL
 
         # region: BUTTON
         self.btn_add_site = Button(self.root, text="+", bg=self.BG,
                                    fg=self.FG, relief="flat",
-                                   font=("monospace", 23), command=self.add_site)
+                                   font=("monospace", 23), cursor="hand2",
+                                   command=self.add_site)
         # region: BUTTON
 
         # region: ENTRY
         self.ent = Entry(self.frm_entry, bg=self.BG, fg=self.FG, relief="flat",
-                         justify="center", insertbackground=self.FG, font=("sans-serif", 14))
+                         justify="center", insertbackground=self.FG,
+                         font=("sans-serif", 14))
 
-        self.ent.bind("<KeyRelease>", lambda x: self.create_button_search(self.ent.get()))
+        self.ent.bind("<KeyRelease>",
+                      lambda x: self.create_button_search(self.ent.get()))
+        self.ent.bind("<Return>", lambda x: self.core.execute(self.ent.get()))
         self.ent.focus()
         # endregion: ENTRY
 
@@ -108,19 +112,20 @@ Tous Droits Réservés"
 
         for item in self.core.search(self.ent.get()):
             if item.split("\\")[-1][:-4] not in self.ls_value:
-                self.ls_value.append(item.split("\\")[-1][:-4])
+                self.ls_value.append(item)
 
         for index in range(len(self.ls_value)):
-            self.ls_btn.append(Button(self.root, text=self.ls_value[index],
+            self.ls_btn.append(Button(self.root,
+                                text=self.ls_value[index].split("\\")[-1][:-4],
                                 bg=self.BG, fg=self.FG, relief="flat",
-                                font=("sans serif", 13),
-                                command=lambda i=index: print(
-                                    self.ls_btn[i].cget("text"))))
+                                font=("sans serif", 13), cursor="hand2",
+                                command=lambda i=index: startfile(
+                                    self.ls_value[i])))
 
             self.ls_btn[index].pack(fill="x")
 
     def add_site(self):
-        print("ceci est un test")
+        print("add site")
 
 def main():
     check()

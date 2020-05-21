@@ -49,6 +49,6 @@ class LauncherCore:
                     cmd = i[1]
                     result.append(cmd)
         return result
-
+    
     def execute(self, value):
-        print(value)
+        os.startfile(self.search(value)[0])
