@@ -37,9 +37,10 @@ Tous Droits Réservés"
         self.root.geometry(f"{WIDTH}x{HEIGHT}+{W_CENTER}+{H_CENTER}")
         self.root.resizable(False, False)
         self.root.config(bg=self.ACCENT)
-        self.root.overrideredirect(1)
+        self.root.overrideredirect(True)
         self.root.wm_attributes("-transparentcolor", self.ACCENT)
         self.root.focus_force()
+        self.root.bind("<Control-w>", exit)
         # endregion: ROOT
 
         # region: FRAME
@@ -63,7 +64,7 @@ Tous Droits Réservés"
         self.btn_add_site = Button(self.root, text="+", bg=self.BG,
                                    fg=self.FG, relief="flat",
                                    font=("monospace", 23), cursor="hand2",
-                                   command=self.add_site)
+                                   command=self.window_add)
         # region: BUTTON
 
         # region: ENTRY
@@ -72,7 +73,7 @@ Tous Droits Réservés"
                          font=("sans-serif", 14))
 
         self.ent.bind("<KeyRelease>",
-                      lambda x: self.create_button_search(self.ent.get()))
+                      lambda x: self.create_button_search())
         self.ent.bind("<Return>", lambda x: self.core.execute(self.ent.get()))
         self.ent.focus()
         # endregion: ENTRY
@@ -103,7 +104,7 @@ Tous Droits Réservés"
         self.FG = self.THEME[self.MYTHEME]["fg"]
         self.ACCENT = self.THEME[self.MYTHEME]["accent"]
 
-    def create_button_search(self, value, event=False):
+    def create_button_search(self, event=False):
         for index in range(len(self.ls_value)):
             self.ls_btn[index].destroy()
         
@@ -126,13 +127,63 @@ Tous Droits Réservés"
 
     def add_site(self):
         print("add site")
+    
+    def window_add(self):
+        # region: window
+        self.tl_add = Toplevel(bg=self.BG)
+        self.tl_add.title("Add Shortcuts")
+        self.tl_add.iconbitmap("img/icon.ico")
+        self.tl_add.geometry("450x200")
+        self.tl_add.resizable(False, False)
+        self.tl_add.focus_force()
+        # endregion: window
+
+        # region: ENTRY
+        self.ent_app = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
+                             insertbackground=self.FG, bd=0)
+
+        self.ent_shortcuts = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
+                                   insertbackground=self.FG, bd=0)
+
+        self.ent_opening = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
+                                 insertbackground=self.FG, bd=0)
+
+
+        self.ent_app.bind("<Return>", lambda event: self.ent_shortcuts.focus())
+        self.ent_shortcuts.bind("<Return>", lambda event: self.ent_opening.focus())
+        # self.ent_app.bind("<Return>", lambda event: self.ent_shortcuts.focus())
+        # endregion: ENTRY
+
+        # region: LABEL
+        self.lbl_add = Label(self.tl_add, text="Enter app's name", bg=self.BG,
+                             fg=self.FG, anchor="w")
+
+        self.lbl_shortcuts = Label(self.tl_add, text="Enter shortcut's name",
+                                   bg=self.BG, fg=self.FG, anchor="w")
+
+        self.lbl_opening = Label(self.tl_add,
+                                 text="Enter link's opening or URL",
+                                 bg=self.BG, fg=self.FG, anchor="w")
+        # endregion: LABEL
+
+        # region: PACK
+        self.lbl_add.pack(anchor="w", fill="x", padx=10, pady=5)
+        self.ent_app.pack(anchor="w", fill="x", padx=10, pady=5)
+
+        self.lbl_shortcuts.pack(anchor="w", fill="x", padx=10, pady=5)
+        self.ent_shortcuts.pack(anchor="w", fill="x", padx=10, pady=5)
+
+        self.lbl_opening.pack(anchor="w", fill="x", padx=10, pady=5)
+        self.ent_opening.pack(anchor="w", fill="x", padx=10, pady=5)
+        # endregion: PACK
+
+        self.tl_add.mainloop()
 
 def main():
     check()
     root = Tk()
     launch = Launcher(root)
     root.mainloop()
-    print(launch.ls_value)
 
 if __name__ == "__main__":
     main()

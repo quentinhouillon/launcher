@@ -2,10 +2,6 @@ import sqlite3
 import os
 
 class LauncherCore:
-    def __init__(self):
-        self.conn = sqlite3.connect("file/Launcher.db")
-        self.cur = self.conn.cursor()
-    
     def list_disrectory(self, path):
         file = []
         for root, dirs, files in os.walk(path):
@@ -45,10 +41,30 @@ class LauncherCore:
 
         else:
             for i in self.listing_app():
-                if value in i[0]:
+                if value.lower() in i[0]:
                     cmd = i[1]
                     result.append(cmd)
         return result
     
     def execute(self, value):
         os.startfile(self.search(value)[0])
+    
+class Database:
+    def __init__(self):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+    def add_shortcuts(self, ls_values):
+        self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
+        self.conn.commit()
+    
+    def delete_shortcuts(self, name_app):
+        self.cur.execute("DELETE FROM Launcher WHERE app=?",
+                             name_app)
+    
+    def update_shortcuts(self, ls_values, old_name_app):
+        self.cur.execute(
+            "UPDATE Launcher SET app=?, shortcuts=?, opening=? WHERE app=?",
+                         (ls_values, old_name_app))
+        
+        self.conn.commit()

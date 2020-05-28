@@ -17,9 +17,9 @@ def check():
         cur.execute(
             """CREATE TABLE IF NOT EXISTS Launcher
                (id INTEGER PRIMARY KEY,
-               app TEXT,
-               shortcut TEXT,
-               opening TEXT)""")
+               app TEXT NULL,
+               shortcut TEXT NULL,
+               opening TEXT NULL)""")
 
     if "theme.json" not in listdir("."):
         add_theme = {
