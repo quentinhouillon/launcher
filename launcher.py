@@ -11,7 +11,10 @@ class Launcher:
         chdir(getcwd())
 
         self.root = root
-        self.ls_btn = []
+        self.ls_frm = []
+        self.ls_lbl_app = []
+        self.ls_lbl_opening = []
+        self.ls_lbl_shortcuts = []
         self.ls_value = []
         self.core = LauncherCore()
         
@@ -30,7 +33,7 @@ class Launcher:
         self.program = "Launcher"
         self.author = "w4rmux"
         self.version = "1.0"
-        self.license = f" © {self.date.year} {self.program}. \
+        self.license = f" © {self.date.year} {self.program}.\
 Tous Droits Réservés"
 
         # region: ROOT
@@ -45,7 +48,6 @@ Tous Droits Réservés"
 
         # region: FRAME
         self.frm_entry = Frame(self.root, bg=self.BG, pady=16)
-        self.frm_result = Frame(self.root, bg=self.ACCENT)
         # endregion: FRAME
 
         # region IMAGE
@@ -58,14 +60,13 @@ Tous Droits Réservés"
 
         self.lbl_search.bind("<ButtonRelease-1>",
                              lambda x: self.core.execute(self.ent.get()))
-        # endregion: LABEL
-
-        # region: BUTTON
-        self.btn_add_site = Button(self.root, text="+", bg=self.BG,
+        
+        self.lbl_add_shortcuts = Label(self.frm_entry, text="+", bg=self.BG,
                                    fg=self.FG, relief="flat",
-                                   font=("monospace", 23), cursor="hand2",
-                                   command=self.window_add)
-        # region: BUTTON
+                                   font=("monospace", 23), cursor="hand2")
+       
+        self.lbl_add_shortcuts.bind("<ButtonRelease-1>", self.window_add)
+        # endregion: LABEL
 
         # region: ENTRY
         self.ent = Entry(self.frm_entry, bg=self.BG, fg=self.FG, relief="flat",
@@ -73,18 +74,17 @@ Tous Droits Réservés"
                          font=("sans-serif", 14))
 
         self.ent.bind("<KeyRelease>",
-                      lambda x: self.create_button_search())
+                      lambda x: self.create_frame_search())
+
         self.ent.bind("<Return>", lambda x: self.core.execute(self.ent.get()))
         self.ent.focus()
         # endregion: ENTRY
 
         # region: PACK
         self.lbl_search.pack(side="left", padx=10)
-        self.ent.pack(fill="x")
-        self.btn_add_site.pack(side="right", anchor="n")
+        self.lbl_add_shortcuts.pack(side="right")
+        self.ent.pack(fill="x", anchor="center")
         self.frm_entry.pack(fill="x", side="top")
-
-        self.frm_result.pack(fill="both", side="top")
         # endregion: PACK
     
     def get_settings(self):
@@ -104,31 +104,47 @@ Tous Droits Réservés"
         self.FG = self.THEME[self.MYTHEME]["fg"]
         self.ACCENT = self.THEME[self.MYTHEME]["accent"]
 
-    def create_button_search(self, event=False):
+    def create_frame_search(self, event=False):
         for index in range(len(self.ls_value)):
-            self.ls_btn[index].destroy()
+            self.ls_frm[index].destroy()
         
         self.ls_value = []
-        self.ls_btn = []
+        self.ls_frm = []
+        self.ls_lbl_app = []
+        self.ls_lbl_shortcuts = []
 
         for item in self.core.search(self.ent.get()):
             if item.split("\\")[-1][:-4] not in self.ls_value:
                 self.ls_value.append(item)
 
         for index in range(len(self.ls_value)):
-            self.ls_btn.append(Button(self.root,
-                                text=self.ls_value[index].split("\\")[-1][:-4],
-                                bg=self.BG, fg=self.FG, relief="flat",
-                                font=("sans serif", 13), cursor="hand2",
-                                command=lambda i=index: startfile(
-                                    self.ls_value[i])))
+            self.ls_frm.append(Frame(self.root, bg=self.BG, cursor="hand2"))
+            
+            self.ls_lbl_app.append(Label(self.ls_frm[index],
+                                   text=self.ls_value[index].split("\\")[-1][:-4],
+                                   bg=self.BG, fg=self.FG, cursor="hand2",
+                                   font=("monospace", 15)))
 
-            self.ls_btn[index].pack(fill="x")
+            self.ls_lbl_shortcuts.append(Label(self.ls_frm[index], text="+",
+                                   bg=self.BG, fg=self.FG,font=("monospace", 23),
+                                   cursor="hand2"))
 
-    def add_site(self):
-        print("add site")
+            self.ls_frm[index].bind("<ButtonRelease-1>",
+                                    lambda event, i=index:
+                                        startfile(self.ls_value[i]))
+            
+            self.ls_lbl_app[index].bind("<ButtonRelease-1>",
+                                 lambda event, i=index:
+                                    startfile(self.ls_value[i]))
+
+            self.ls_lbl_shortcuts[index].bind("<ButtonRelease-1>",
+                                              self.window_add)
+
+            self.ls_lbl_app[index].pack(side="left", anchor="n")
+            self.ls_lbl_shortcuts[index].pack(side="right", anchor="n")
+            self.ls_frm[index].pack(fill="x")
     
-    def window_add(self):
+    def window_add(self, event=False):
         # region: window
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Add Shortcuts")
