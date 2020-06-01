@@ -17,7 +17,6 @@ def check():
         cur.execute(
             """CREATE TABLE IF NOT EXISTS Launcher
                (id INTEGER PRIMARY KEY,
-               app TEXT NULL,
                shortcut TEXT NULL,
                opening TEXT NULL)""")
 

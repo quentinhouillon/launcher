@@ -14,7 +14,7 @@ class Launcher:
         self.ls_frm = []
         self.ls_lbl_app = []
         self.ls_lbl_opening = []
-        self.ls_lbl_shortcuts = []
+        self.ls_lbl_opening = []
         self.ls_value = []
         self.core = LauncherCore()
         
@@ -47,7 +47,7 @@ Tous Droits Réservés"
         # endregion: ROOT
 
         # region: FRAME
-        self.frm_entry = Frame(self.root, bg=self.BG, pady=16)
+        self.frm_entry = Frame(self.root, bg=self.BG, pady=12)
         # endregion: FRAME
 
         # region IMAGE
@@ -82,9 +82,9 @@ Tous Droits Réservés"
 
         # region: PACK
         self.lbl_search.pack(side="left", padx=10)
-        self.lbl_add_shortcuts.pack(side="right")
+        self.lbl_add_shortcuts.pack(side="right", padx=10)
         self.ent.pack(fill="x", anchor="center")
-        self.frm_entry.pack(fill="x", side="top")
+        self.frm_entry.pack(fill="x", side="top", pady=10)
         # endregion: PACK
     
     def get_settings(self):
@@ -111,7 +111,7 @@ Tous Droits Réservés"
         self.ls_value = []
         self.ls_frm = []
         self.ls_lbl_app = []
-        self.ls_lbl_shortcuts = []
+        self.ls_lbl_opening = []
 
         for item in self.core.search(self.ent.get()):
             if item.split("\\")[-1][:-4] not in self.ls_value:
@@ -125,7 +125,7 @@ Tous Droits Réservés"
                                    bg=self.BG, fg=self.FG, cursor="hand2",
                                    font=("monospace", 15)))
 
-            self.ls_lbl_shortcuts.append(Label(self.ls_frm[index], text="+",
+            self.ls_lbl_opening.append(Label(self.ls_frm[index], text="+",
                                    bg=self.BG, fg=self.FG,font=("monospace", 23),
                                    cursor="hand2"))
 
@@ -137,27 +137,25 @@ Tous Droits Réservés"
                                  lambda event, i=index:
                                     startfile(self.ls_value[i]))
 
-            self.ls_lbl_shortcuts[index].bind("<ButtonRelease-1>",
-                                              self.window_add)
+            self.ls_lbl_opening[index].bind("<ButtonRelease-1>",
+                                             lambda event, i=index:
+                                             self.window_add(self.ls_value[i]))
 
             self.ls_lbl_app[index].pack(side="left", anchor="n")
-            self.ls_lbl_shortcuts[index].pack(side="right", anchor="n")
+            self.ls_lbl_opening[index].pack(side="right", anchor="n", padx=10)
             self.ls_frm[index].pack(fill="x")
     
-    def window_add(self, event=False):
+    def window_add(self, name_opening=False, event=False):
         # region: window
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Add Shortcuts")
         self.tl_add.iconbitmap("img/icon.ico")
-        self.tl_add.geometry("450x200")
+        self.tl_add.geometry("360x150")
         self.tl_add.resizable(False, False)
         self.tl_add.focus_force()
         # endregion: window
 
         # region: ENTRY
-        self.ent_app = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
-                             insertbackground=self.FG, bd=0)
-
         self.ent_shortcuts = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
                                    insertbackground=self.FG, bd=0)
 
@@ -165,15 +163,11 @@ Tous Droits Réservés"
                                  insertbackground=self.FG, bd=0)
 
 
-        self.ent_app.bind("<Return>", lambda event: self.ent_shortcuts.focus())
         self.ent_shortcuts.bind("<Return>", lambda event: self.ent_opening.focus())
-        # self.ent_app.bind("<Return>", lambda event: self.ent_shortcuts.focus())
+        # self.ent_opening.bind("<Return>", lambda event: self.ent_shortcuts.focus())
         # endregion: ENTRY
 
         # region: LABEL
-        self.lbl_add = Label(self.tl_add, text="Enter app's name", bg=self.BG,
-                             fg=self.FG, anchor="w")
-
         self.lbl_shortcuts = Label(self.tl_add, text="Enter shortcut's name",
                                    bg=self.BG, fg=self.FG, anchor="w")
 
@@ -183,9 +177,6 @@ Tous Droits Réservés"
         # endregion: LABEL
 
         # region: PACK
-        self.lbl_add.pack(anchor="w", fill="x", padx=10, pady=5)
-        self.ent_app.pack(anchor="w", fill="x", padx=10, pady=5)
-
         self.lbl_shortcuts.pack(anchor="w", fill="x", padx=10, pady=5)
         self.ent_shortcuts.pack(anchor="w", fill="x", padx=10, pady=5)
 
@@ -193,7 +184,17 @@ Tous Droits Réservés"
         self.ent_opening.pack(anchor="w", fill="x", padx=10, pady=5)
         # endregion: PACK
 
+        self.autocompletion_window_app(name_opening)
         self.tl_add.mainloop()
+
+    def autocompletion_window_app(self, name_opening=False):
+        try:
+            if len(name_opening) >= 1:
+                self.ent_opening.insert(INSERT, name_opening)
+                self.ent_shortcuts.focus()
+        
+        except:
+            self.ent_shortcuts.focus()
 
 def main():
     check()
