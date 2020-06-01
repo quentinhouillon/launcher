@@ -11,10 +11,8 @@ class Launcher:
         chdir(getcwd())
 
         self.root = root
+
         self.ls_frm = []
-        self.ls_lbl_app = []
-        self.ls_lbl_opening = []
-        self.ls_lbl_opening = []
         self.ls_value = []
 
         self.core = LauncherCore()
@@ -110,10 +108,8 @@ Tous Droits Réservés"
         for index in range(len(self.ls_value)):
             self.ls_frm[index].destroy()
         
-        self.ls_value = []
         self.ls_frm = []
-        self.ls_lbl_app = []
-        self.ls_lbl_opening = []
+        self.ls_value = []
 
         for item in self.core.search(self.ent.get()):
             if item.split("\\")[-1][:-4] not in self.ls_value:
@@ -122,29 +118,29 @@ Tous Droits Réservés"
         for index in range(len(self.ls_value)):
             self.ls_frm.append(Frame(self.root, bg=self.BG, cursor="hand2"))
             
-            self.ls_lbl_app.append(Label(self.ls_frm[index],
+            self.lbl_app = Label(self.ls_frm[index],
                                    text=self.ls_value[index].split("\\")[-1][:-4],
                                    bg=self.BG, fg=self.FG, cursor="hand2",
-                                   font=("monospace", 15)))
+                                   font=("monospace", 15))
 
-            self.ls_lbl_opening.append(Label(self.ls_frm[index], text="+",
+            self.lbl_opening = Label(self.ls_frm[index], text="+",
                                    bg=self.BG, fg=self.FG,font=("monospace", 23),
-                                   cursor="hand2"))
+                                   cursor="hand2")
 
             self.ls_frm[index].bind("<ButtonRelease-1>",
                                     lambda event, i=index:
                                         startfile(self.ls_value[i]))
             
-            self.ls_lbl_app[index].bind("<ButtonRelease-1>",
+            self.lbl_app.bind("<ButtonRelease-1>",
                                  lambda event, i=index:
                                     startfile(self.ls_value[i]))
 
-            self.ls_lbl_opening[index].bind("<ButtonRelease-1>",
+            self.lbl_opening.bind("<ButtonRelease-1>",
                                              lambda event, i=index:
                                              self.window_add(self.ls_value[i]))
 
-            self.ls_lbl_app[index].pack(side="left", anchor="n")
-            self.ls_lbl_opening[index].pack(side="right", anchor="n", padx=10)
+            self.lbl_app.pack(side="left", anchor="n")
+            self.lbl_opening.pack(side="right", anchor="n", padx=10)
             self.ls_frm[index].pack(fill="x")
     
     def window_add(self, name_opening=False, event=False):
