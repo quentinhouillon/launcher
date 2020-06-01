@@ -59,16 +59,16 @@ class Database:
         self.conn.commit()
     
     def display_shortcuts(self):
-        self.cur.execute("SELECT * FROM launcher")
+        self.cur.execute("SELECT shortcut, opening FROM launcher")
         return self.cur.fetchall()
     
     def delete_shortcuts(self, old_name_shortcuts):
-        self.cur.execute("DELETE FROM Launcher WHERE shortcuts=?",
+        self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
                              old_name_shortcuts)
     
     def update_shortcuts(self, ls_values, old_name_shortcuts):
         self.cur.execute(
-            "UPDATE Launcher SET app=?, shortcuts=?, opening=? WHERE app=?",
+            "UPDATE Launcher SET app=?, shortcut=?, opening=? WHERE app=?",
                          (ls_values, old_name_shortcuts))
         
         self.conn.commit()

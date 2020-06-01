@@ -144,14 +144,14 @@ Tous Droits Réservés"
             self.ls_frm[index].pack(fill="x")
     
     def window_add(self, name_opening=False, event=False):
-        # region: window
+        # region: WINDOW
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Ajouter un raccourcis")
         self.tl_add.iconbitmap("img/icon.ico")
         self.tl_add.geometry("360x150")
         self.tl_add.resizable(False, False)
         self.tl_add.focus_force()
-        # endregion: window
+        # endregion: WINDOW
 
         # region: ENTRY
         self.ent_shortcuts = Entry(self.tl_add, bg=self.ACCENT, fg=self.FG,
@@ -162,7 +162,8 @@ Tous Droits Réservés"
 
 
         self.ent_shortcuts.bind("<Return>", lambda event: self.ent_opening.focus())
-        # self.ent_opening.bind("<Return>", lambda event: self.ent_shortcuts.focus())
+        self.ent_opening.bind("<Return>", lambda event: self.add_shortcuts(
+            self.ent_shortcuts.get(), self.ent_opening.get()))
         # endregion: ENTRY
 
         # region: LABEL
@@ -201,8 +202,38 @@ l'url du site internet",
         self.db.add_shortcuts(ls_value)
         self.tl_add.destroy()
     
+    def window_display(self, event=False):
+        # region: WINDOW
+        self.tl_display = Toplevel(bg=self.BG)
+        self.tl_display.title("Mes raccourcis")
+        self.tl_display.iconbitmap("img/icon.ico")
+        self.tl_display.geometry("850x600")
+        self.tl_display.resizable(False, False)
+        self.tl_display.focus_force()
+        # endregion: WINDOW
+
+        # region: TEXT
+        self.txt_shortcuts = Text(self.tl_display, bg=self.BG, fg=self.FG,
+                             insertbackground=self.FG, bd=0)
+        # endregion: TEXT
+
+        # region: PACK
+        self.txt_shortcuts.pack(fill="both")
+        # endregion: PACK
+
+        self.display_shortcuts()
+        self.tl_display.mainloop()
+
     def display_shortcuts(self):
-        pass
+        for insert in self.db.display_shortcuts():
+            insert_shortcuts = ("racourcis: ", insert[0], "\n")
+            insert_opening = ("Commande d'ouverture: ", insert[1], "\n\n")
+
+            for shortcuts in insert_shortcuts:
+                self.txt_shortcuts.insert(INSERT, shortcuts)
+
+            for opening in insert_opening:
+                self.txt_shortcuts.insert(INSERT, opening)
 
     def update_shortcuts(self, name_shortcuts):
         pass
