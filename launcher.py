@@ -16,7 +16,9 @@ class Launcher:
         self.ls_lbl_opening = []
         self.ls_lbl_opening = []
         self.ls_value = []
+
         self.core = LauncherCore()
+        self.db = Database()
         
         self.get_settings()
         self.date = datetime.now()
@@ -148,7 +150,7 @@ Tous Droits Réservés"
     def window_add(self, name_opening=False, event=False):
         # region: window
         self.tl_add = Toplevel(bg=self.BG)
-        self.tl_add.title("Add Shortcuts")
+        self.tl_add.title("Ajouter un raccourcis")
         self.tl_add.iconbitmap("img/icon.ico")
         self.tl_add.geometry("360x150")
         self.tl_add.resizable(False, False)
@@ -168,11 +170,13 @@ Tous Droits Réservés"
         # endregion: ENTRY
 
         # region: LABEL
-        self.lbl_shortcuts = Label(self.tl_add, text="Enter shortcut's name",
+        self.lbl_shortcuts = Label(self.tl_add,
+                                   text="Entrer le nom du raccourcis",
                                    bg=self.BG, fg=self.FG, anchor="w")
 
         self.lbl_opening = Label(self.tl_add,
-                                 text="Enter link's opening or URL",
+                                 text="Entrer le chemin d'accès du fichier ou \
+l'url du site internet",
                                  bg=self.BG, fg=self.FG, anchor="w")
         # endregion: LABEL
 
@@ -195,6 +199,20 @@ Tous Droits Réservés"
         
         except:
             self.ent_shortcuts.focus()
+    
+    def add_shortcuts(self, name_shortcuts, name_opening):
+        ls_value = (name_shortcuts, name_opening)
+        self.db.add_shortcuts(ls_value)
+        self.tl_add.destroy()
+    
+    def display_shortcuts(self):
+        pass
+
+    def update_shortcuts(self, name_shortcuts):
+        pass
+
+    def delete_shortcuts(self, name_shortcuts):
+        pass
 
 def main():
     check()
