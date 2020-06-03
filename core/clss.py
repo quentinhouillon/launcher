@@ -1,6 +1,7 @@
 import sqlite3
 import os
 
+
 class LauncherCore:
     def list_disrectory(self, path):
         file = []
@@ -20,7 +21,7 @@ class LauncherCore:
         return self.ls_program_data
 
     def listing_app(self):
-        self.ls_apps= []
+        self.ls_apps = []
         for i in self.search_app_data():
             files = i.split("\\")[-1]
             if ".ini" not in files:
@@ -31,7 +32,7 @@ class LauncherCore:
             if ".ini" not in files:
                 self.ls_apps.append((files[:-4].lower(), i))
         return self.ls_apps
-    
+
     def search(self, value):
         cmd = ''
         result = []
@@ -45,10 +46,11 @@ class LauncherCore:
                     cmd = i[1]
                     result.append(cmd)
         return result
-    
+
     def execute(self, value):
         os.startfile(self.search(value)[0])
-    
+
+
 class Database:
     def __init__(self):
         self.conn = sqlite3.connect("file/Launcher.db")
@@ -57,18 +59,25 @@ class Database:
     def add_shortcuts(self, ls_values):
         self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
         self.conn.commit()
-    
+
     def display_shortcuts(self):
         self.cur.execute("SELECT shortcut, opening FROM launcher")
         return self.cur.fetchall()
-    
-    def delete_shortcuts(self, old_name_shortcuts):
+
+    def delete_shortcuts(self, name_shortcuts):
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
-                             old_name_shortcuts)
-    
-    def update_shortcuts(self, ls_values, old_name_shortcuts):
+                         name_shortcuts)
+
+    def update_shortcuts(self, ls_values):
         self.cur.execute(
-            "UPDATE Launcher SET app=?, shortcut=?, opening=? WHERE app=?",
-                         (ls_values, old_name_shortcuts))
-        
+            "UPDATE Launcher SET shortcut=?, opening=? WHERE shortcut=?",
+            ls_values)
+
         self.conn.commit()
+
+    def get_shortcuts(self, name_shortcuts):
+        self.cur.execute(
+            "SELECT Shortcut, opening FROM launcher WHERE shortcut=?",
+            (name_shortcuts,))
+        
+        return self.cur.fetchall()

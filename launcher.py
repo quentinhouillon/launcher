@@ -66,7 +66,7 @@ Tous Droits Réservés"
                                        fg=self.FG, relief="flat",
                                        font=("monospace", 23), cursor="hand2")
 
-        self.lbl_add_shortcuts.bind("<Button-1>", self.popup)
+        self.lbl_add_shortcuts.bind("<ButtonRelease-1>", self.popup)
         # endregion: LABEL
 
         # region: ENTRY
@@ -90,6 +90,14 @@ Tous Droits Réservés"
         self.menu_popup.add_command(label="Afficher un raccourcis",
                                     accelerator="Ctrl-L",
                                     command=self.window_display)
+
+        self.menu_popup.add_command(label="Modifier un raccourcis",
+                                    accelerator="Ctrl-U",
+                                    command=self.window_update)
+
+        self.menu_popup.add_command(label="Supprimer un raccourcis",
+                                    accelerator="Ctrl-L",
+                                    command=self.window_delete)
         # endregion: MENU
 
         # region: PACK
@@ -201,6 +209,11 @@ l'url du site internet",
         self.autocompletion_window_app(name_opening)
         self.tl_add.mainloop()
 
+    def add_shortcuts(self, name_shortcuts, name_opening):
+        ls_value = (name_shortcuts, name_opening)
+        self.db.add_shortcuts(ls_value)
+        self.tl_add.destroy()
+
     def autocompletion_window_app(self, name_opening=False):
         try:
             if len(name_opening) >= 1:
@@ -209,11 +222,6 @@ l'url du site internet",
 
         except:
             self.ent_shortcuts.focus()
-
-    def add_shortcuts(self, name_shortcuts, name_opening):
-        ls_value = (name_shortcuts, name_opening)
-        self.db.add_shortcuts(ls_value)
-        self.tl_add.destroy()
 
     def window_display(self, event=False):
         # region: WINDOW
@@ -248,11 +256,92 @@ l'url du site internet",
             for opening in insert_opening:
                 self.txt_shortcuts.insert(INSERT, opening)
 
-    def update_shortcuts(self, name_shortcuts):
-        pass
+    def window_update_delete(self, function, event=False):
+        # region: WINDOW
+        self.tl_update_delete = Toplevel(bg=self.BG)
+        self.tl_update_delete.title("Choisis un raccourcis")
+        self.tl_update_delete.geometry("250x100")
+        self.tl_update_delete.resizable(False, False)
+        self.tl_update_delete.focus_force()
+        # endregion: WINDOW
 
-    def delete_shortcuts(self, name_shortcuts):
-        pass
+        # region: FRAME
+        self.frm_choose = Frame(self.tl_update_delete, bg=self.BG)
+        self.frm_update = Frame(self.tl_update_delete, bg=self.BG)
+        # endregion: FRAME
+
+        # region: LABEL
+        self.lbl_update_shortcut = Label(self.frm_update,
+                                         text="Entre un nouveau raccourcis",
+                                         bg=self.BG, fg=self.FG)
+
+        self.lbl_update_opening = Label(self.frm_update,
+                                         text="Entre une nouvelle URL \
+ou un nouveau chemin d'accès",
+                                         bg=self.BG, fg=self.FG)
+        
+        self.lbl_instruction = Label(self.frm_update,
+                                     text="Si aucune modification n'est \
+inscrite, l'ancien nom sera conservé",
+                                     bg=self.BG, fg="green",
+                                     font=("monospace", 8), anchor="w")
+
+        self.lbl_choose = Label(self.frm_choose,
+                                text="Entre le nom d'un raccourcis",
+                                bg=self.BG, fg=self.FG, anchor="center")
+        # endregion: LABEL
+
+        # region: ENTRY
+        self.ent_update_shortcut = Entry(self.frm_update, bg=self.ACCENT,
+                                fg=self.FG, bd=0, insertbackground=self.FG,
+                                justify="center")
+
+        self.ent_update_opening = Entry(self.frm_update, bg=self.ACCENT,
+                                fg=self.FG, bd=0, insertbackground=self.FG,
+                                justify="center")
+
+        self.ent_choose = Entry(self.frm_choose, bg=self.ACCENT,
+                                fg=self.FG, bd=0, insertbackground=self.FG,
+                                justify="center")
+
+        self.ent_choose.bind("<Return>", function)
+        self.ent_choose.focus()
+        # endregion: ENTRY
+
+        # region: PACK
+        self.lbl_choose.pack(fill="x", padx=10, pady=10)
+        self.ent_choose.pack(fill="x", padx=10, pady=10)
+        self.frm_choose.pack(fill="x")
+
+        self.lbl_update_shortcut.pack(fill="x", pady=10)
+        self.ent_update_shortcut.pack(fill="x", pady=10)
+
+        self.lbl_update_opening.pack(fill="x", pady=10)
+        self.ent_update_opening.pack(fill="x", pady=10)
+
+        self.lbl_instruction.pack(side="bottom")
+        # endregion: PACK
+
+        self.tl_update_delete.mainloop()
+
+    def window_update(self, event=False):
+        self.window_update_delete(self.update_shortcuts)
+
+    def update_shortcuts(self, event=False):
+        self.result_get = self.db.get_shortcuts(self.ent_choose.get())
+        if len(self.result_get) != 0:
+            self.frm_choose.pack_forget()
+            self.tl_update_delete.geometry("400x190")
+            self.frm_update.pack()
+        
+        else:
+            print("ERROR")
+
+    def window_delete(self, event=False):
+        self.window_update_delete(self.delete_shortcuts)
+
+    def delete_shortcuts(self, event=False):
+        print("DELETE")
 
     def popup(self, event):
         self.menu_popup.tk_popup(event.x_root, event.y_root, 0)
