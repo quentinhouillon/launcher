@@ -2,6 +2,7 @@ from datetime import datetime
 from json import dump, load
 from os import getcwd, chdir, startfile
 from tkinter import *
+from tkinter.messagebox import showinfo
 
 from core.check_settings import *
 from core.clss import *
@@ -212,6 +213,7 @@ l'url du site internet",
     def add_shortcuts(self, name_shortcuts, name_opening):
         ls_value = (name_shortcuts, name_opening)
         self.db.add_shortcuts(ls_value)
+        showinfo("Ajout", "Votre raccourcis a bien été ajouté")
         self.tl_add.destroy()
 
     def autocompletion_window_app(self, name_opening=False):
@@ -305,6 +307,10 @@ inscrite, l'ancien nom sera conservé",
                                 justify="center")
 
         self.ent_choose.bind("<Return>", function)
+        self.ent_update_shortcut.bind("<Return>",
+                                lambda event: self.ent_update_opening.focus())
+
+        self.ent_update_opening.bind("<Return>", self.update_shortcuts)
         self.ent_choose.focus()
         # endregion: ENTRY
 
@@ -325,17 +331,42 @@ inscrite, l'ancien nom sera conservé",
         self.tl_update_delete.mainloop()
 
     def window_update(self, event=False):
-        self.window_update_delete(self.update_shortcuts)
+        self.window_update_delete(self.update_window_shortcuts)
 
-    def update_shortcuts(self, event=False):
+    def update_window_shortcuts(self, event=False):
         self.result_get = self.db.get_shortcuts(self.ent_choose.get())
         if len(self.result_get) != 0:
             self.frm_choose.pack_forget()
             self.tl_update_delete.geometry("400x190")
             self.frm_update.pack()
+            self.ent_update_shortcut.focus()
         
         else:
             print("ERROR")
+    
+    def update_shortcuts(self ,event=False):
+        ls_value = []
+
+        if len(self.ent_update_shortcut.get()) != 0:
+            ls_value.append(self.ent_update_shortcut.get())
+        
+        else:
+            for index in self.result_get:
+                ls_value.append(index[0])
+        
+        if len(self.ent_update_opening.get()) != 0:
+            ls_value.append(self.ent_update_opening.get())
+        
+        else:
+            for index in self.result_get:
+                ls_value.append(index[1])
+
+        for index in self.result_get:
+            ls_value.append(index[0])
+
+        self.db.update_shortcuts(ls_value)
+        showinfo("Mise à jour", "Votre raccourcis a bien été mis à jour")
+        self.tl_update_delete.destroy()
 
     def window_delete(self, event=False):
         self.window_update_delete(self.delete_shortcuts)
