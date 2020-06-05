@@ -2,7 +2,7 @@ from datetime import datetime
 from json import dump, load
 from os import getcwd, chdir, startfile
 from tkinter import *
-from tkinter.messagebox import showinfo
+from tkinter.messagebox import showinfo, showerror
 
 from core.check_settings import *
 from core.clss import *
@@ -90,7 +90,7 @@ Tous Droits Réservés"
 
         self.menu_popup.add_command(label="Afficher un raccourcis",
                                     accelerator="Ctrl-L",
-                                    command=self.window_display)
+                                    command=self.display_shortcuts)
 
         self.menu_popup.add_command(label="Modifier un raccourcis",
                                     accelerator="Ctrl-U",
@@ -244,19 +244,24 @@ l'url du site internet",
         self.txt_shortcuts.pack(fill="both")
         # endregion: PACK
 
-        self.display_shortcuts()
-        self.tl_display.mainloop()
-
     def display_shortcuts(self):
-        for insert in self.db.display_shortcuts():
-            insert_shortcuts = ("racourcis: ", insert[0], "\n")
-            insert_opening = ("Commande d'ouverture: ", insert[1], "\n\n")
+        if len(self.db.display_shortcuts()) != 0:
+            self.window_display()
 
-            for shortcuts in insert_shortcuts:
-                self.txt_shortcuts.insert(INSERT, shortcuts)
+            for insert in self.db.display_shortcuts():
+                insert_shortcuts = ("racourcis: ", insert[0], "\n")
+                insert_opening = ("Commande d'ouverture: ", insert[1], "\n\n")
 
-            for opening in insert_opening:
-                self.txt_shortcuts.insert(INSERT, opening)
+                for shortcuts in insert_shortcuts:
+                    self.txt_shortcuts.insert(INSERT, shortcuts)
+
+                for opening in insert_opening:
+                    self.txt_shortcuts.insert(INSERT, opening)
+            
+            self.tl_display.mainloop()
+        
+        else:
+            showerror("Erreur",  "Vous n'avez aucun raccourcis à afficher")
 
     def window_update_delete(self, function, event=False):
         # region: WINDOW
