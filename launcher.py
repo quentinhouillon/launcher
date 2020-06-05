@@ -46,6 +46,10 @@ Tous Droits Réservés"
         self.root.wm_attributes("-transparentcolor", self.ACCENT)
         self.root.focus_force()
         self.root.bind("<Escape>", exit)
+        self.root.bind("<Control-n>", self.window_add)
+        self.root.bind("<Control-l>", self.display_shortcuts)
+        self.root.bind("<Control-u>", self.window_update)
+        self.root.bind("<Control-d>", self.window_delete)
         # endregion: ROOT
 
         # region: FRAME
@@ -97,7 +101,7 @@ Tous Droits Réservés"
                                     command=self.window_update)
 
         self.menu_popup.add_command(label="Supprimer un raccourcis",
-                                    accelerator="Ctrl-L",
+                                    accelerator="Ctrl-D",
                                     command=self.window_delete)
         # endregion: MENU
 
@@ -244,7 +248,7 @@ l'url du site internet",
         self.txt_shortcuts.pack(fill="both")
         # endregion: PACK
 
-    def display_shortcuts(self):
+    def display_shortcuts(self, event=False):
         if len(self.db.display_shortcuts()) != 0:
             self.window_display()
 
