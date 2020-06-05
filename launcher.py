@@ -347,7 +347,9 @@ inscrite, l'ancien nom sera conservé",
             self.ent_update_shortcut.focus()
         
         else:
-            print("ERROR")
+            showerror("Erreur", "Ce raccourci n'éxiste pas")
+            self.tl_update_delete.focus_force()
+            self.ent_choose.focus()
     
     def update_shortcuts(self ,event=False):
         ls_value = []
@@ -377,7 +379,17 @@ inscrite, l'ancien nom sera conservé",
         self.window_update_delete(self.delete_shortcuts)
 
     def delete_shortcuts(self, event=False):
-        print("DELETE")
+        self.result_get = self.db.get_shortcuts(self.ent_choose.get())
+
+        if len(self.result_get) != 0:
+            self.db.delete_shortcuts(self.ent_choose.get())
+            showinfo("Suppression", "Votre raccourcis a bien été supprimé")
+            self.tl_update_delete.destroy()
+        
+        else:
+            showerror("Erreur", "Ce raccourci n'éxiste pas")
+            self.tl_update_delete.focus_force()
+            self.ent_choose.focus()
 
     def popup(self, event):
         self.menu_popup.tk_popup(event.x_root, event.y_root, 0)

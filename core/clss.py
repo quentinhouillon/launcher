@@ -66,7 +66,7 @@ class Database:
 
     def delete_shortcuts(self, name_shortcuts):
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
-                         name_shortcuts)
+                         (name_shortcuts,))
 
     def update_shortcuts(self, ls_values):
         self.cur.execute(
