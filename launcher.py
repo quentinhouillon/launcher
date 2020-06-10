@@ -15,7 +15,10 @@ class Launcher:
         self.root = root
 
         self.ls_frm = []
+        self.ls_frm_shortcuts = []
         self.ls_value = []
+        self.ls_shortcuts = []
+        self.ls_opening = []
 
         self.core = LauncherCore()
         self.db = Database()
@@ -130,15 +133,51 @@ Tous Droits Réservés"
         self.ACCENT = self.THEME[self.MYTHEME]["accent"]
 
     def create_frame_search(self, event=False):
-        for index in range(len(self.ls_value)):
+        for index in range(len(self.ls_frm)):
             self.ls_frm[index].destroy()
 
-        self.ls_frm = []
-        self.ls_value = []
+        for index in range(len(self.ls_frm_shortcuts)):
+            self.ls_frm_shortcuts[index].destroy()
 
-        for item in self.core.search(self.ent.get()):
-            if item.split("\\")[-1][:-4] not in self.ls_value:
-                self.ls_value.append(item)
+        self.ls_frm.clear()
+        self.ls_frm_shortcuts.clear()
+        self.ls_value.clear()
+        self.ls_shortcuts.clear()
+        self.ls_opening.clear()
+
+        apps = self.core.search(self.ent.get())[0]
+        shortcuts = self.core.search(self.ent.get())[1]
+
+        try:
+            self.ls_shortcuts.append(shortcuts["shortcut"])
+            self.ls_opening.append(shortcuts["opening"])
+        
+        except:
+            pass
+
+        for app in apps:
+            if app.split("\\")[-1][:-4] not in self.ls_value:
+                self.ls_value.append(app)
+
+        for index in range(len(self.ls_shortcuts)):
+            self.ls_frm_shortcuts.append(Frame(self.root, bg=self.BG,
+                                                cursor="hand2"))
+
+            self.lbl_app = Label(self.ls_frm_shortcuts[index],
+                                 text=self.ls_shortcuts[index],
+                                 bg=self.BG, fg=self.FG, cursor="hand2",
+                                 font=("monospace", 15))
+
+            self.ls_frm_shortcuts[index].bind("<ButtonRelease-1>",
+                                    lambda event, i=index:
+                                        startfile(self.ls_opening[i]))
+
+            self.lbl_app.bind("<ButtonRelease-1>",
+                              lambda event, i=index:
+                              startfile(self.ls_opening[i]))
+
+            self.lbl_app.pack(side="left", anchor="n")
+            self.ls_frm_shortcuts[index].pack(fill="x")
 
         for index in range(len(self.ls_value)):
             self.ls_frm.append(Frame(self.root, bg=self.BG, cursor="hand2"))

@@ -3,6 +3,9 @@ import os
 
 
 class LauncherCore:
+    def __init__(self):
+        self.db = Database()
+
     def list_disrectory(self, path):
         file = []
         for root, dirs, files in os.walk(path):
@@ -36,8 +39,11 @@ class LauncherCore:
     def search(self, value):
         cmd = ''
         result = []
+        shortcut = {}
 
-        if len(value) <= 2:
+        db_shortcut = self.db.get_shortcuts(value)
+
+        if len(value) <= 1:
             pass
 
         else:
@@ -45,39 +51,69 @@ class LauncherCore:
                 if value.lower() in i[0]:
                     cmd = i[1]
                     result.append(cmd)
-        return result
+
+            for index in db_shortcut:
+                if index != 0:
+                    shortcut["shortcut"] = index[0]
+                    shortcut["opening"] = index[1]
+
+        return (result, shortcut)
 
     def execute(self, value):
-        os.startfile(self.search(value)[0])
+        os.startfile(self.search(value)[0][0])
 
 
 class Database:
-    def __init__(self):
+    def add_shortcuts(self, ls_values):
         self.conn = sqlite3.connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
-    def add_shortcuts(self, ls_values):
         self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
         self.conn.commit()
 
+        self.conn.close()
+
     def display_shortcuts(self):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
         self.cur.execute("SELECT shortcut, opening FROM launcher")
-        return self.cur.fetchall()
+
+        to_return = self.cur.fetchall()
+        self.conn.close()
+
+        return to_return
 
     def delete_shortcuts(self, name_shortcuts):
+        # BUG
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
                          (name_shortcuts,))
 
+        self.conn.close()
+
     def update_shortcuts(self, ls_values):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
         self.cur.execute(
             "UPDATE Launcher SET shortcut=?, opening=? WHERE shortcut=?",
             ls_values)
 
         self.conn.commit()
+        self.conn.close()
 
     def get_shortcuts(self, name_shortcuts):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
         self.cur.execute(
             "SELECT Shortcut, opening FROM launcher WHERE shortcut=?",
             (name_shortcuts,))
-        
-        return self.cur.fetchall()
+
+        to_return = self.cur.fetchall()
+        self.conn.close()
+
+        return to_return
