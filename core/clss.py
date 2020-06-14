@@ -41,7 +41,7 @@ class LauncherCore:
         result = []
         shortcut = {}
 
-        db_shortcut = self.db.get_shortcuts(value)
+        db_shortcut = self.db.display_shortcuts()
 
         if len(value) <= 1:
             pass
@@ -77,7 +77,7 @@ class Database:
         self.conn = sqlite3.connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
-        self.cur.execute("SELECT shortcut, opening FROM launcher")
+        self.cur.execute("SELECT shortcut, opening FROM Launcher")
 
         to_return = self.cur.fetchall()
         self.conn.close()
@@ -85,13 +85,13 @@ class Database:
         return to_return
 
     def delete_shortcuts(self, name_shortcuts):
-        # BUG
         self.conn = sqlite3.connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
                          (name_shortcuts,))
-
+        
+        self.conn.commit()
         self.conn.close()
 
     def update_shortcuts(self, ls_values):
@@ -110,7 +110,7 @@ class Database:
         self.cur = self.conn.cursor()
 
         self.cur.execute(
-            "SELECT Shortcut, opening FROM launcher WHERE shortcut=?",
+            "SELECT Shortcut, opening FROM Launcher WHERE shortcut=?",
             (name_shortcuts,))
 
         to_return = self.cur.fetchall()
