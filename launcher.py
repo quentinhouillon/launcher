@@ -16,7 +16,7 @@ class Launcher:
 
         self.ls_frm = []
         self.ls_frm_shortcuts = []
-        self.ls_value = []
+        self.ls_name_app = []
         self.ls_shortcuts = []
         self.ls_opening = []
 
@@ -91,19 +91,19 @@ Tous Droits Réservés"
 
         # region: MENU
         self.menu_popup = Menu(self.root, tearoff=0, bg=self.BG, fg=self.FG)
-        self.menu_popup.add_command(label="Ajouter un raccourcis",
+        self.menu_popup.add_command(label="Ajouter un raccourci",
                                     accelerator="Ctrl-N",
                                     command=self.window_add)
 
-        self.menu_popup.add_command(label="Afficher un raccourcis",
+        self.menu_popup.add_command(label="Afficher un raccourci",
                                     accelerator="Ctrl-L",
                                     command=self.display_shortcuts)
 
-        self.menu_popup.add_command(label="Modifier un raccourcis",
+        self.menu_popup.add_command(label="Modifier un raccourci",
                                     accelerator="Ctrl-U",
                                     command=self.window_update)
 
-        self.menu_popup.add_command(label="Supprimer un raccourcis",
+        self.menu_popup.add_command(label="Supprimer un raccourci",
                                     accelerator="Ctrl-D",
                                     command=self.window_delete)
         # endregion: MENU
@@ -141,7 +141,7 @@ Tous Droits Réservés"
 
         self.ls_frm.clear()
         self.ls_frm_shortcuts.clear()
-        self.ls_value.clear()
+        self.ls_name_app.clear()
         self.ls_shortcuts.clear()
         self.ls_opening.clear()
 
@@ -156,12 +156,18 @@ Tous Droits Réservés"
             pass
 
         for app in apps:
-            if app.split("\\")[-1][:-4] not in self.ls_value:
-                self.ls_value.append(app)
+            if app.split("\\")[-1][:-4] not in self.ls_name_app:
+                self.ls_name_app.append(app)
+        
+        self.img_icon = PhotoImage(file="img/shortcut.png")
 
         for index in range(len(self.ls_shortcuts)):
             self.ls_frm_shortcuts.append(Frame(self.root, bg=self.BG,
                                                 cursor="hand2"))
+
+            self.lbl_icon = Label(self.ls_frm_shortcuts[index],
+                                  image=self.img_icon,
+                                  bg=self.BG, cursor="hand2")
 
             self.lbl_app = Label(self.ls_frm_shortcuts[index],
                                  text=self.ls_shortcuts[index],
@@ -171,19 +177,27 @@ Tous Droits Réservés"
             self.ls_frm_shortcuts[index].bind("<ButtonRelease-1>",
                                     lambda event, i=index:
                                         startfile(self.ls_opening[i]))
+            
+            self.lbl_icon.bind("<ButtonRelease-1>",
+                               lambda event, i=index:
+                                        startfile(self.ls_opening[i]))
 
             self.lbl_app.bind("<ButtonRelease-1>",
                               lambda event, i=index:
                               startfile(self.ls_opening[i]))
 
+            self.lbl_icon.pack(side="left", anchor="n", padx=5, pady=5)
             self.lbl_app.pack(side="left", anchor="n")
             self.ls_frm_shortcuts[index].pack(fill="x")
 
-        for index in range(len(self.ls_value)):
+        for index in range(len(self.ls_name_app)):
             self.ls_frm.append(Frame(self.root, bg=self.BG, cursor="hand2"))
 
+            self.lbl_icon = Label(self.ls_frm[index], image=self.img_icon,
+                                  bg=self.BG, cursor="hand2")
+
             self.lbl_app = Label(self.ls_frm[index],
-                                 text=self.ls_value[index].split(
+                                 text=self.ls_name_app[index].split(
                                      "\\")[-1][:-4],
                                  bg=self.BG, fg=self.FG, cursor="hand2",
                                  font=("monospace", 15))
@@ -195,16 +209,21 @@ Tous Droits Réservés"
 
             self.ls_frm[index].bind("<ButtonRelease-1>",
                                     lambda event, i=index:
-                                        startfile(self.ls_value[i]))
+                                        startfile(self.ls_name_app[i]))
+            
+            self.lbl_icon.bind("<ButtonRelease-1>",
+                               lambda event, i=index:
+                                        startfile(self.ls_name_app[i]))
 
             self.lbl_app.bind("<ButtonRelease-1>",
                               lambda event, i=index:
-                              startfile(self.ls_value[i]))
+                              startfile(self.ls_name_app[i]))
 
             self.lbl_opening.bind("<ButtonRelease-1>",
                                   lambda event, i=index:
-                                  self.window_add(self.ls_value[i]))
+                                  self.window_add(self.ls_name_app[i]))
 
+            self.lbl_icon.pack(side="left", anchor="n", padx=5, pady=5)
             self.lbl_app.pack(side="left", anchor="n")
             self.lbl_opening.pack(side="right", anchor="n", padx=10)
             self.ls_frm[index].pack(fill="x")
@@ -212,7 +231,7 @@ Tous Droits Réservés"
     def window_add(self, name_opening=False, event=False):
         # region: WINDOW
         self.tl_add = Toplevel(bg=self.BG)
-        self.tl_add.title("Ajouter un raccourcis")
+        self.tl_add.title("Ajouter un raccourci")
         self.tl_add.iconbitmap("img/icon.ico")
         self.tl_add.geometry("360x150")
         self.tl_add.resizable(False, False)
@@ -233,7 +252,7 @@ Tous Droits Réservés"
 
         # region: LABEL
         self.lbl_shortcuts = Label(self.tl_add,
-                                   text="Entrer le nom du raccourcis",
+                                   text="Entrer le nom du raccourci",
                                    bg=self.BG, fg=self.FG, anchor="w")
 
         self.lbl_opening = Label(self.tl_add,
@@ -256,7 +275,7 @@ l'url du site internet",
     def add_shortcuts(self, name_shortcuts, name_opening):
         ls_value = (name_shortcuts, name_opening)
         self.db.add_shortcuts(ls_value)
-        showinfo("Ajout", "Votre raccourcis a bien été ajouté")
+        showinfo("Ajout", "Votre raccourci a bien été ajouté")
         self.tl_add.destroy()
 
     def autocompletion_window_app(self, name_opening=False):
@@ -304,12 +323,12 @@ l'url du site internet",
             self.tl_display.mainloop()
         
         else:
-            showerror("Erreur",  "Vous n'avez aucun raccourcis à afficher")
+            showerror("Erreur",  "Vous n'avez aucun raccourci à afficher")
 
     def window_update_delete(self, function, event=False):
         # region: WINDOW
         self.tl_update_delete = Toplevel(bg=self.BG)
-        self.tl_update_delete.title("Choisis un raccourcis")
+        self.tl_update_delete.title("Choisis un raccourci")
         self.tl_update_delete.geometry("250x100")
         self.tl_update_delete.resizable(False, False)
         self.tl_update_delete.focus_force()
@@ -322,11 +341,11 @@ l'url du site internet",
 
         # region: LABEL
         self.lbl_update_shortcut = Label(self.frm_update,
-                                         text="Entre un nouveau raccourcis",
+                                         text="Entrer un nouveau raccourci",
                                          bg=self.BG, fg=self.FG)
 
         self.lbl_update_opening = Label(self.frm_update,
-                                         text="Entre une nouvelle URL \
+                                         text="Entrer une nouvelle URL \
 ou un nouveau chemin d'accès",
                                          bg=self.BG, fg=self.FG)
         
@@ -337,7 +356,7 @@ inscrite, l'ancien nom sera conservé",
                                      font=("monospace", 8), anchor="w")
 
         self.lbl_choose = Label(self.frm_choose,
-                                text="Entre le nom d'un raccourcis",
+                                text="Entrer le nom d'un raccourci",
                                 bg=self.BG, fg=self.FG, anchor="center")
         # endregion: LABEL
 
@@ -390,7 +409,7 @@ inscrite, l'ancien nom sera conservé",
             self.ent_update_shortcut.focus()
         
         else:
-            showerror("Erreur", "Ce raccourci n'éxiste pas")
+            showerror("Erreur", "Ce raccourci n'existe pas")
             self.tl_update_delete.focus_force()
             self.ent_choose.focus()
     
@@ -415,7 +434,7 @@ inscrite, l'ancien nom sera conservé",
             ls_value.append(index[0])
 
         self.db.update_shortcuts(ls_value)
-        showinfo("Mise à jour", "Votre raccourcis a bien été mis à jour")
+        showinfo("Mise à jour", "Votre raccourci a bien été mis à jour")
         self.tl_update_delete.destroy()
 
     def window_delete(self, event=False):
@@ -426,11 +445,11 @@ inscrite, l'ancien nom sera conservé",
 
         if len(self.result_get) != 0:
             self.db.delete_shortcuts(self.ent_choose.get())
-            showinfo("Suppression", "Votre raccourcis a bien été supprimé")
+            showinfo("Suppression", "Votre raccourci a bien été supprimé")
             self.tl_update_delete.destroy()
         
         else:
-            showerror("Erreur", "Ce raccourci n'éxiste pas")
+            showerror("Erreur", "Ce raccourci n'existe pas")
             self.tl_update_delete.focus_force()
             self.ent_choose.focus()
 

@@ -6,7 +6,7 @@ class LauncherCore:
     def __init__(self):
         self.db = Database()
 
-    def list_disrectory(self, path):
+    def list_directory(self, path):
         file = []
         for root, dirs, files in os.walk(path):
             for i in files:
@@ -14,12 +14,12 @@ class LauncherCore:
         return file
 
     def search_app_data(self):
-        self.ls_app_data = self.list_disrectory(
+        self.ls_app_data = self.list_directory(
             os.environ["AppData"] + r"\Microsoft\Windows\Start Menu\Programs")
         return self.ls_app_data
 
     def search_program_data(self):
-        self.ls_program_data = self.list_disrectory(
+        self.ls_program_data = self.list_directory(
             r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs")
         return self.ls_program_data
 
@@ -41,7 +41,7 @@ class LauncherCore:
         result = []
         shortcut = {}
 
-        db_shortcut = self.db.display_shortcuts()
+        db_shortcut = self.db.get_shortcuts(value)
 
         if len(value) <= 1:
             pass
@@ -60,7 +60,11 @@ class LauncherCore:
         return (result, shortcut)
 
     def execute(self, value):
-        os.startfile(self.search(value)[0][0])
+        try:
+            os.startfile(self.search(value)[1]["opening"])
+
+        except:
+            os.startfile(self.search(value)[0][0])
 
 
 class Database:
