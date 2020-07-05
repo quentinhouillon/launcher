@@ -27,7 +27,7 @@ class Launcher:
         self.date = datetime.now()
 
         WIDTH = 650
-        HEIGHT = 400
+        HEIGHT = 455
 
         W_SCREEN = self.root.winfo_screenwidth()
         H_SCREEN = self.root.winfo_screenheight()
@@ -57,7 +57,26 @@ Tous Droits Réservés"
 
         # region: FRAME
         self.frm_entry = Frame(self.root, bg=self.BG, pady=12)
+        self.frm_result = Frame(self.root, bg=self.ACCENT)
         # endregion: FRAME
+
+        # region: CANVAS
+        self.canvas = Canvas(self.frm_result, bg=self.ACCENT, bd=0, highlightthickness=0)
+        self.frm_canvas = Frame(self.canvas)
+
+        self.frm_canvas.bind(
+            "<Configure>",
+            lambda e: self.canvas.configure(
+                scrollregion=self.canvas.bbox("all")
+            )
+        )
+
+        # endregion: CANVAS
+
+        # region: SCROLLBAR
+        self.scrollbar = Scrollbar(
+            self.frm_result, orient="vertical", command=self.canvas.yview, bg=self.BG)
+        # endregion: SCROLLBAR
 
         # region IMAGE
         self.img_search = PhotoImage(file="img/search.png")
@@ -107,12 +126,19 @@ Tous Droits Réservés"
                                     accelerator="Ctrl-D",
                                     command=self.window_delete)
         # endregion: MENU
+        
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+        self.canvas.create_window((0,0), window=self.frm_canvas, anchor="nw")
 
         # region: PACK
         self.lbl_search.pack(side="left", padx=10)
         self.lbl_add_shortcuts.pack(side="right", padx=10)
         self.ent.pack(fill="x", anchor="center")
         self.frm_entry.pack(fill="x", side="top", pady=10)
+
+        self.frm_result.pack(fill="both")
+        self.scrollbar.pack(side="right", fill="y")
+        self.canvas.pack(fill="both")
         # endregion: PACK
 
     def get_settings(self):
@@ -162,7 +188,7 @@ Tous Droits Réservés"
         self.img_icon = PhotoImage(file="img/shortcut.png")
 
         for index in range(len(self.ls_shortcuts)):
-            self.ls_frm_shortcuts.append(Frame(self.root, bg=self.BG,
+            self.ls_frm_shortcuts.append(Frame(self.frm_canvas, bg=self.BG,
                                                 cursor="hand2"))
 
             self.lbl_icon = Label(self.ls_frm_shortcuts[index],
@@ -191,7 +217,8 @@ Tous Droits Réservés"
             self.ls_frm_shortcuts[index].pack(fill="x")
 
         for index in range(len(self.ls_name_app)):
-            self.ls_frm.append(Frame(self.root, bg=self.BG, cursor="hand2"))
+            self.ls_frm.append(Frame(self.frm_canvas, bg=self.BG,
+                                     cursor="hand2"))
 
             self.lbl_icon = Label(self.ls_frm[index], image=self.img_icon,
                                   bg=self.BG, cursor="hand2")
@@ -200,7 +227,7 @@ Tous Droits Réservés"
                                  text=self.ls_name_app[index].split(
                                      "\\")[-1][:-4],
                                  bg=self.BG, fg=self.FG, cursor="hand2",
-                                 font=("monospace", 15))
+                                 font=("monospace", 15), width=50)
 
             self.lbl_opening = Label(self.ls_frm[index], text="+",
                                      bg=self.BG, fg=self.FG, font=(
@@ -224,7 +251,7 @@ Tous Droits Réservés"
                                   self.window_add(self.ls_name_app[i]))
 
             self.lbl_icon.pack(side="left", anchor="n", padx=5, pady=5)
-            self.lbl_app.pack(side="left", anchor="n")
+            self.lbl_app.pack(side="left", anchor="n", fill="x")
             self.lbl_opening.pack(side="right", anchor="n", padx=10)
             self.ls_frm[index].pack(fill="x")
 
