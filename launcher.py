@@ -29,6 +29,9 @@ class Launcher:
         self.core = LauncherCore()
         self.db = Database()
         self.window_add = WindowAdd(self.BG, self.FG, self.ACCENT)
+        self.window_display = WindowDisplay(self.BG, self.FG, self.ACCENT)
+        self.window_update_delete = WindowUpdateDelete(
+            self.BG, self.FG, self.ACCENT)
 
         WIDTH = 650
         HEIGHT = 455
@@ -54,9 +57,9 @@ Tous Droits Réservés"
         self.root.focus_force()
         self.root.bind("<Escape>", exit)
         self.root.bind("<Control-n>", self.window_add.window_add)
-        self.root.bind("<Control-l>", self.display_shortcuts)
-        self.root.bind("<Control-u>", self.window_update)
-        self.root.bind("<Control-d>", self.window_delete)
+        self.root.bind("<Control-l>", self.window_display.display_shortcuts)
+        self.root.bind("<Control-u>", self.window_update_delete.window_update)
+        self.root.bind("<Control-d>", self.window_update_delete.window_delete)
         # endregion: ROOT
 
         # region: FRAME
@@ -80,7 +83,8 @@ Tous Droits Réservés"
 
         # region: SCROLLBAR
         self.scrollbar = Scrollbar(
-            self.frm_result, orient="vertical", command=self.canvas.yview, bg=self.BG)
+            self.frm_result, orient="vertical", command=self.canvas.yview,
+            bg=self.BG)
         # endregion: SCROLLBAR
 
         # region IMAGE
@@ -121,15 +125,15 @@ Tous Droits Réservés"
 
         self.menu_popup.add_command(label="Afficher un raccourci",
                                     accelerator="Ctrl-L",
-                                    command=self.display_shortcuts)
+                                    command=self.window_display.display_shortcuts)
 
         self.menu_popup.add_command(label="Modifier un raccourci",
                                     accelerator="Ctrl-U",
-                                    command=self.window_update)
+                                    command=self.window_update_delete.window_update)
 
         self.menu_popup.add_command(label="Supprimer un raccourci",
                                     accelerator="Ctrl-D",
-                                    command=self.window_delete)
+                                    command=self.window_update_delete.window_delete)
         # endregion: MENU
 
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
@@ -264,172 +268,6 @@ Tous Droits Réservés"
             self.lbl_app.pack(side="left", anchor="n", fill="x")
             self.lbl_opening.pack(side="right", anchor="n", padx=10)
             self.ls_frm[index].pack(fill="x")
-
-    def window_display(self, event=False):
-        # region: WINDOW
-        self.tl_display = Toplevel(bg=self.BG)
-        self.tl_display.title("Mes raccourcis")
-        self.tl_display.iconbitmap("img/icon.ico")
-        self.tl_display.geometry("850x600")
-        self.tl_display.resizable(False, False)
-        self.tl_display.focus_force()
-        # endregion: WINDOW
-
-        # region: TEXT
-        self.txt_shortcuts = Text(self.tl_display, bg=self.BG, fg=self.FG,
-                                  insertbackground=self.FG, bd=0)
-        # endregion: TEXT
-
-        # region: PACK
-        self.txt_shortcuts.pack(fill="both")
-        # endregion: PACK
-
-    def display_shortcuts(self, event=False):
-        if len(self.db.display_shortcuts()) != 0:
-            self.window_display()
-
-            for insert in self.db.display_shortcuts():
-                insert_shortcuts = ("racourcis: ", insert[0], "\n")
-                insert_opening = ("Commande d'ouverture: ", insert[1], "\n\n")
-
-                for shortcuts in insert_shortcuts:
-                    self.txt_shortcuts.insert(INSERT, shortcuts)
-
-                for opening in insert_opening:
-                    self.txt_shortcuts.insert(INSERT, opening)
-
-            self.tl_display.mainloop()
-
-        else:
-            showerror("Erreur",  "Vous n'avez aucun raccourci à afficher")
-
-    def window_update_delete(self, function, event=False):
-        # region: WINDOW
-        self.tl_update_delete = Toplevel(bg=self.BG)
-        self.tl_update_delete.title("Choisis un raccourci")
-        self.tl_update_delete.geometry("250x100")
-        self.tl_update_delete.resizable(False, False)
-        self.tl_update_delete.focus_force()
-        # endregion: WINDOW
-
-        # region: FRAME
-        self.frm_choose = Frame(self.tl_update_delete, bg=self.BG)
-        self.frm_update = Frame(self.tl_update_delete, bg=self.BG)
-        # endregion: FRAME
-
-        # region: LABEL
-        self.lbl_update_shortcut = Label(self.frm_update,
-                                         text="Entrer un nouveau raccourci",
-                                         bg=self.BG, fg=self.FG)
-
-        self.lbl_update_opening = Label(self.frm_update,
-                                        text="Entrer une nouvelle URL \
-ou un nouveau chemin d'accès",
-                                        bg=self.BG, fg=self.FG)
-
-        self.lbl_instruction = Label(self.frm_update,
-                                     text="Si aucune modification n'est \
-inscrite, l'ancien nom sera conservé",
-                                     bg=self.BG, fg="green",
-                                     font=("monospace", 8), anchor="w")
-
-        self.lbl_choose = Label(self.frm_choose,
-                                text="Entrer le nom d'un raccourci",
-                                bg=self.BG, fg=self.FG, anchor="center")
-        # endregion: LABEL
-
-        # region: ENTRY
-        self.ent_update_shortcut = Entry(self.frm_update, bg=self.ACCENT,
-                                         fg=self.FG, bd=0, insertbackground=self.FG,
-                                         justify="center")
-
-        self.ent_update_opening = Entry(self.frm_update, bg=self.ACCENT,
-                                        fg=self.FG, bd=0, insertbackground=self.FG,
-                                        justify="center")
-
-        self.ent_choose = Entry(self.frm_choose, bg=self.ACCENT,
-                                fg=self.FG, bd=0, insertbackground=self.FG,
-                                justify="center")
-
-        self.ent_choose.bind("<Return>", function)
-        self.ent_update_shortcut.bind("<Return>",
-                                      lambda event: self.ent_update_opening.focus())
-
-        self.ent_update_opening.bind("<Return>", self.update_shortcuts)
-        self.ent_choose.focus()
-        # endregion: ENTRY
-
-        # region: PACK
-        self.lbl_choose.pack(fill="x", padx=10, pady=10)
-        self.ent_choose.pack(fill="x", padx=10, pady=10)
-        self.frm_choose.pack(fill="x")
-
-        self.lbl_update_shortcut.pack(fill="x", pady=10)
-        self.ent_update_shortcut.pack(fill="x", pady=10)
-
-        self.lbl_update_opening.pack(fill="x", pady=10)
-        self.ent_update_opening.pack(fill="x", pady=10)
-
-        self.lbl_instruction.pack(side="bottom")
-        # endregion: PACK
-
-        self.tl_update_delete.mainloop()
-
-    def window_update(self, event=False):
-        self.window_update_delete(self.update_window_shortcuts)
-
-    def update_window_shortcuts(self, event=False):
-        self.result_get = self.db.get_shortcuts(self.ent_choose.get())
-        if len(self.result_get) != 0:
-            self.frm_choose.pack_forget()
-            self.tl_update_delete.geometry("400x190")
-            self.frm_update.pack()
-            self.ent_update_shortcut.focus()
-
-        else:
-            showerror("Erreur", "Ce raccourci n'existe pas")
-            self.tl_update_delete.focus_force()
-            self.ent_choose.focus()
-
-    def update_shortcuts(self, event=False):
-        ls_value = []
-
-        if len(self.ent_update_shortcut.get()) != 0:
-            ls_value.append(self.ent_update_shortcut.get())
-
-        else:
-            for index in self.result_get:
-                ls_value.append(index[0])
-
-        if len(self.ent_update_opening.get()) != 0:
-            ls_value.append(self.ent_update_opening.get())
-
-        else:
-            for index in self.result_get:
-                ls_value.append(index[1])
-
-        for index in self.result_get:
-            ls_value.append(index[0])
-
-        self.db.update_shortcuts(ls_value)
-        showinfo("Mise à jour", "Votre raccourci a bien été mis à jour")
-        self.tl_update_delete.destroy()
-
-    def window_delete(self, event=False):
-        self.window_update_delete(self.delete_shortcuts)
-
-    def delete_shortcuts(self, event=False):
-        self.result_get = self.db.get_shortcuts(self.ent_choose.get())
-
-        if len(self.result_get) != 0:
-            self.db.delete_shortcuts(self.ent_choose.get())
-            showinfo("Suppression", "Votre raccourci a bien été supprimé")
-            self.tl_update_delete.destroy()
-
-        else:
-            showerror("Erreur", "Ce raccourci n'existe pas")
-            self.tl_update_delete.focus_force()
-            self.ent_choose.focus()
 
     def popup(self, event):
         self.menu_popup.tk_popup(event.x_root, event.y_root, 0)
