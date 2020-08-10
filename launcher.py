@@ -145,9 +145,8 @@ Tous Droits Réservés"
         self.ent.pack(fill="x", anchor="center")
         self.frm_entry.pack(fill="x", side="top", pady=10)
 
-        self.frm_result.pack(fill="both")
-        self.scrollbar.pack(side="right", fill="y")
-        self.canvas.pack(fill="both")
+        self.frm_result.pack(fill="both", expand=True)
+        self.canvas.pack(fill="both", expand=True, side="left")
         # endregion: PACK
 
     def get_settings(self):
@@ -196,6 +195,12 @@ Tous Droits Réservés"
 
         self.img_icon = PhotoImage(file="img/shortcut.png")
 
+        if len(self.ls_name_app) + len(self.ls_shortcuts) > 8:
+            self.scrollbar.pack(side="right", fill="y")
+        
+        else:
+            self.scrollbar.pack_forget()
+
         for index in range(len(self.ls_shortcuts)):
             self.ls_frm_shortcuts.append(Frame(self.frm_canvas, bg=self.BG,
                                                cursor="hand2"))
@@ -207,7 +212,7 @@ Tous Droits Réservés"
             self.lbl_app = Label(self.ls_frm_shortcuts[index],
                                  text=self.ls_shortcuts[index],
                                  bg=self.BG, fg=self.FG, cursor="hand2",
-                                 font=("monospace", 15))
+                                 font=("monospace", 15), width=50)
 
             self.ls_frm_shortcuts[index].bind("<ButtonRelease-1>",
                                               lambda event, i=index:
