@@ -1,10 +1,10 @@
-from tkinter import Label, Text, Frame, Tk, Button
-from tkinter.messagebox import showinfo, showerror
+from tkinter import Button, Frame, Label, Text, Tk, Toplevel
+from tkinter.messagebox import showerror, showinfo
 
 from core.clss import DbProfile
 
 
-class AddProfile:
+class AddProfiles:
     def __init__(self, bg, fg, accent):
         self.BG = bg
         self.FG = fg
@@ -12,7 +12,7 @@ class AddProfile:
 
         self.db = DbProfile()
 
-    def window_add_profile(self):
+    def window_add_profiles(self):
         # region: WINDOW
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Ajouter un profile")
@@ -23,8 +23,8 @@ class AddProfile:
 
         # region: LABEL
         self.lbl_profile = Label(self.tl_add,
-                            text="Ajouter vos applications pour créer un profile",
-                            bg=self.BG, fg=self.FG)
+                                 text="Ajouter vos applications pour créer un profile",
+                                 bg=self.BG, fg=self.FG)
         # endregion: LABEL
 
         # region: TEXT
@@ -34,12 +34,12 @@ class AddProfile:
         # endregion: TEXT
 
         # region: BUTTON
-        self.btn_add = Button(self.tl_add, text="+ Ajouter", bg=self.ACCENT, 
+        self.btn_add = Button(self.tl_add, text="+ Ajouter", bg=self.ACCENT,
                               fg=self.FG, relief="flat")
         self.btn_save = Button(self.tl_add, text="Enregistrer", bg=self.ACCENT,
                                fg=self.FG, relief="flat")
         self.btn_cancel = Button(self.tl_add, text="Annuler", bg=self.ACCENT,
-                               fg=self.FG, relief="flat", command=self.tl_add.destroy)
+                                 fg=self.FG, relief="flat", command=self.tl_add.destroy)
         # endregion: BUTTON
 
         # region: PACK
@@ -51,15 +51,15 @@ class AddProfile:
         # endregion: PACK
 
         self.tl_add.mainloop()
-    
-    def add_profile(self, name_profile, name_opening):
+
+    def add_profiles(self, name_profile, name_opening):
         list_profile = list()
-        for add_shortcuts in self.db.display_profile():
+        for add_shortcuts in self.db.display_profiles():
             list_profile.append(add_shortcuts[0])
 
         if name_profile not in list_profile:
             ls_value = (name_profile, name_opening)
-            self.db.add_profile(ls_value)
+            self.db.add_profiles(ls_value)
             showinfo("Ajout", "Votre profile a bien été ajouté")
             self.tl_add.destroy()
 

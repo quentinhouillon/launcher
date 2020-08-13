@@ -6,7 +6,7 @@ from tkinter.messagebox import showerror, showinfo
 
 from core.check_settings import *
 from core.clss import *
-from view.add_profile import *
+from view.add_profiles import *
 from view.add_shortcuts import *
 from view.display_shortcuts import *
 from view.update_delete_shortcuts import *
@@ -34,7 +34,7 @@ class Launcher:
             self.BG, self.FG, self.ACCENT)
         self.update_delete_shortcuts = UpdateDeleteShortcuts(
             self.BG, self.FG, self.ACCENT)
-        self.add_profile = AddProfile(self.BG, self.FG, self.ACCENT)
+        self.add_profiles = AddProfiles(self.BG, self.FG, self.ACCENT)
 
         WIDTH = 650
         HEIGHT = 455
@@ -66,6 +66,13 @@ Tous Droits Réservés"
             "<Control-u>", self.update_delete_shortcuts.window_update_shortcuts)
         self.root.bind(
             "<Control-d>", self.update_delete_shortcuts.window_delete_shortcuts)
+        self.root.bind("<Alt-n>", self.add_profiles.window_add_profiles)
+        self.root.bind(
+            "<Alt-l>", self.display_profiles.display_profiles)
+        self.root.bind(
+            "<Alt-u>", self.update_delete_profiles.window_update_profiles)
+        self.root.bind(
+            "<Alt-d>", self.update_delete_profiles.window_delete_profiles)
         # endregion: ROOT
 
         # region: FRAME
@@ -141,9 +148,9 @@ Tous Droits Réservés"
                                     accelerator="Ctrl-D",
                                     command=self.update_delete_shortcuts.window_delete_shortcuts)
 
-        self.menu_popup.add_command(label="Ajouter un profile",
+        self.menu_popup.add_command(label="Ajouter un profiles",
                                     accelerator="Alt-N",
-                                    command=self.add_profile.window_add_profile)
+                                    command=self.add_profiles.window_add_profiles)
         # endregion: MENU
 
         self.canvas.configure(yscrollcommand=self.scrollbar.set)

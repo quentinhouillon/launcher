@@ -1,27 +1,29 @@
+from os import environ, startfile, walk
+from os.path import join
+from sqlite3 import connect
+
+import win32api
+import win32con
 import win32gui
 import win32ui
-import win32con
-import win32api
 from PIL import Image, ImageTk
 from win32com.shell import shell, shellcon
-from sqlite3 import connect
-import os
 
 
 class LauncherCore:
     def __init__(self):
         self.db = DbLauncher()
 
-    def list_directory(self, path):
+    def list_directory(self, link):
         file = []
-        for root, dirs, files in os.walk(path):
+        for root, dirs, files in walk(link):
             for i in files:
-                file.append(os.path.join(root, i))
+                file.append(join(root, i))
         return file
 
     def search_app_data(self):
         self.ls_app_data = self.list_directory(
-            os.environ["AppData"] + r"\Microsoft\Windows\Start Menu\Programs")
+            environ["AppData"] + r"\Microsoft\Windows\Start Menu\Programs")
         return self.ls_app_data
 
     def search_program_data(self):
@@ -67,10 +69,10 @@ class LauncherCore:
 
     def execute(self, value):
         try:
-            os.startfile(self.search(value)[1]["opening"])
+            startfile(self.search(value)[1]["opening"])
 
         except:
-            os.startfile(self.search(value)[0][0])
+            startfile(self.search(value)[0][0])
 
     def get_icon(self, PATH, size="large"):
         SHGFI_ICON = 0x000000100
@@ -163,8 +165,9 @@ class DbLauncher:
 
         return to_return
 
+
 class DbProfile:
-    def add_profile(self, ls_values):
+    def add_profiles(self, ls_values):
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
@@ -173,7 +176,7 @@ class DbProfile:
 
         self.conn.close()
 
-    def display_profile(self):
+    def display_profiles(self):
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
@@ -184,7 +187,7 @@ class DbProfile:
 
         return to_return
 
-    def delete_profile(self, name_profile):
+    def delete_profiles(self, name_profile):
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
@@ -194,7 +197,7 @@ class DbProfile:
         self.conn.commit()
         self.conn.close()
 
-    def update_profile(self, ls_values):
+    def update_profiles(self, ls_values):
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
@@ -205,7 +208,7 @@ class DbProfile:
         self.conn.commit()
         self.conn.close()
 
-    def get_profile(self, name_profile):
+    def get_profiles(self, name_profile):
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
