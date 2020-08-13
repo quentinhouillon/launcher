@@ -5,6 +5,7 @@
         "accent": "#2B2B2B"
     },
     "light": {
+        "bg": "#a3adae",
         "fg": "black",
         "accent": "#d3d7d9"
     }

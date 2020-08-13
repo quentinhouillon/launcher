@@ -1,15 +1,15 @@
 from datetime import datetime
-from json import dump, load
+from json import load
 from os import chdir, getcwd, startfile
-from tkinter import Button, Canvas, Frame, Label, Tk, mainloop
-from tkinter.messagebox import showerror, showinfo
+from tkinter import (Canvas, Entry, Frame, Label, Menu, PhotoImage, Scrollbar,
+                     Tk)
 
-from core.check_settings import *
-from core.clss import *
-from view.add_profiles import *
-from view.add_shortcuts import *
-from view.display_shortcuts import *
-from view.update_delete_shortcuts import *
+from core.check_settings import check
+from core.clss import LauncherCore
+from view.add_profiles import AddProfiles
+from view.add_shortcuts import AddShortcuts
+from view.display_shortcuts import DisplayShortcuts
+from view.update_delete_shortcuts import UpdateDeleteShortcuts
 
 
 class Launcher:
@@ -28,7 +28,6 @@ class Launcher:
         self.date = datetime.now()
 
         self.core = LauncherCore()
-        self.db = DbLauncher()
         self.add_shortcuts = AddShortcuts(self.BG, self.FG, self.ACCENT)
         self.display_shortcuts = DisplayShortcuts(
             self.BG, self.FG, self.ACCENT)
@@ -48,10 +47,9 @@ class Launcher:
         self.program = "Launcher"
         self.author = "w4rmux"
         self.version = "1.0"
-        self.license = f" © {self.date.year} {self.program}.\
-Tous Droits Réservés"
+        self.license = f""" © {self.date.year} {self.program}.
+                            Tous Droits Réservés"""
 
-        # region: ROOT
         self.root.geometry(f"{WIDTH}x{HEIGHT}+{W_CENTER}+{H_CENTER}")
         self.root.resizable(False, False)
         self.root.config(bg=self.ACCENT)
@@ -63,9 +61,11 @@ Tous Droits Réservés"
         self.root.bind(
             "<Control-l>", self.display_shortcuts.display_shortcuts)
         self.root.bind(
-            "<Control-u>", self.update_delete_shortcuts.window_update_shortcuts)
+            "<Control-u>",
+            self.update_delete_shortcuts.window_update_shortcuts)
         self.root.bind(
-            "<Control-d>", self.update_delete_shortcuts.window_delete_shortcuts)
+            "<Control-d>",
+            self.update_delete_shortcuts.window_delete_shortcuts)
         self.root.bind("<Alt-n>", self.add_profiles.window_add_profiles)
         # self.root.bind(
         #     "<Alt-l>", self.display_profiles.display_profiles)
@@ -73,14 +73,10 @@ Tous Droits Réservés"
         #     "<Alt-u>", self.update_delete_profiles.window_update_profiles)
         # self.root.bind(
         #     "<Alt-d>", self.update_delete_profiles.window_delete_profiles)
-        # endregion: ROOT
 
-        # region: FRAME
         self.frm_entry = Frame(self.root, bg=self.BG, pady=12)
         self.frm_result = Frame(self.root, bg=self.ACCENT)
-        # endregion: FRAME
 
-        # region: CANVAS
         self.canvas = Canvas(self.frm_result, bg=self.ACCENT,
                              bd=0, highlightthickness=0)
         self.frm_canvas = Frame(self.canvas, bg=self.ACCENT)
@@ -92,19 +88,12 @@ Tous Droits Réservés"
             )
         )
 
-        # endregion: CANVAS
-
-        # region: SCROLLBAR
         self.scrollbar = Scrollbar(
             self.frm_result, orient="vertical", command=self.canvas.yview,
             bg=self.BG)
-        # endregion: SCROLLBAR
 
-        # region IMAGE
         self.img_search = PhotoImage(file="img/search.png")
-        # endregion IMAGE
 
-        # region: LABEL
         self.lbl_search = Label(self.frm_entry, image=self.img_search,
                                 bg=self.BG, cursor="hand2")
 
@@ -116,9 +105,7 @@ Tous Droits Réservés"
                                        font=("monospace", 23), cursor="hand2")
 
         self.lbl_add_shortcuts.bind("<ButtonRelease-1>", self.popup)
-        # endregion: LABEL
 
-        # region: ENTRY
         self.ent = Entry(self.frm_entry, bg=self.BG, fg=self.FG, relief="flat",
                          justify="center", insertbackground=self.FG,
                          font=("sans-serif", 14))
@@ -128,35 +115,36 @@ Tous Droits Réservés"
 
         self.ent.bind("<Return>", lambda x: self.core.execute(self.ent.get()))
         self.ent.focus()
-        # endregion: ENTRY
 
-        # region: MENU
         self.menu_popup = Menu(self.root, tearoff=0, bg=self.BG, fg=self.FG)
-        self.menu_popup.add_command(label="Ajouter un raccourci",
-                                    accelerator="Ctrl-N",
-                                    command=self.add_shortcuts.window_add_shortcuts)
+        self.menu_popup.add_command(
+            label="Ajouter un raccourci",
+            accelerator="Ctrl-N",
+            command=self.add_shortcuts.window_add_shortcuts)
 
-        self.menu_popup.add_command(label="Afficher un raccourci",
-                                    accelerator="Ctrl-L",
-                                    command=self.display_shortcuts.display_shortcuts)
+        self.menu_popup.add_command(
+            label="Afficher un raccourci",
+            accelerator="Ctrl-L",
+            command=self.display_shortcuts.display_shortcuts)
 
-        self.menu_popup.add_command(label="Modifier un raccourci",
-                                    accelerator="Ctrl-U",
-                                    command=self.update_delete_shortcuts.window_update_shortcuts)
+        self.menu_popup.add_command(
+            label="Modifier un raccourci",
+            accelerator="Ctrl-U",
+            command=self.update_delete_shortcuts.window_update_shortcuts)
 
-        self.menu_popup.add_command(label="Supprimer un raccourci",
-                                    accelerator="Ctrl-D",
-                                    command=self.update_delete_shortcuts.window_delete_shortcuts)
+        self.menu_popup.add_command(
+            label="Supprimer un raccourci",
+            accelerator="Ctrl-D",
+            command=self.update_delete_shortcuts.window_delete_shortcuts)
 
-        self.menu_popup.add_command(label="Ajouter un profiles",
-                                    accelerator="Alt-N",
-                                    command=self.add_profiles.window_add_profiles)
-        # endregion: MENU
+        self.menu_popup.add_command(
+            label="Ajouter un profiles",
+            accelerator="Alt-N",
+            command=self.add_profiles.window_add_profiles)
 
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
         self.canvas.create_window((0, 0), window=self.frm_canvas, anchor="nw")
 
-        # region: PACK
         self.lbl_search.pack(side="left", padx=10)
         self.lbl_add_shortcuts.pack(side="right", padx=10)
         self.ent.pack(fill="x", anchor="center")
@@ -164,7 +152,6 @@ Tous Droits Réservés"
 
         self.frm_result.pack(fill="both", expand=True)
         self.canvas.pack(fill="both", expand=True, side="left")
-        # endregion: PACK
 
     def get_settings(self):
         with open("file/config.json", "r") as config:
@@ -203,7 +190,7 @@ Tous Droits Réservés"
             self.ls_shortcuts.append(shortcuts["shortcut"])
             self.ls_opening.append(shortcuts["opening"])
 
-        except:
+        except KeyError:
             pass
 
         for app in apps:
@@ -282,9 +269,10 @@ Tous Droits Réservés"
                               lambda event, i=index:
                               startfile(self.ls_name_app[i]))
 
-            self.lbl_opening.bind("<ButtonRelease-1>",
-                                  lambda event, i=index:
-                                  self.add_shortcuts.window_add_shortcuts(self.ls_name_app[i]))
+            self.lbl_opening.bind(
+                "<ButtonRelease-1>",
+                lambda event, i=index:
+                self.add_shortcuts.window_add_shortcuts(self.ls_name_app[i]))
 
             self.lbl_icon_app.pack(side="left", anchor="n", padx=5, pady=5)
             self.lbl_app.pack(side="left", anchor="n", fill="x")
@@ -298,7 +286,7 @@ Tous Droits Réservés"
 def main():
     check()
     root = Tk()
-    launch = Launcher(root)
+    Launcher(root)
     root.mainloop()
 
 

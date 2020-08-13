@@ -6,8 +6,8 @@ import win32api
 import win32con
 import win32gui
 import win32ui
-from PIL import Image, ImageTk
-from win32com.shell import shell, shellcon
+from PIL import Image
+from win32com.shell import shell
 
 
 class LauncherCore:
@@ -71,7 +71,7 @@ class LauncherCore:
         try:
             startfile(self.search(value)[1]["opening"])
 
-        except:
+        except KeyError:
             startfile(self.search(value)[0][0])
 
     def get_icon(self, PATH, size="large"):
@@ -83,7 +83,9 @@ class LauncherCore:
             SHIL_SIZE = 0x00002
         else:
             raise TypeError(
-                "Invalid argument for 'size'. Must be equal to 'small' or 'large'")
+                "Invalid argument for 'size'. Must be equal"
+                "to 'small' or 'large'"
+            )
 
         ret, info = shell.SHGetFileInfo(
             PATH, 0, SHGFI_ICONLOCATION | SHGFI_ICON | SHIL_SIZE)

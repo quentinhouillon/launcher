@@ -1,4 +1,4 @@
-from tkinter import Button, Entry, Frame, Label, Text, Tk, Toplevel
+from tkinter import Button, Entry, Frame, Label, Text, Toplevel
 from tkinter.filedialog import askopenfilenames
 from tkinter.messagebox import showerror, showinfo
 
@@ -14,53 +14,42 @@ class AddProfiles:
         self.db = DbProfile()
 
     def window_add_profiles(self, event=False):
-        # region: WINDOW
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Ajouter un profile")
         self.tl_add.iconbitmap("img/icon.ico")
         self.tl_add.focus_force()
-        # endregion: WINDOW
 
-        # region: FRAME
         self.frm_main = Frame(self.tl_add, bg=self.BG)
         self.frm_entry = Frame(self.tl_add, bg=self.BG)
         self.frm_footer = Frame(self.tl_add, bg=self.BG)
-        # endregion: FRAME
 
-        # region: LABEL
-        self.lbl_profile = Label(self.tl_add,
-                                 text="Ajouter vos applications pour créer un profile",
-                                 bg=self.BG, fg=self.FG)
+        self.lbl_profile = Label(
+            self.tl_add,
+            text="Ajouter vos applications pour créer un profile",
+            bg=self.BG, fg=self.FG)
         self.lbl_name_profile = Label(self.frm_entry,
                                       text="Entrer le non du profile",
                                       bg=self.BG, fg=self.FG)
-        # endregion: LABEL
 
-        # region: ENTRY
         self.ent_profile_name = Entry(self.frm_entry, bg=self.ACCENT,
                                       insertbackground=self.FG,
                                       fg=self.FG, bd=0)
-        # endregion: ENTRY
 
-        # region: TEXT
         self.txt_profile = Text(self.frm_main, bg=self.ACCENT, fg=self.FG,
                                 bd=0, insertbackground=self.FG,
                                 state="disabled")
-        # endregion: TEXT
 
-        # region: BUTTON
         self.btn_add = Button(self.frm_main, text="+ Ajouter", bg=self.ACCENT,
                               fg=self.FG, relief="flat", command=self.openfile)
-        self.btn_save = Button(self.frm_footer, text="Enregistrer", bg=self.ACCENT,
-                               fg=self.FG, relief="flat",
+        self.btn_save = Button(self.frm_footer, text="Enregistrer",
+                               bg=self.ACCENT, fg=self.FG, relief="flat",
                                command=lambda: self.add_profiles(
                                    self.ent_profile_name.get(),
                                    self.txt_profile.get(0.1, "end")))
-        self.btn_cancel = Button(self.frm_footer, text="Annuler", bg=self.ACCENT,
-                                 fg=self.FG, relief="flat", command=self.tl_add.destroy)
-        # endregion: BUTTON
+        self.btn_cancel = Button(self.frm_footer, text="Annuler",
+                                 bg=self.ACCENT, fg=self.FG, relief="flat",
+                                 command=self.tl_add.destroy)
 
-        # region: PACK
         self.lbl_profile.pack(fill="x", padx=10, pady=10, side="top")
 
         self.lbl_name_profile.pack(fill="x", side="left", anchor="n")
@@ -75,7 +64,6 @@ class AddProfiles:
         self.txt_profile.pack(fill="x", padx=10, expand="true")
         self.btn_add.pack(fill="x", padx=10, pady=10, expand="true")
         self.frm_main.pack(fill="x", expand="true", side="bottom", anchor="w")
-        # endregion: PACK
 
         self.tl_add.mainloop()
 

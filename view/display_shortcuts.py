@@ -1,5 +1,5 @@
-from tkinter import Toplevel, Text, mainloop
-from tkinter.messagebox import showinfo, showerror
+from tkinter import Toplevel, Text
+from tkinter.messagebox import showerror
 
 from core.clss import DbLauncher
 
@@ -13,23 +13,17 @@ class DisplayShortcuts:
         self.db = DbLauncher()
 
     def window_display_shortcuts(self, event=False):
-        # region: WINDOW
         self.tl_display = Toplevel(bg=self.BG)
         self.tl_display.title("Mes raccourcis")
         self.tl_display.iconbitmap("img/icon.ico")
         self.tl_display.geometry("850x600")
         self.tl_display.resizable(False, False)
         self.tl_display.focus_force()
-        # endregion: WINDOW
 
-        # region: TEXT
         self.txt_shortcuts = Text(self.tl_display, bg=self.BG, fg=self.FG,
                                   insertbackground=self.FG, bd=0)
-        # endregion: TEXT
 
-        # region: PACK
         self.txt_shortcuts.pack(fill="both")
-        # endregion: PACK
 
     def display_shortcuts(self, event=False):
         if len(self.db.display_shortcuts()) != 0:

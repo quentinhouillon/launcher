@@ -1,7 +1,8 @@
-from tkinter import *
-from tkinter.messagebox import showinfo, showerror
+from tkinter import Entry, Frame, Label, Toplevel
+from tkinter.messagebox import showerror, showinfo
 
 from core.clss import DbLauncher
+
 
 class UpdateDeleteShortcuts:
     def __init__(self, bg, fg, accent):
@@ -12,20 +13,15 @@ class UpdateDeleteShortcuts:
         self.db = DbLauncher()
 
     def window_update_delete(self, function, event=False):
-        # region: WINDOW
         self.tl_update_delete = Toplevel(bg=self.BG)
         self.tl_update_delete.title("Choisis un raccourci")
         self.tl_update_delete.geometry("250x100")
         self.tl_update_delete.resizable(False, False)
         self.tl_update_delete.focus_force()
-        # endregion: WINDOW
 
-        # region: FRAME
         self.frm_choose = Frame(self.tl_update_delete, bg=self.BG)
         self.frm_update = Frame(self.tl_update_delete, bg=self.BG)
-        # endregion: FRAME
 
-        # region: LABEL
         self.lbl_update_shortcut = Label(self.frm_update,
                                          text="Entrer un nouveau raccourci",
                                          bg=self.BG, fg=self.FG)
@@ -44,15 +40,15 @@ inscrite, l'ancien nom sera conservé",
         self.lbl_choose = Label(self.frm_choose,
                                 text="Entrer le nom d'un raccourci",
                                 bg=self.BG, fg=self.FG, anchor="center")
-        # endregion: LABEL
 
-        # region: ENTRY
         self.ent_update_shortcut = Entry(self.frm_update, bg=self.ACCENT,
-                                         fg=self.FG, bd=0, insertbackground=self.FG,
+                                         fg=self.FG, bd=0,
+                                         insertbackground=self.FG,
                                          justify="center")
 
         self.ent_update_opening = Entry(self.frm_update, bg=self.ACCENT,
-                                        fg=self.FG, bd=0, insertbackground=self.FG,
+                                        fg=self.FG, bd=0,
+                                        insertbackground=self.FG,
                                         justify="center")
 
         self.ent_choose = Entry(self.frm_choose, bg=self.ACCENT,
@@ -61,13 +57,12 @@ inscrite, l'ancien nom sera conservé",
 
         self.ent_choose.bind("<Return>", function)
         self.ent_update_shortcut.bind("<Return>",
-                                      lambda event: self.ent_update_opening.focus())
+                                      lambda event:
+                                          self.ent_update_opening.focus())
 
         self.ent_update_opening.bind("<Return>", self.update_shortcuts)
         self.ent_choose.focus()
-        # endregion: ENTRY
 
-        # region: PACK
         self.lbl_choose.pack(fill="x", padx=10, pady=10)
         self.ent_choose.pack(fill="x", padx=10, pady=10)
         self.frm_choose.pack(fill="x")
@@ -79,7 +74,6 @@ inscrite, l'ancien nom sera conservé",
         self.ent_update_opening.pack(fill="x", pady=10)
 
         self.lbl_instruction.pack(side="bottom")
-        # endregion: PACK
 
         self.tl_update_delete.mainloop()
 

@@ -2,11 +2,12 @@ import sqlite3
 from os import system, chdir, listdir
 from json import dump
 
+
 def check():
     try:
         chdir("file")
 
-    except:
+    except FileNotFoundError:
         system("mkdir file")
         chdir("file")
 
@@ -19,7 +20,7 @@ def check():
                (id INTEGER PRIMARY KEY,
                shortcut TEXT NULL,
                opening TEXT NULL)""")
-        
+
         cur.execute("""
                CREATE TABLE IF NOT EXISTS profile
                (id INTEGER PRIMARY KEY,
@@ -34,7 +35,7 @@ def check():
                 "accent": "#2B2B2B"
             },
             "light": {
-                "fg": "#a3adae",
+                "bg": "#a3adae",
                 "fg": "black",
                 "accent": "#d3d7d9",
             }
@@ -42,7 +43,7 @@ def check():
 
         with open("theme.json", "w") as theme:
             dump(add_theme, theme, indent=4)
-    
+
     if "config.json" not in listdir("."):
         add_config = {
             "settings": {
@@ -53,7 +54,7 @@ def check():
 
         with open("config.json", "w") as config:
             dump(add_config, config, indent=4)
-        
+
     # if "language.json" not in listdir("."):
     #     with open("language.json", "w") as language:
     #         pass
