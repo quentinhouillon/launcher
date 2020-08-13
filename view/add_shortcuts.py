@@ -49,7 +49,7 @@ l'url du site internet",
         self.tl_add.mainloop()
 
     def add_shortcuts(self, name_shortcuts, name_opening):
-        list_shortcuts = list()
+        list_shortcuts = []
         for add_shortcuts in self.db.display_shortcuts():
             list_shortcuts.append(add_shortcuts[0])
 

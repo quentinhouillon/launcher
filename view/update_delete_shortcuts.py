@@ -16,6 +16,7 @@ class UpdateDeleteShortcuts:
         self.tl_update_delete = Toplevel(bg=self.BG)
         self.tl_update_delete.title("Choisis un raccourci")
         self.tl_update_delete.geometry("250x100")
+        self.tl_update_delete.iconbitmap("img/icon.ico")
         self.tl_update_delete.resizable(False, False)
         self.tl_update_delete.focus_force()
 
@@ -67,11 +68,11 @@ inscrite, l'ancien nom sera conservé",
         self.ent_choose.pack(fill="x", padx=10, pady=10)
         self.frm_choose.pack(fill="x")
 
-        self.lbl_update_shortcut.pack(fill="x", pady=10)
-        self.ent_update_shortcut.pack(fill="x", pady=10)
+        self.lbl_update_shortcut.pack(fill="x", pady=5)
+        self.ent_update_shortcut.pack(fill="x", pady=5)
 
-        self.lbl_update_opening.pack(fill="x", pady=10)
-        self.ent_update_opening.pack(fill="x", pady=10)
+        self.lbl_update_opening.pack(fill="x", pady=5)
+        self.ent_update_opening.pack(fill="x", pady=5)
 
         self.lbl_instruction.pack(side="bottom")
 
@@ -84,7 +85,7 @@ inscrite, l'ancien nom sera conservé",
         self.result_get = self.db.get_shortcuts(self.ent_choose.get())
         if len(self.result_get) != 0:
             self.frm_choose.pack_forget()
-            self.tl_update_delete.geometry("400x190")
+            self.tl_update_delete.geometry("400x160")
             self.frm_update.pack()
             self.ent_update_shortcut.focus()
 

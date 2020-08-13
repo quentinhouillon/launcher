@@ -1,6 +1,6 @@
 from datetime import datetime
 from json import load
-from os import chdir, getcwd, startfile
+from os import chdir, getcwd, startfile, path
 from tkinter import (Canvas, Entry, Frame, Label, Menu, PhotoImage, Scrollbar,
                      Tk)
 
@@ -18,14 +18,31 @@ class Launcher:
 
         self.root = root
 
+        # lists
         self.ls_frm = []
         self.ls_frm_shortcuts = []
         self.ls_name_app = []
         self.ls_shortcuts = []
         self.ls_opening = []
+        
+        # constants
+        WIDTH = 650
+        HEIGHT = 455
+
+        W_SCREEN = self.root.winfo_screenwidth()
+        H_SCREEN = self.root.winfo_screenheight()
+
+        W_CENTER = int(W_SCREEN/2 - WIDTH/2)
+        H_CENTER = int(H_SCREEN/2 - HEIGHT/2)
+        
+        date = datetime.now()
+
+        PROGRAM = "Launcher"
+        AUTHOR = "w4rmux"
+        VERSION = "1.0"
+        LICENSE = f" © {date.year} {PROGRAM}.Tous Droits Réservés"
 
         self.get_settings()
-        self.date = datetime.now()
 
         self.core = LauncherCore()
         self.add_shortcuts = AddShortcuts(self.BG, self.FG, self.ACCENT)
@@ -35,20 +52,6 @@ class Launcher:
             self.BG, self.FG, self.ACCENT)
         self.add_profiles = AddProfiles(self.BG, self.FG, self.ACCENT)
 
-        WIDTH = 650
-        HEIGHT = 455
-
-        W_SCREEN = self.root.winfo_screenwidth()
-        H_SCREEN = self.root.winfo_screenheight()
-
-        W_CENTER = int(W_SCREEN/2 - WIDTH/2)
-        H_CENTER = int(H_SCREEN/2 - HEIGHT/2)
-
-        self.program = "Launcher"
-        self.author = "w4rmux"
-        self.version = "1.0"
-        self.license = f""" © {self.date.year} {self.program}.
-                            Tous Droits Réservés"""
 
         self.root.geometry(f"{WIDTH}x{HEIGHT}+{W_CENTER}+{H_CENTER}")
         self.root.resizable(False, False)
@@ -56,6 +59,8 @@ class Launcher:
         self.root.overrideredirect(True)
         self.root.wm_attributes("-transparentcolor", self.ACCENT)
         self.root.focus_force()
+
+        # bindings
         self.root.bind("<Escape>", exit)
         self.root.bind("<Control-n>", self.add_shortcuts.window_add_shortcuts)
         self.root.bind(
@@ -194,7 +199,7 @@ class Launcher:
             pass
 
         for app in apps:
-            if app.split("\\")[-1][:-4] not in self.ls_name_app:
+            if path.splitext(path.basename(app))[0] not in self.ls_name_app:
                 self.ls_name_app.append(app)
 
         self.img_icon = PhotoImage(file="img/shortcut.png")
@@ -247,8 +252,9 @@ class Launcher:
                                       bg=self.BG, cursor="hand2")
 
             self.lbl_app = Label(self.ls_frm[index],
-                                 text=self.ls_name_app[index].split(
-                                     "\\")[-1][:-4],
+                                 text=path.splitext(
+                                     path.basename(
+                                         self.ls_name_app[index]))[0],
                                  bg=self.BG, fg=self.FG, cursor="hand2",
                                  font=("monospace", 15), width=50)
 

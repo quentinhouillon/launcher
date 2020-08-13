@@ -86,7 +86,7 @@ class AddProfiles:
         open_file = askopenfilenames()
         self.txt_profile.config(state="normal")
 
-        for of in open_file:
-            self.txt_profile.insert("insert", f"{of}\n")
+        for file in open_file:
+            self.txt_profile.insert("insert", f"{file}\n")
 
         self.txt_profile.config(state="disabled")
