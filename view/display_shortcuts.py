@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Toplevel, Text, mainloop
 from tkinter.messagebox import showinfo, showerror
 
 from core.clss import DbLauncher
@@ -24,7 +24,7 @@ class DisplayShortcuts:
 
         # region: TEXT
         self.txt_shortcuts = Text(self.tl_display, bg=self.BG, fg=self.FG,
-                                  insertbackground=self.FG, bd=0, state="disabled")
+                                  insertbackground=self.FG, bd=0)
         # endregion: TEXT
 
         # region: PACK
@@ -40,11 +40,12 @@ class DisplayShortcuts:
                 insert_opening = ("Commande d'ouverture: ", insert[1], "\n\n")
 
                 for shortcuts in insert_shortcuts:
-                    self.txt_shortcuts.insert(INSERT, shortcuts)
+                    self.txt_shortcuts.insert("insert", shortcuts)
 
                 for opening in insert_opening:
-                    self.txt_shortcuts.insert(INSERT, opening)
+                    self.txt_shortcuts.insert("insert", opening)
 
+            self.txt_shortcuts.config(state="disabled")
             self.tl_display.mainloop()
 
         else:

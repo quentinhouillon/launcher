@@ -4,7 +4,7 @@ import win32con
 import win32api
 from PIL import Image, ImageTk
 from win32com.shell import shell, shellcon
-import sqlite3
+from sqlite3 import connect
 import os
 
 
@@ -110,7 +110,7 @@ class LauncherCore:
 
 class DbLauncher:
     def add_shortcuts(self, ls_values):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
@@ -119,7 +119,7 @@ class DbLauncher:
         self.conn.close()
 
     def display_shortcuts(self):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("SELECT shortcut, opening FROM Launcher")
@@ -130,7 +130,7 @@ class DbLauncher:
         return to_return
 
     def delete_shortcuts(self, name_shortcuts):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
@@ -140,7 +140,7 @@ class DbLauncher:
         self.conn.close()
 
     def update_shortcuts(self, ls_values):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute(
@@ -151,7 +151,7 @@ class DbLauncher:
         self.conn.close()
 
     def get_shortcuts(self, name_shortcuts):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute(
@@ -165,7 +165,7 @@ class DbLauncher:
 
 class DbProfile:
     def add_profile(self, ls_values):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
@@ -174,7 +174,7 @@ class DbProfile:
         self.conn.close()
 
     def display_profile(self):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("SELECT shortcut, profile FROM Launcher")
@@ -185,7 +185,7 @@ class DbProfile:
         return to_return
 
     def delete_profile(self, name_profile):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
@@ -195,7 +195,7 @@ class DbProfile:
         self.conn.close()
 
     def update_profile(self, ls_values):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute(
@@ -206,7 +206,7 @@ class DbProfile:
         self.conn.close()
 
     def get_profile(self, name_profile):
-        self.conn = sqlite3.connect("file/Launcher.db")
+        self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
         self.cur.execute(

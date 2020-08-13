@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Toplevel, Entry, Frame, Label
 from tkinter.messagebox import showinfo, showerror
 
 from core.clss import DbLauncher
@@ -68,13 +68,13 @@ l'url du site internet",
             self.tl_add.destroy()
         
         else:
-            showerror("Erreur", "Ce raccourcis existe déjà")
+            showerror("Erreur", "Ce raccourci existe déjà")
             self.tl_add.destroy()
 
     def autocompletion_window_app(self, name_opening=False):
         try:
             if len(name_opening) >= 1:
-                self.ent_opening.insert(INSERT, name_opening)
+                self.ent_opening.insert("insert", name_opening)
                 self.ent_shortcuts.focus()
 
         except:

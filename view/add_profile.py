@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Label, Text, Frame, Tk, Button
 from tkinter.messagebox import showinfo, showerror
 
 from core.clss import DbProfile
@@ -51,3 +51,18 @@ class AddProfile:
         # endregion: PACK
 
         self.tl_add.mainloop()
+    
+    def add_profile(self, name_profile, name_opening):
+        list_profile = list()
+        for add_shortcuts in self.db.display_profile():
+            list_profile.append(add_shortcuts[0])
+
+        if name_profile not in list_profile:
+            ls_value = (name_profile, name_opening)
+            self.db.add_profile(ls_value)
+            showinfo("Ajout", "Votre profile a bien été ajouté")
+            self.tl_add.destroy()
+
+        else:
+            showerror("Erreur", "Ce profile existe déjà")
+            self.tl_add.destroy()

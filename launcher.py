@@ -1,7 +1,7 @@
 from datetime import datetime
 from json import dump, load
 from os import chdir, getcwd, startfile
-from tkinter import *
+from tkinter import Button, Canvas, Frame, Label, Tk, mainloop
 from tkinter.messagebox import showerror, showinfo
 
 from core.check_settings import *
@@ -140,7 +140,7 @@ Tous Droits Réservés"
         self.menu_popup.add_command(label="Supprimer un raccourci",
                                     accelerator="Ctrl-D",
                                     command=self.update_delete_shortcuts.window_delete_shortcuts)
-        
+
         self.menu_popup.add_command(label="Ajouter un profile",
                                     accelerator="Alt-N",
                                     command=self.add_profile.window_add_profile)
