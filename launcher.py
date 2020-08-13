@@ -1,14 +1,15 @@
 from datetime import datetime
 from json import dump, load
-from os import getcwd, chdir, startfile
+from os import chdir, getcwd, startfile
 from tkinter import *
-from tkinter.messagebox import showinfo, showerror
+from tkinter.messagebox import showerror, showinfo
 
 from core.check_settings import *
 from core.clss import *
-from view.add_window import *
-from view.display_window import *
-from view.update_delete_window import *
+from view.add_profile import *
+from view.add_shortcuts import *
+from view.display_shortcuts import *
+from view.update_delete_shortcuts import *
 
 
 class Launcher:
@@ -27,11 +28,13 @@ class Launcher:
         self.date = datetime.now()
 
         self.core = LauncherCore()
-        self.db = Database()
-        self.window_add = WindowAdd(self.BG, self.FG, self.ACCENT)
-        self.window_display = WindowDisplay(self.BG, self.FG, self.ACCENT)
-        self.window_update_delete = WindowUpdateDelete(
+        self.db = DbLauncher()
+        self.add_shortcuts = AddShortcuts(self.BG, self.FG, self.ACCENT)
+        self.display_shortcuts = DisplayShortcuts(
             self.BG, self.FG, self.ACCENT)
+        self.update_delete_shortcuts = UpdateDeleteShortcuts(
+            self.BG, self.FG, self.ACCENT)
+        self.add_profile = AddProfile(self.BG, self.FG, self.ACCENT)
 
         WIDTH = 650
         HEIGHT = 455
@@ -56,10 +59,13 @@ Tous Droits Réservés"
         self.root.wm_attributes("-transparentcolor", self.ACCENT)
         self.root.focus_force()
         self.root.bind("<Escape>", exit)
-        self.root.bind("<Control-n>", self.window_add.window_add)
-        self.root.bind("<Control-l>", self.window_display.display_shortcuts)
-        self.root.bind("<Control-u>", self.window_update_delete.window_update)
-        self.root.bind("<Control-d>", self.window_update_delete.window_delete)
+        self.root.bind("<Control-n>", self.add_shortcuts.window_add_shortcuts)
+        self.root.bind(
+            "<Control-l>", self.display_shortcuts.display_shortcuts)
+        self.root.bind(
+            "<Control-u>", self.update_delete_shortcuts.window_update_shortcuts)
+        self.root.bind(
+            "<Control-d>", self.update_delete_shortcuts.window_delete_shortcuts)
         # endregion: ROOT
 
         # region: FRAME
@@ -121,19 +127,23 @@ Tous Droits Réservés"
         self.menu_popup = Menu(self.root, tearoff=0, bg=self.BG, fg=self.FG)
         self.menu_popup.add_command(label="Ajouter un raccourci",
                                     accelerator="Ctrl-N",
-                                    command=self.window_add.window_add)
+                                    command=self.add_shortcuts.window_add_shortcuts)
 
         self.menu_popup.add_command(label="Afficher un raccourci",
                                     accelerator="Ctrl-L",
-                                    command=self.window_display.display_shortcuts)
+                                    command=self.display_shortcuts.display_shortcuts)
 
         self.menu_popup.add_command(label="Modifier un raccourci",
                                     accelerator="Ctrl-U",
-                                    command=self.window_update_delete.window_update)
+                                    command=self.update_delete_shortcuts.window_update_shortcuts)
 
         self.menu_popup.add_command(label="Supprimer un raccourci",
                                     accelerator="Ctrl-D",
-                                    command=self.window_update_delete.window_delete)
+                                    command=self.update_delete_shortcuts.window_delete_shortcuts)
+        
+        self.menu_popup.add_command(label="Ajouter un profile",
+                                    accelerator="Alt-N",
+                                    command=self.add_profile.window_add_profile)
         # endregion: MENU
 
         self.canvas.configure(yscrollcommand=self.scrollbar.set)
@@ -197,7 +207,7 @@ Tous Droits Réservés"
 
         if len(self.ls_name_app) + len(self.ls_shortcuts) > 8:
             self.scrollbar.pack(side="right", fill="y")
-        
+
         else:
             self.scrollbar.pack_forget()
 
@@ -267,7 +277,7 @@ Tous Droits Réservés"
 
             self.lbl_opening.bind("<ButtonRelease-1>",
                                   lambda event, i=index:
-                                  self.window_add.window_add(self.ls_name_app[i]))
+                                  self.add_shortcuts.window_add_shortcuts(self.ls_name_app[i]))
 
             self.lbl_icon_app.pack(side="left", anchor="n", padx=5, pady=5)
             self.lbl_app.pack(side="left", anchor="n", fill="x")

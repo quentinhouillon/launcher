@@ -1,15 +1,15 @@
 from tkinter import *
 from tkinter.messagebox import showinfo, showerror
 
-from core.clss import Database
+from core.clss import DbLauncher
 
-class WindowUpdateDelete:
+class UpdateDeleteShortcuts:
     def __init__(self, bg, fg, accent):
         self.BG = bg
         self.FG = fg
         self.ACCENT = accent
 
-        self.db = Database()
+        self.db = DbLauncher()
 
     def window_update_delete(self, function, event=False):
         # region: WINDOW
@@ -83,7 +83,7 @@ inscrite, l'ancien nom sera conservé",
 
         self.tl_update_delete.mainloop()
 
-    def window_update(self, event=False):
+    def window_update_shortcuts(self, event=False):
         self.window_update_delete(self.update_window_shortcuts)
 
     def update_window_shortcuts(self, event=False):
@@ -123,7 +123,7 @@ inscrite, l'ancien nom sera conservé",
         showinfo("Mise à jour", "Votre raccourci a bien été mis à jour")
         self.tl_update_delete.destroy()
 
-    def window_delete(self, event=False):
+    def window_delete_shortcuts(self, event=False):
         self.window_update_delete(self.delete_shortcuts)
 
     def delete_shortcuts(self, event=False):

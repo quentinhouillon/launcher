@@ -1,18 +1,18 @@
 from tkinter import *
 from tkinter.messagebox import showinfo, showerror
 
-from core.clss import Database
+from core.clss import DbLauncher
 
 
-class WindowDisplay:
+class DisplayShortcuts:
     def __init__(self, bg, fg, accent):
         self.BG = bg
         self.FG = fg
         self.ACCENT = accent
 
-        self.db = Database()
+        self.db = DbLauncher()
 
-    def window_display(self, event=False):
+    def window_display_shortcuts(self, event=False):
         # region: WINDOW
         self.tl_display = Toplevel(bg=self.BG)
         self.tl_display.title("Mes raccourcis")
@@ -24,7 +24,7 @@ class WindowDisplay:
 
         # region: TEXT
         self.txt_shortcuts = Text(self.tl_display, bg=self.BG, fg=self.FG,
-                                  insertbackground=self.FG, bd=0)
+                                  insertbackground=self.FG, bd=0, state="disabled")
         # endregion: TEXT
 
         # region: PACK
@@ -33,7 +33,7 @@ class WindowDisplay:
 
     def display_shortcuts(self, event=False):
         if len(self.db.display_shortcuts()) != 0:
-            self.window_display()
+            self.window_display_shortcuts()
 
             for insert in self.db.display_shortcuts():
                 insert_shortcuts = ("racourcis: ", insert[0], "\n")

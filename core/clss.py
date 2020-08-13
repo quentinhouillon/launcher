@@ -10,7 +10,7 @@ import os
 
 class LauncherCore:
     def __init__(self):
-        self.db = Database()
+        self.db = DbLauncher()
 
     def list_directory(self, path):
         file = []
@@ -108,7 +108,7 @@ class LauncherCore:
         return img
 
 
-class Database:
+class DbLauncher:
     def add_shortcuts(self, ls_values):
         self.conn = sqlite3.connect("file/Launcher.db")
         self.cur = self.conn.cursor()
@@ -157,6 +157,61 @@ class Database:
         self.cur.execute(
             "SELECT Shortcut, opening FROM Launcher WHERE shortcut=?",
             (name_shortcuts,))
+
+        to_return = self.cur.fetchall()
+        self.conn.close()
+
+        return to_return
+
+class DbProfile:
+    def add_profile(self, ls_values):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+        self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
+        self.conn.commit()
+
+        self.conn.close()
+
+    def display_profile(self):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+        self.cur.execute("SELECT shortcut, profile FROM Launcher")
+
+        to_return = self.cur.fetchall()
+        self.conn.close()
+
+        return to_return
+
+    def delete_profile(self, name_profile):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+        self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
+                         (name_profile,))
+
+        self.conn.commit()
+        self.conn.close()
+
+    def update_profile(self, ls_values):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+        self.cur.execute(
+            "UPDATE Launcher SET shortcut=?, profile=? WHERE shortcut=?",
+            ls_values)
+
+        self.conn.commit()
+        self.conn.close()
+
+    def get_profile(self, name_profile):
+        self.conn = sqlite3.connect("file/Launcher.db")
+        self.cur = self.conn.cursor()
+
+        self.cur.execute(
+            "SELECT Shortcut, profile FROM Launcher WHERE shortcut=?",
+            (name_profile,))
 
         to_return = self.cur.fetchall()
         self.conn.close()

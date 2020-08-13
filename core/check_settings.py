@@ -19,6 +19,12 @@ def check():
                (id INTEGER PRIMARY KEY,
                shortcut TEXT NULL,
                opening TEXT NULL)""")
+        
+        cur.execute("""
+               CREATE TABLE IF NOT EXISTS profile
+               (id INTEGER PRIMARY KEY,
+               shortcut TEXT NULL,
+               profile TEXT NULL)""")
 
     if "theme.json" not in listdir("."):
         add_theme = {

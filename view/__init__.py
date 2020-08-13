@@ -1,3 +1,4 @@
-from .add_window import *
-from .display_window import *
-from .update_delete_window import *
+from .add_shortcuts import *
+from .display_shortcuts import *
+from .update_delete_shortcuts import *
+from .add_profile import *

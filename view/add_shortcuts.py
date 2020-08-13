@@ -1,18 +1,18 @@
 from tkinter import *
 from tkinter.messagebox import showinfo, showerror
 
-from core.clss import Database
+from core.clss import DbLauncher
 
 
-class WindowAdd:
+class AddShortcuts:
     def __init__(self, bg, fg, accent):
         self.BG = bg
         self.FG = fg
         self.ACCENT = accent
 
-        self.db = Database()
+        self.db = DbLauncher()
 
-    def window_add(self, name_opening=False, event=False):
+    def window_add_shortcuts(self, name_opening=False, event=False):
         # region: WINDOW
         self.tl_add = Toplevel(bg=self.BG)
         self.tl_add.title("Ajouter un raccourci")
