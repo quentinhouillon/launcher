@@ -67,12 +67,12 @@ Tous Droits Réservés"
         self.root.bind(
             "<Control-d>", self.update_delete_shortcuts.window_delete_shortcuts)
         self.root.bind("<Alt-n>", self.add_profiles.window_add_profiles)
-        self.root.bind(
-            "<Alt-l>", self.display_profiles.display_profiles)
-        self.root.bind(
-            "<Alt-u>", self.update_delete_profiles.window_update_profiles)
-        self.root.bind(
-            "<Alt-d>", self.update_delete_profiles.window_delete_profiles)
+        # self.root.bind(
+        #     "<Alt-l>", self.display_profiles.display_profiles)
+        # self.root.bind(
+        #     "<Alt-u>", self.update_delete_profiles.window_update_profiles)
+        # self.root.bind(
+        #     "<Alt-d>", self.update_delete_profiles.window_delete_profiles)
         # endregion: ROOT
 
         # region: FRAME

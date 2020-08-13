@@ -171,7 +171,7 @@ class DbProfile:
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
-        self.cur.execute("INSERT INTO Launcher VALUES (NULL, ?, ?)", ls_values)
+        self.cur.execute("INSERT INTO profile VALUES (NULL, ?, ?)", ls_values)
         self.conn.commit()
 
         self.conn.close()
@@ -180,7 +180,7 @@ class DbProfile:
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
-        self.cur.execute("SELECT shortcut, profile FROM Launcher")
+        self.cur.execute("SELECT shortcut, profile FROM profile")
 
         to_return = self.cur.fetchall()
         self.conn.close()
@@ -191,7 +191,7 @@ class DbProfile:
         self.conn = connect("file/Launcher.db")
         self.cur = self.conn.cursor()
 
-        self.cur.execute("DELETE FROM Launcher WHERE shortcut=?",
+        self.cur.execute("DELETE FROM profile WHERE shortcut=?",
                          (name_profile,))
 
         self.conn.commit()
@@ -202,7 +202,7 @@ class DbProfile:
         self.cur = self.conn.cursor()
 
         self.cur.execute(
-            "UPDATE Launcher SET shortcut=?, profile=? WHERE shortcut=?",
+            "UPDATE profile SET shortcut=?, profile=? WHERE shortcut=?",
             ls_values)
 
         self.conn.commit()
@@ -213,7 +213,7 @@ class DbProfile:
         self.cur = self.conn.cursor()
 
         self.cur.execute(
-            "SELECT Shortcut, profile FROM Launcher WHERE shortcut=?",
+            "SELECT Shortcut, profile FROM profile WHERE shortcut=?",
             (name_profile,))
 
         to_return = self.cur.fetchall()
