@@ -1,8 +1,10 @@
-from datetime import datetime
+# from datetime import datetime
 from json import load
-from os import chdir, getcwd, startfile, path
+from os import chdir, getcwd, path, startfile
 from tkinter import (Canvas, Entry, Frame, Label, Menu, PhotoImage, Scrollbar,
                      Tk)
+
+from PIL import ImageTk
 
 from core.check_settings import check
 from core.clss import LauncherCore
@@ -24,7 +26,8 @@ class Launcher:
         self.ls_name_app = []
         self.ls_shortcuts = []
         self.ls_opening = []
-        
+        self.app_icon = {}
+
         # constants
         WIDTH = 650
         HEIGHT = 455
@@ -34,13 +37,12 @@ class Launcher:
 
         W_CENTER = int(W_SCREEN/2 - WIDTH/2)
         H_CENTER = int(H_SCREEN/2 - HEIGHT/2)
-        
-        date = datetime.now()
 
-        PROGRAM = "Launcher"
-        AUTHOR = "w4rmux"
-        VERSION = "1.0"
-        LICENSE = f" © {date.year} {PROGRAM}.Tous Droits Réservés"
+        # date = datetime.now()
+        # PROGRAM = "Launcher"
+        # AUTHOR = "w4rmux"
+        # VERSION = "1.0"
+        # LICENSE = f" © {date.year} {PROGRAM}.Tous Droits Réservés"
 
         self.get_settings()
 
@@ -51,7 +53,6 @@ class Launcher:
         self.update_delete_shortcuts = UpdateDeleteShortcuts(
             self.BG, self.FG, self.ACCENT)
         self.add_profiles = AddProfiles(self.BG, self.FG, self.ACCENT)
-
 
         self.root.geometry(f"{WIDTH}x{HEIGHT}+{W_CENTER}+{H_CENTER}")
         self.root.resizable(False, False)
@@ -240,15 +241,14 @@ class Launcher:
             self.ls_frm_shortcuts[index].pack(fill="x")
 
         for index in range(len(self.ls_name_app)):
-            # image = self.core.get_icon(self.ls_name_app[index], "large")
-            # image.convert("RGBA").save(f"img/app_icon.png")
-            # self.img_app_icon = PhotoImage(file=f"img/appp_icon.png"
+            image = self.core.get_icon(self.ls_name_app[index], "large")
+            self.app_icon[index] = ImageTk.PhotoImage(image)
 
             self.ls_frm.append(Frame(self.frm_canvas, bg=self.BG,
                                      cursor="hand2"))
 
             self.lbl_icon_app = Label(self.ls_frm[index],
-                                      image=self.img_icon,
+                                      image=self.app_icon[index],
                                       bg=self.BG, cursor="hand2")
 
             self.lbl_app = Label(self.ls_frm[index],
