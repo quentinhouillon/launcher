@@ -93,6 +93,11 @@ class Launcher:
                 scrollregion=self.canvas.bbox("all")
             )
         )
+        self.canvas.bind("<Configure>", self.on_configure)
+        self._unbound_to_mousewheel(event=None)
+
+        self.frm_canvas.bind('<Leave>', self._unbound_to_mousewheel)
+        self.frm_canvas.bind('<Enter>', self._bound_to_mousewheel)
 
         self.scrollbar = Scrollbar(
             self.frm_result, orient="vertical", command=self.canvas.yview,
@@ -287,6 +292,23 @@ class Launcher:
 
     def popup(self, event):
         self.menu_popup.tk_popup(event.x_root, event.y_root, 0)
+
+    def on_configure(self, event):
+        self.canvas.configure(yscrollcommand=self.scrollbar.set)
+        self.canvas.create_window(
+            (0, 0), width=event.width, window=self.frm_canvas, anchor="nw")
+
+    def _on_mousewheel(self, event):
+        """Add scroll mousewheel for canvas."""
+        self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+    def _bound_to_mousewheel(self, event):
+        """Apply scroll with mousewheel of canvas."""
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
+
+    def _unbound_to_mousewheel(self, event):
+        """Remove scroll with mousewheel of canvas."""
+        self.canvas.unbind_all("<MouseWheel>")
 
 
 def main():
