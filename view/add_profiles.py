@@ -26,7 +26,7 @@ class AddProfiles:
         self.lbl_profile = Label(
             self.tl_add,
             text="Ajouter vos applications pour créer un profile",
-            bg=self.BG, fg=self.FG)
+            bg=self.BG, fg=self.FG, font=("sans serif", 12))
         self.lbl_name_profile = Label(self.frm_entry,
                                       text="Entrer le non du profile",
                                       bg=self.BG, fg=self.FG)
@@ -52,8 +52,8 @@ class AddProfiles:
 
         self.lbl_profile.pack(fill="x", padx=10, pady=10, side="top")
 
-        self.lbl_name_profile.pack(fill="x", side="left", anchor="n")
-        self.ent_profile_name.pack(fill="x", expand="true", padx=10)
+        self.lbl_name_profile.pack(fill="x", anchor="n")
+        self.ent_profile_name.pack(fill="x", expand="true", pady=5)
         self.frm_entry.pack(fill="x", expand="true", side="top",
                             padx=10, pady=10)
 
