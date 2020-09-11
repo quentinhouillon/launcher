@@ -96,9 +96,6 @@ class Launcher:
         self.canvas.bind("<Configure>", self.on_configure)
         self._unbound_to_mousewheel(event=None)
 
-        self.frm_canvas.bind('<Leave>', self._unbound_to_mousewheel)
-        self.frm_canvas.bind('<Enter>', self._bound_to_mousewheel)
-
         self.scrollbar = Scrollbar(
             self.frm_result, orient="vertical", command=self.canvas.yview,
             bg=self.BG)
@@ -212,9 +209,12 @@ class Launcher:
 
         if len(self.ls_name_app) + len(self.ls_shortcuts) > 8:
             self.scrollbar.pack(side="right", fill="y")
+            self.frm_canvas.bind('<Enter>', self._bound_to_mousewheel)
+            self.frm_canvas.bind('<Leave>', self._unbound_to_mousewheel)
 
         else:
             self.scrollbar.pack_forget()
+            self.frm_canvas.bind('<Enter>', self._unbound_to_mousewheel)
 
         for index in range(len(self.ls_shortcuts)):
             self.ls_frm_shortcuts.append(Frame(self.frm_canvas, bg=self.BG,
